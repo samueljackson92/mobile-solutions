@@ -1,6 +1,8 @@
 #!/bin/bash
 
+cd src
 phonegap build android
+cd ..
 echo 'Uninstalling app'
 adb uninstall uk.ac.aber.dcs.slj11.conference
 echo 'Reinstalling...'
