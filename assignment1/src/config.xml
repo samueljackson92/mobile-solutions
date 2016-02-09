@@ -1,84 +1,90 @@
-<?xml version='1.0' encoding='utf-8'?>
-<widget id="uk.ac.aber.dcs.slj11.conf" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
-    <name>Hello World</name>
-    <description>
-        Hello World sample application that responds to the deviceready event.
-    </description>
-    <author email="support@phonegap.com" href="http://phonegap.com">
-        PhoneGap Team
-    </author>
-    <content src="index.html" />
-    <preference name="permissions" value="none" />
-    <preference name="orientation" value="default" />
-    <preference name="target-device" value="universal" />
-    <preference name="fullscreen" value="true" />
-    <preference name="webviewbounce" value="true" />
-    <preference name="prerendered-icon" value="true" />
-    <preference name="stay-in-webview" value="false" />
-    <preference name="ios-statusbarstyle" value="black-opaque" />
-    <preference name="detect-data-types" value="true" />
-    <preference name="exit-on-suspend" value="false" />
-    <preference name="show-splash-screen-spinner" value="true" />
-    <preference name="auto-hide-splash-screen" value="true" />
-    <preference name="disable-cursor" value="false" />
-    <preference name="android-minSdkVersion" value="14" />
-    <preference name="android-installLocation" value="auto" />
-    <gap:plugin name="org.apache.cordova.battery-status" />
-    <gap:plugin name="org.apache.cordova.camera" />
-    <gap:plugin name="org.apache.cordova.media-capture" />
-    <gap:plugin name="org.apache.cordova.console" />
-    <gap:plugin name="org.apache.cordova.contacts" />
-    <gap:plugin name="org.apache.cordova.device" />
-    <gap:plugin name="org.apache.cordova.device-motion" />
-    <gap:plugin name="org.apache.cordova.device-orientation" />
-    <gap:plugin name="org.apache.cordova.dialogs" />
-    <gap:plugin name="org.apache.cordova.file" />
-    <gap:plugin name="org.apache.cordova.file-transfer" />
-    <gap:plugin name="org.apache.cordova.geolocation" />
-    <gap:plugin name="org.apache.cordova.globalization" />
-    <gap:plugin name="org.apache.cordova.inappbrowser" />
-    <gap:plugin name="org.apache.cordova.media" />
-    <gap:plugin name="org.apache.cordova.network-information" />
-    <gap:plugin name="org.apache.cordova.splashscreen" />
-    <gap:plugin name="org.apache.cordova.vibration" />
-    <icon src="icon.png" />
-    <icon gap:platform="android" gap:qualifier="ldpi" src="www/res/icon/android/icon-36-ldpi.png" />
-    <icon gap:platform="android" gap:qualifier="mdpi" src="www/res/icon/android/icon-48-mdpi.png" />
-    <icon gap:platform="android" gap:qualifier="hdpi" src="www/res/icon/android/icon-72-hdpi.png" />
-    <icon gap:platform="android" gap:qualifier="xhdpi" src="www/res/icon/android/icon-96-xhdpi.png" />
-    <icon gap:platform="blackberry" src="www/res/icon/blackberry/icon-80.png" />
-    <icon gap:platform="blackberry" gap:state="hover" src="www/res/icon/blackberry/icon-80.png" />
-    <icon gap:platform="ios" height="57" src="www/res/icon/ios/icon-57.png" width="57" />
-    <icon gap:platform="ios" height="72" src="www/res/icon/ios/icon-72.png" width="72" />
-    <icon gap:platform="ios" height="114" src="www/res/icon/ios/icon-57-2x.png" width="114" />
-    <icon gap:platform="ios" height="144" src="www/res/icon/ios/icon-72-2x.png" width="144" />
-    <icon gap:platform="webos" src="www/res/icon/webos/icon-64.png" />
-    <icon gap:platform="winphone" src="www/res/icon/windows-phone/icon-48.png" />
-    <icon gap:platform="winphone" gap:role="background" src="www/res/icon/windows-phone/icon-173-tile.png" />
-    <gap:splash gap:platform="android" gap:qualifier="port-ldpi" src="www/res/screen/android/screen-ldpi-portrait.png" />
-    <gap:splash gap:platform="android" gap:qualifier="port-mdpi" src="www/res/screen/android/screen-mdpi-portrait.png" />
-    <gap:splash gap:platform="android" gap:qualifier="port-hdpi" src="www/res/screen/android/screen-hdpi-portrait.png" />
-    <gap:splash gap:platform="android" gap:qualifier="port-xhdpi" src="www/res/screen/android/screen-xhdpi-portrait.png" />
-    <gap:splash gap:platform="blackberry" src="www/res/screen/blackberry/screen-225.png" />
-    <gap:splash gap:platform="ios" height="480" src="www/res/screen/ios/screen-iphone-portrait.png" width="320" />
-    <gap:splash gap:platform="ios" height="960" src="www/res/screen/ios/screen-iphone-portrait-2x.png" width="640" />
-    <gap:splash gap:platform="ios" height="1136" src="www/res/screen/ios/screen-iphone-portrait-568h-2x.png" width="640" />
-    <gap:splash gap:platform="ios" height="1024" src="www/res/screen/ios/screen-ipad-portrait.png" width="768" />
-    <gap:splash gap:platform="ios" height="768" src="www/res/screen/ios/screen-ipad-landscape.png" width="1024" />
-    <gap:splash gap:platform="winphone" src="www/res/screen/windows-phone/screen-portrait.jpg" />
-    <access origin="*" />
-    <plugin name="cordova-plugin-whitelist" version="1" />
-    <allow-intent href="http://*/*" />
-    <allow-intent href="https://*/*" />
-    <allow-intent href="tel:*" />
-    <allow-intent href="sms:*" />
-    <allow-intent href="mailto:*" />
-    <allow-intent href="geo:*" />
-    <platform name="android">
-        <allow-intent href="market:*" />
-    </platform>
-    <platform name="ios">
-        <allow-intent href="itms:*" />
-        <allow-intent href="itms-apps:*" />
-    </platform>
-</widget>
+<widget xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" id="uk.ac.aber.dcs.slj11.conference" version="1.0.0">
+<!--
+The name and description are used in the PhoneGap Build website
+-->
+<name>Conference Browser</name>
+<description>Browse conference sessions and discover venues</description> 
+<!--
+Identifies the author and their contact details. The email is displayed on the
+PhoneGap Build website 
+-->
+<author href="http://users.aber.ac.uk/cwl" email="cwl@aber.ac.uk">Samuel Jackson</author>
+<content src="index.html"/>
+<!--
+A set of preferences generated by the PhoneGap desktop
+build tool. I've not changed any of the defaults.
+See http://docs.build.phonegap.com/en_US/configuring_preferences.md.html#Preferences
+-->
+<!-- No Android permissions allowed. Default is all permissions! -->
+<preference name="permissions" value="none"/>
+<!-- Other values are portrait and landscape -->
+<preference name="orientation" value="default"/>
+<!-- Other values are handset or tablet -->
+<preference name="target-device" value="universal"/>
+<!-- Hid the status bar at the top of the screen -->
+<preference name="fullscreen" value="true"/>
+<!-- Rubber band bouncing effect -->
+<preference name="webviewbounce" value="true"/>
+<!-- iOS only: to not apply iOS gloss to the app's icon -->
+<preference name="prerendered-icon" value="true"/>
+<preference name="stay-in-webview" value="false"/>
+<preference name="ios-statusbarstyle" value="black-opaque"/>
+<!-- iOS only: Data types such as phone numbers are automatically turned into links --> <preference name="detect-data-types" value="true"/>
+<!-- iOS only: App will not terminate when suspended -->
+<preference name="exit-on-suspend" value="false"/>
+<preference name="show-splash-screen-spinner" value="true"/>
+<preference name="auto-hide-splash-screen" value="true"/>
+<preference name="disable-cursor" value="false"/>
+<!-- Minimum Android SDK version supported -->
+<preference name="android-minSdkVersion" value="14"/>
+<!-- Where an Android app can be installed. Other values
+internalOnly and preferExternal, i.e. SD card --> <preference name="android-installLocation" value="auto"/>
+<!--
+The Cordova plugin libraries. These are the defaults generated by the PhoneGap desktop build tool. We are only using the geolocation plugin, but I've left
+them all uncommented.
+-->
+<plugin name="org.apache.cordova.battery-status" source="pgb"/> <plugin name="org.apache.cordova.camera" source="pgb"/> <plugin name="org.apache.cordova.media-capture" source="pgb"/> <plugin name="org.apache.cordova.console" source="pgb"/> <plugin name="org.apache.cordova.contacts" source="pgb"/> <plugin name="org.apache.cordova.device" source="pgb"/>
+<plugin name="org.apache.cordova.device-motion" source="pgb"/>
+<plugin name="org.apache.cordova.device-orientation" source="pgb"/> <plugin name="org.apache.cordova.dialogs" source="pgb"/>
+<plugin name="org.apache.cordova.file" source="pgb"/>
+<plugin name="org.apache.cordova.file-transfer" source="pgb"/> <plugin name="org.apache.cordova.geolocation" source="pgb"/> <plugin name="org.apache.cordova.globalization" source="pgb"/> <plugin name="org.apache.cordova.inappbrowser" source="pgb"/> <plugin name="org.apache.cordova.media" source="pgb"/>
+<plugin name="org.apache.cordova.network-information" source="pgb"/> <plugin name="org.apache.cordova.splashscreen" source="pgb"/>
+<plugin name="org.apache.cordova.vibration" source="pgb"/>
+<icon src="icon.png"/> <!--
+We can specify the icons to use for different platforms. In this case we have only included the Android icons (for the launcher screen) and at
+four levels of resolution so that the correct version will be used depending on the device screen. Note that PhoneGap will also look for a default icon in the project's top level folder called icon.png.
+-->
+<icon src="www/icons/android/ldpi.png" gap:platform="android" gap:qualifier="ldpi" /> <icon src="www/icons/android/mdpi.png" gap:platform="android" gap:qualifier="mdpi" /> <icon src="www/icons/android/hdpi.png" gap:platform="android" gap:qualifier="hdpi" /> <icon src="www/icons/android/xhdpi.png" gap:platform="android" gap:qualifier="xhdpi" />
+<!--
+How you do splashscreens. I've not done this for this app, so commented out
+-->
+<!--
+<gap:splash src="www/res/screen/android/screen-ldpi-portrait.png" gap:platform="android"
+gap:qualifier="port-ldpi"/> -->
+<!--
+See the W3C Widget Access specification. Allows network access to specific
+domains (XHR, images etc). Here we allow access to everything. You may wish to restrict
+this,
+e.g. just to http://maps.google.com for the map.
+This whitelist is for webviews that don't support Content Security Policy. See https://github.com/apache/cordova-plugin-whitelist for details
+-->
+<access origin="*"/>
+<!--
+The plugin that implements Cordova 4.0+ webview component whitlisting policy
+-->
+<plugin name="cordova-plugin-whitelist" version="1"/>
+<!--
+Intent whitelisting: Controls which URLs the app is allowed to ask the system to open. On Android, this equates to sending an intent of type BROWSEABLE.
+This whitelist does not apply to plugins, only hyperlinks and calls to window.open().
+The following is more permissive than it should be for this app! -->
+<!-- Allow links to web pages to open in a browser --> <allow-intent href="http://*/*"/>
+<allow-intent href="https://*/*"/>
+<!-- Allow tel: links to open the dialer --> <allow-intent href="tel:*"/>
+<!-- Allow SMS links to open messaging app --> <allow-intent href="sms:*"/>
+<!-- Allow geo: links to open the mail app --> <allow-intent href="mailto:*"/>
+<!-- Allow geo: links to open maps via the map app --> <allow-intent href="geo:*"/>
+<!-- Allow opening of Android Play Store to show a specific app --> <platform name="android">
+<allow-intent href="market:*"/> </platform>
+<!-- Allow opening of App Store to show a specific app, e.g. ads that redirect users to install an app -->
+<platform name="ios"> <allow-intent href="itms:*"/> <allow-intent href="itms-apps:*"/>
+</platform> </widget>
