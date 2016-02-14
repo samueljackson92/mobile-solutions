@@ -45,6 +45,24 @@ Conference.controller = (function ($, dataContext, document) {
         }
     };
 
+    
+    
+    var renderSessionItem = function(obj) { 
+        // render a single session item as HTML
+        var content = '<li>';
+        content += '<a href="" class="ui-btn ui-btn-icon-right ui-icon-carat-r">';
+        content += '<div class="session-list-item">';
+        content += '<h3>' + obj.title + '</h3>';
+        content += '<div>';
+        content += '<h6>' + obj.type + '</h6>';
+        content += '<h6>' + obj.starttime + ' - ' + obj.endtime  + '</h6>';
+        content += '</div>';
+        content += '</div>';
+        content += '</a>';
+        content += '</li>';
+        return content;
+    }
+    
     var renderSessionsList = function (sessionsList) {
         // This is where you do the work to build the HTML ul list
         // based on the data you've received from DataContext.js (it
@@ -72,30 +90,15 @@ Conference.controller = (function ($, dataContext, document) {
             sessionsHTML += '<ul data-role="listview" data-filter="true" class="ui-listview">'
            
             // convert each item to a string HTML list item 
-            var sessionsListHTML = sessionsList.map(function (obj) {
-                var content = '<li>';
-                content += '<a href="" class="ui-btn ui-btn-icon-right ui-icon-carat-r">';
-                content += '<div class="session-list-item">';
-                content += '<h3>' + obj.title + '</h3>';
-                content += '<div>';
-                content += '<h6>' + obj.type + '</h6>';
-                content += '<h6>' + obj.starttime + ' - ' + obj.endtime  + '</h6>';
-                content += '</div>';
-                content += '</div>';
-                content += '</a>';
-                content += '</li>';
-                return content;
-            }); 
-           
-            // join list items into a single HTML string
+            var sessionsListHTML = sessionsList.map(renderSessionItem);  
             sessionsHTML += sessionsListHTML.join(''); 
             sessionsHTML += "</ul>"; 
-            
-            // insert loaded content into webpage
             sessionsContent.html(sessionsHTML);
+            
             // must trigger a create here to let JQM know new widgets are to be created
             sessionsContent.trigger('create');
-            // add filter search bar
+            
+            // add filter search bar after loading content
             $('.ui-listview').filterable({
                 filterPlaceholder: "Search for sessions..."
             });
