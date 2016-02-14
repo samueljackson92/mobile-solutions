@@ -214,14 +214,33 @@ Conference.dataContext = (function ($) {
     var init = function () {
         return initialise_database();
     };
+    
+    var convertResultSetToArray = function(results) { 
+        //convert results set to vanilla JavaScript array
+        var size = results.rows.length;
+        var data = new Array(size);
+        
+        for(var i=0; i < size; ++i) {
+            data[i] = results.rows.item(i); 
+        }
 
+        return data;
+    }
+    
 
     var querySessions = function (tx) {
         // For the moment we just deal with the first day
         // SELECT * FROM sessions WHERE sessions.dayid = '1' ORDER BY sessions.starttime ASC
 
-        // **ENTER CODE HERE** TO EXECUTE SQL AND DEAL WITH ANY ERRORS
-        // ON SUCCESS YOU SHOULD CALL processorFunc PASSING THE LIST OF RESULT DATA
+        // callback function to handle loading session results
+        // also calls processorFunc
+        var handleSessionLoad = function(tx, results) {
+            console.log("Session Loaded");
+            results = convertResultSetToArray(results); 
+            processorFunc(results);
+        };
+        
+        tx.executeSql("SELECT * FROM sessions WHERE sessions.dayid = '1' ORDER BY sessions.starttime ASC", [], handleSessionLoad, errorDB);
     }
 
     // Called by Controller.js onPageChange method

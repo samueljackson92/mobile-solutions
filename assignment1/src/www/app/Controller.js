@@ -61,7 +61,41 @@ Conference.controller = (function ($, dataContext, document) {
         // would help.
         // o You will need to refresh JQM by calling listview function
         // **ENTER CODE HERE**
-
+        
+        var sessionsContent = $('#sessions-list-content');
+        var content = "";
+        
+        // handle when we have no sessions
+        if (sessionsList.length === 0) {
+            content += "<div>No Items</div>";
+        } else {
+            var sessionsHTML = '';
+            sessionsHTML += '<ul data-role="listview" data-filter="true" data-input="#myFilter">'
+           
+            // convert each item to a string HTML list item 
+            var sessionsListHTML = sessionsList.map(function (obj) {
+                console.log(obj);
+                var content = '<li>';
+                content += '<a href="">';
+                content += '<div class="session-list-item">';
+                content += '<h3>' + obj.title + '</h3>';
+                content += '<div>';
+                content += '<h6>' + obj.type + '</h6>';
+                content += '<h6>' + obj.starttime + ' - ' + obj.endtime  + '</h6>';
+                content += '</div>';
+                content += '</div>';
+                content += '</a>';
+                content += '</li>';
+                return content;
+            }); 
+           
+            // join list items into a single HTML string
+            sessionsHTML += sessionsListHTML.join(''); 
+            sessionsHTML += "</ul>"; 
+            // insert loaded content into webpage
+            sessionsContent.html(sessionsHTML); 
+        }
+        
     };
 
     var noDataDisplay = function (event, data) {
