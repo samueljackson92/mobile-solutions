@@ -60,23 +60,21 @@ Conference.controller = (function ($, dataContext, document) {
         // up an array and then converting to a string with join before appending
         // would help.
         // o You will need to refresh JQM by calling listview function
-        // **ENTER CODE HERE**
         
         var sessionsContent = $('#sessions-list-content');
-        var content = "";
+        var sessionsHTML = '';
         
         // handle when we have no sessions
         if (sessionsList.length === 0) {
-            content += "<div>No Items</div>";
-        } else {
-            var sessionsHTML = '';
-            sessionsHTML += '<ul data-role="listview" data-filter="true" data-input="#myFilter">'
+            sessionsHTML += "<div>No Items</div>";
+            sessionsContent.html(sessionsHTML);
+        } else { 
+            sessionsHTML += '<ul data-role="listview" data-filter="true" class="ui-listview">'
            
             // convert each item to a string HTML list item 
             var sessionsListHTML = sessionsList.map(function (obj) {
-                console.log(obj);
                 var content = '<li>';
-                content += '<a href="">';
+                content += '<a href="" class="ui-btn ui-btn-icon-right ui-icon-carat-r">';
                 content += '<div class="session-list-item">';
                 content += '<h3>' + obj.title + '</h3>';
                 content += '<div>';
@@ -92,10 +90,16 @@ Conference.controller = (function ($, dataContext, document) {
             // join list items into a single HTML string
             sessionsHTML += sessionsListHTML.join(''); 
             sessionsHTML += "</ul>"; 
+            
             // insert loaded content into webpage
-            sessionsContent.html(sessionsHTML); 
-        }
-        
+            sessionsContent.html(sessionsHTML);
+            // must trigger a create here to let JQM know new widgets are to be created
+            sessionsContent.trigger('create');
+            // add filter search bar
+            $('.ui-listview').filterable({
+                filterPlaceholder: "Search for sessions..."
+            });
+        } 
     };
 
     var noDataDisplay = function (event, data) {
