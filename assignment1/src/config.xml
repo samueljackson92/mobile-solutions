@@ -1,9 +1,10 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="uk.ac.aber.dcs.slj11.conference" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
+<widget id="uk.ac.aber.dcs.slj11.conference" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
     <name>Conference Browser</name>
     <description>Browse conference sessions and discover venues</description>
-    <author email="cwl@aber.ac.uk" href="http://users.aber.ac.uk/cwl">Samuel Jackson</author>
+    <author email="slj11@aber.ac.uk" href="http://users.aber.ac.uk/slj11">Samuel Jackson</author>
     <content src="index.html" />
+    <preference name="phonegap-version" value="3.7.0" />
     <preference name="permissions" value="none" />
     <preference name="orientation" value="default" />
     <preference name="target-device" value="universal" />
@@ -53,6 +54,9 @@
     <platform name="android">
         <allow-intent href="market:*" />
     </platform>
+    <gap:config-file platform="android" parent="/manifest">
+         <application android:debuggable="true" />
+    </gap:config-file>
     <platform name="ios">
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
