@@ -4,6 +4,7 @@ Conference.controller = (function ($, dataContext, document) {
     "use strict";
 
     var position = null;
+    var infoWindow = null;
     var mapDisplayed = false;
     var currentMapWidth = 0;
     var currentMapHeight = 0;
@@ -195,32 +196,41 @@ Conference.controller = (function ($, dataContext, document) {
 
     };
 
-    var get_map_height = function () {
-        return $(window).height() - ($('#maptitle').height() + $('#mapfooter').height());
-    }
-
-    var get_map_width = function () {
-        return $(window).width();
-    }
-
     var handle_geolocation_query = function (pos) {
         position = pos;
-       
+        
+       //create a dynamic google map 
         var map = new google.maps.Map(document.getElementById('map-canvas'), {
             center: {lat: position.coords.latitude, lng: position.coords.longitude},
-            zoom: 16
+            zoom: 15
         });
 
+        // hook into resize events. This makes the map responsive
+        google.maps.event.addDomListener(window, "resize", function() {
+            var center = map.getCenter();
+            google.maps.event.trigger(map, "resize");
+            map.setCenter(center); 
+        });
         
-        var the_height = get_map_height();
-        var the_width = get_map_width();
-
+        // load venues and plot as markers
         dataContext.processLocationsList(function(venues) {
             venues.forEach(function(obj) {
                  var marker = new google.maps.Marker({
                     position: {lat: parseFloat(obj.latitude), lng: parseFloat(obj.longitude)},
                     map: map,
                     title: obj.name
+                 });
+ 
+                 marker.addListener('click', function() {
+                    if (infoWindow) {
+                        infoWindow.close();
+                    }
+                    
+                     infoWindow = new google.maps.InfoWindow({
+                        content: obj.name
+                     });
+                    
+                     infoWindow.open(map, marker);
                  });
             });
             
@@ -251,8 +261,7 @@ Conference.controller = (function ($, dataContext, document) {
     // Provides a hash of functions that we return to external code so that they
     // know which functions they can call. In this case just init.
     var pub = {
-        init: init,
-        initMap: initMap
+        init: init
     };
 
     return pub;
