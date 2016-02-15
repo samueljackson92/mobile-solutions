@@ -132,14 +132,12 @@ Conference.controller = (function ($, dataContext, document) {
             // if we have access to PhoneGap we want to wait until it is ready before
             // initialising geolocation services
             if (phoneGapApp) {
-                //alert('Running as PhoneGapp app');
                 document.addEventListener("deviceready", initiate_geolocation, false);
             }
             else {
                 initiate_geolocation(); // Directly from the mobile browser
             }
         } else {
-            //alert('Running as desktop browser app');
             initiate_geolocation(); // Directly from the browser
         }
     };
@@ -195,7 +193,6 @@ Conference.controller = (function ($, dataContext, document) {
             }
         };
 
-        handle_geolocation_query(position);
     };
 
     var get_map_height = function () {
@@ -208,22 +205,26 @@ Conference.controller = (function ($, dataContext, document) {
 
     var handle_geolocation_query = function (pos) {
         position = pos;
+       
+        var map = new google.maps.Map(document.getElementById('map-canvas'), {
+            center: {lat: position.coords.latitude, lng: position.coords.longitude},
+            zoom: 16
+        });
 
+        
         var the_height = get_map_height();
         var the_width = get_map_width();
 
-        var image_url = "http://maps.google.com/maps/api/staticmap?sensor=false&center=" + position.coords.latitude + "," +
-            position.coords.longitude + "&zoom=14&size=" +
-            the_width + "x" + the_height + "&markers=color:blue|label:S|" +
-            position.coords.latitude + ',' + position.coords.longitude;
-
-        $('#map-img').remove();
-
-        jQuery('<img/>', {
-            id: 'map-img',
-            src: image_url,
-            title: 'Google map of my location'
-        }).appendTo('#mapPos');
+        dataContext.processLocationsList(function(venues) {
+            venues.forEach(function(obj) {
+                 var marker = new google.maps.Marker({
+                    position: {lat: parseFloat(obj.latitude), lng: parseFloat(obj.longitude)},
+                    map: map,
+                    title: obj.name
+                 });
+            });
+            
+        });
 
         mapDisplayed = true;
     };
@@ -250,7 +251,8 @@ Conference.controller = (function ($, dataContext, document) {
     // Provides a hash of functions that we return to external code so that they
     // know which functions they can call. In this case just init.
     var pub = {
-        init: init
+        init: init,
+        initMap: initMap
     };
 
     return pub;

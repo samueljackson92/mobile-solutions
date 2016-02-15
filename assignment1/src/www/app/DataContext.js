@@ -226,6 +226,19 @@ Conference.dataContext = (function ($) {
 
         return data;
     }
+
+    var queryLocations = function(tx) {
+        // find all of the locations for the current sessions
+
+        // callback function to handle loading venues
+        var handleVenuesLoad = function(tx, results) {
+            console.log("Venues Loaded");
+            results = convertResultSetToArray(results);
+            processorFunc(results); 
+        }
+        
+        tx.executeSql("SELECT * FROM venues", [], handleVenuesLoad, errorDB);
+    }
     
 
     var querySessions = function (tx) {
@@ -243,6 +256,13 @@ Conference.dataContext = (function ($) {
         tx.executeSql("SELECT * FROM sessions WHERE sessions.dayid = '1' ORDER BY sessions.starttime ASC", [], handleSessionLoad, errorDB);
     }
 
+    var processLocationsList = function(processor) {
+        processorFunc = processor;
+        if(db) {
+            db.transaction(queryLocations, errorDB);
+        }
+    }
+
     // Called by Controller.js onPageChange method
     var processSessionsList = function (processor) {
         processorFunc = processor;
@@ -254,7 +274,8 @@ Conference.dataContext = (function ($) {
     // The methods we're publishing to other JS files
     var pub = {
         init:init,
-        processSessionsList:processSessionsList  // Called by Controller.js
+        processSessionsList:processSessionsList,  // Called by Controller.js
+        processLocationsList:processLocationsList
     };
 
     return pub;
