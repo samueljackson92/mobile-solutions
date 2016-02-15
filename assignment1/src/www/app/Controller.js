@@ -5,6 +5,7 @@ Conference.controller = (function ($, dataContext, document) {
 
     var position = null;
     var infoWindow = null;
+    var map = null;
     var mapDisplayed = false;
     var currentMapWidth = 0;
     var currentMapHeight = 0;
@@ -196,11 +197,11 @@ Conference.controller = (function ($, dataContext, document) {
 
     };
 
-    var handle_geolocation_query = function (pos) {
+    var create_google_map = function(pos) { 
         position = pos;
         
-       //create a dynamic google map 
-        var map = new google.maps.Map(document.getElementById('map-canvas'), {
+        //create a dynamic google map 
+        map = new google.maps.Map(document.getElementById('map-canvas'), {
             center: {lat: position.coords.latitude, lng: position.coords.longitude},
             zoom: 15
         });
@@ -212,31 +213,41 @@ Conference.controller = (function ($, dataContext, document) {
             map.setCenter(center); 
         });
         
-        // load venues and plot as markers
-        dataContext.processLocationsList(function(venues) {
-            venues.forEach(function(obj) {
-                 var marker = new google.maps.Marker({
-                    position: {lat: parseFloat(obj.latitude), lng: parseFloat(obj.longitude)},
-                    map: map,
-                    title: obj.name
-                 });
- 
-                 marker.addListener('click', function() {
-                    if (infoWindow) {
-                        infoWindow.close();
-                    }
-                    
-                     infoWindow = new google.maps.InfoWindow({
-                        content: obj.name
-                     });
-                    
-                     infoWindow.open(map, marker);
-                 });
+        mapDisplayed = true;
+    };
+
+    var create_marker = function (venue) { 
+        // create a pin marker on the map
+         var marker = new google.maps.Marker({
+            position: {lat: parseFloat(venue.latitude), lng: parseFloat(venue.longitude)},
+            map: map,
+            title: venue.name
+         });
+        
+         // Add a click listener to the marker to show content
+         marker.addListener('click', function() {
+            // close any open info windows
+            if (infoWindow) {
+                infoWindow.close();
+            }
+            
+            // create a new info window
+            infoWindow = new google.maps.InfoWindow({
+                content: venue.name
             });
             
-        });
+            //display the window
+            infoWindow.open(map, marker);
+         });
+    };
 
-        mapDisplayed = true;
+    var handle_geolocation_query = function (pos) {
+        create_google_map(pos); 
+        
+        // load venues and plot markers
+        dataContext.processLocationsList(function(venues) {
+            venues.forEach(create_marker); 
+        });
     };
 
     var init = function () {
