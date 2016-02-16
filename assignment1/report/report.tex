@@ -1,0 +1,91 @@
+%%% LaTeX Template
+%%% This template can be used for both articles and reports.
+%%%
+%%% Copyright: http://www.howtotex.com/
+%%% Date: February 2011
+
+%%% Preamble
+\documentclass[paper=a4, fontsize=11pt]{scrartcl}	% Article class of KOMA-script with 11pt font and a4 format
+\usepackage[margin=0.7in]{geometry}
+\usepackage[english]{babel}															% English language/hyphenation
+\usepackage[protrusion=true,expansion=true]{microtype}				% Better typography
+\usepackage{amsmath,amsfonts,amsthm}										% Math packages
+%\usepackage{color,transparent}													% If you use color and/or transparency
+\usepackage[hang, small,labelfont=bf,up,textfont=it,up]{caption}	% Custom captions under/above floats
+\usepackage{epstopdf}																	% Converts .eps to .pdf
+\usepackage{subfig}																		% Subfigures
+\usepackage{booktabs}																	% Nicer tables
+\usepackage[pdftex]{graphicx}
+
+%%% Advanced verbatim environment
+\usepackage{verbatim}
+\usepackage{fancyvrb}
+\DefineShortVerb{\|}								% delimiter to display inline verbatim text
+
+
+%%% Custom sectioning (sectsty package)
+\usepackage{sectsty}								% Custom sectioning (see below)
+\allsectionsfont{%									% Change font of al section commands
+	\usefont{OT1}{bch}{b}{n}%					% bch-b-n: CharterBT-Bold font
+%	\hspace{15pt}%									% Uncomment for indentation
+	}
+
+\sectionfont{%										% Change font of \section command
+	\usefont{OT1}{bch}{b}{n}%					% bch-b-n: CharterBT-Bold font
+	\sectionrule{0pt}{0pt}{-5pt}{0.8pt}%	% Horizontal rule below section
+	}
+
+
+%%% Custom headers/footers (fancyhdr package)
+\usepackage{fancyhdr}
+\pagestyle{fancyplain}
+\fancyhead{}														% No page header
+\fancyfoot[C]{\thepage}										% Pagenumbering at center of footer
+\renewcommand{\headrulewidth}{0pt}				% Remove header underlines
+\renewcommand{\footrulewidth}{0pt}				% Remove footer underlines
+\setlength{\headheight}{13.6pt}
+
+%%% Equation and float numbering
+\numberwithin{equation}{section}															% Equationnumbering: section.eq#
+\numberwithin{figure}{section}																% Figurenumbering: section.fig#
+\numberwithin{table}{section}
+
+\usepackage[parfill]{parskip}
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage[numbers]{natbib}															% Tablenumbering: section.tab#
+
+
+%%% Title
+\title{
+	\vspace{-0.5in} 	\usefont{OT1}{bch}{b}{n}
+        SEM2220: Mobile Web Assignment \
+}
+
+% Authors
+\author{
+	\usefont{OT1}{bch}{m}{n} Samuel Jackson
+	\\ \usefont{OT1}{bch}{m}{n} University Of Aberystwyth
+	\\   \texttt{slj11@aber.ac.uk}
+}
+
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+\label{sec:introduction}
+This report provides the documentation for the mobile web assignment for SEM2220. The aim of this assignment is to add some additional functionality to an existing code base comprising of a responsive website wrapped as a PhoneGap application for deployment as a native mobile application. Section \ref{sec:dynamic-lists} discusses the implementation of dynamic sessions lists in the existing code base provided with the assignment brief. This section will discuss both the final solution and any problems encountered. Section \ref{sec:dynamic-maps} discusses an additional feature implemented for ``flair'' marks. Again this will focus on the solution produced and outline any difficulties encountered along the way.
+
+\section{Implementing the Dynamic Sessions List}
+\label{sec:dynamic-lists}
+
+\section{Implementing Interactive Venue Maps}
+\label{sec:dynamic-maps}
+
+\clearpage
+%\bibliographystyle{unsrtnat}
+%\bibliography{references}
+\end{document}
