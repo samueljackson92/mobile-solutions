@@ -7,8 +7,6 @@ Conference.controller = (function ($, dataContext, document) {
     var infoWindow = null;
     var map = null;
     var mapDisplayed = false;
-    var currentMapWidth = 0;
-    var currentMapHeight = 0;
     var sessionsListSelector = "#sessions-list-content";
     var noSessionsCachedMsg = "<div>Your sessions list is empty.</div>";
     var databaseNotInitialisedMsg = "<div>Your browser does not support local databases.</div>";
@@ -39,8 +37,7 @@ Conference.controller = (function ($, dataContext, document) {
                 dataContext.processSessionsList(renderSessionsList);
                 break;
             case MAP_PAGE:
-                if (!mapDisplayed || (currentMapWidth != get_map_width() ||
-                    currentMapHeight != get_map_height())) {
+                if (!mapDisplayed) {
                     deal_with_geolocation();
                 }
                 break;
@@ -224,7 +221,7 @@ Conference.controller = (function ($, dataContext, document) {
             title: venue.name
          });
         
-         // Add a click listener to the marker to show content
+         // Add a click listener to the marker to show info window on click
          marker.addListener('click', function() {
             // close any open info windows
             if (infoWindow) {
