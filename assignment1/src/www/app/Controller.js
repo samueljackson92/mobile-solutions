@@ -113,13 +113,15 @@ Conference.controller = (function ($, dataContext, document) {
     var change_page_back_history = function () {
         $('a[data-role="tab"]').each(function () {
             var anchor = $(this);
-            anchor.bind("click", function () {
-                $.mobile.changePage(anchor.attr("href"), { // Go to the URL
-                    transition: "none",
-                    changeHash: false
+            if(anchor.attr("href") !== undefined) {
+                anchor.bind("click", function () {
+                    $.mobile.changePage(anchor.attr("href"), { // Go to the URL
+                        transition: "none",
+                        changeHash: false
+                    });
+                    return false;
                 });
-                return false;
-            });
+            }
         });
     };
 
