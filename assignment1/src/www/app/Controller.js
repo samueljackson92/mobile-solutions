@@ -79,19 +79,25 @@ Conference.controller = (function ($, dataContext, document) {
         // o You will need to refresh JQM by calling listview function
         
         var sessionsContent = $('#sessions-list-content');
-        var sessionsHTML = '';
         
         // handle when we have no sessions
         if (sessionsList.length === 0) {
-            sessionsHTML += "<div>No Items</div>";
-            sessionsContent.html(sessionsHTML);
+            var errorMessage = $('<div>', {
+                html: "No Items"
+            });
+            sessionsContent.html(errorMessage);
         } else { 
-            sessionsHTML += '<ul data-role="listview" data-filter="true" class="ui-listview">'
-           
-            // convert each item to a string HTML list item 
+
+             // convert each item to a string HTML list item 
             var sessionsListHTML = sessionsList.map(renderSessionItem);  
-            sessionsHTML += sessionsListHTML.join(''); 
-            sessionsHTML += "</ul>"; 
+            
+            sessionsHTML = $('<ul>', {
+                data_role: "listview",
+                data_filter: true,
+                class: "ui-listview",
+                html: sessionsListHTML.join('')
+            });
+            
             sessionsContent.html(sessionsHTML);
             
             // must trigger a create here to let JQM know new widgets are to be created
