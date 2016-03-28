@@ -102,5 +102,6 @@ class WordPairViewController: UITableViewController {
         // safely join two optinal strings
         let title = [nativeWord, foreignWord].flatMap{$0}.joinWithSeparator(" - ")
         cell?.textLabel!.text = title
+        cell?.detailTextLabel!.text = pair.type
     }
 }

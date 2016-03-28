@@ -20,6 +20,7 @@
 		7EE2543B1CA958810036A8B7 /* WordPhrasePair.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE254371CA958810036A8B7 /* WordPhrasePair.swift */; };
 		7EE2543C1CA958810036A8B7 /* Tag+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE254381CA958810036A8B7 /* Tag+CoreDataProperties.swift */; };
 		7EE2543D1CA958810036A8B7 /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE254391CA958810036A8B7 /* Tag.swift */; };
+		7EE254431CA9733F0036A8B7 /* PhraseType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE254421CA9733F0036A8B7 /* PhraseType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +60,9 @@
 		7EE254371CA958810036A8B7 /* WordPhrasePair.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordPhrasePair.swift; sourceTree = "<group>"; };
 		7EE254381CA958810036A8B7 /* Tag+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Tag+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		7EE254391CA958810036A8B7 /* Tag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
+		7EE254421CA9733F0036A8B7 /* PhraseType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhraseType.swift; sourceTree = "<group>"; };
+		7EE254441CA97F1E0036A8B7 /* WordPairs 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "WordPairs 2.xcdatamodel"; sourceTree = "<group>"; };
+		7EE254451CA981A00036A8B7 /* WordPairs 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "WordPairs 3.xcdatamodel"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,6 +159,7 @@
 				7EE254371CA958810036A8B7 /* WordPhrasePair.swift */,
 				7EE254381CA958810036A8B7 /* Tag+CoreDataProperties.swift */,
 				7EE254391CA958810036A8B7 /* Tag.swift */,
+				7EE254421CA9733F0036A8B7 /* PhraseType.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -291,6 +296,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7EE2543D1CA958810036A8B7 /* Tag.swift in Sources */,
+				7EE254431CA9733F0036A8B7 /* PhraseType.swift in Sources */,
 				7EE254071CA934370036A8B7 /* WordPairs.xcdatamodeld in Sources */,
 				7EE254321CA93E8D0036A8B7 /* WordPairViewController.swift in Sources */,
 				7EE2543B1CA958810036A8B7 /* WordPhrasePair.swift in Sources */,
@@ -545,9 +551,11 @@
 		7EE254051CA934370036A8B7 /* WordPairs.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				7EE254451CA981A00036A8B7 /* WordPairs 3.xcdatamodel */,
+				7EE254441CA97F1E0036A8B7 /* WordPairs 2.xcdatamodel */,
 				7EE254061CA934370036A8B7 /* WordPairs.xcdatamodel */,
 			);
-			currentVersion = 7EE254061CA934370036A8B7 /* WordPairs.xcdatamodel */;
+			currentVersion = 7EE254451CA981A00036A8B7 /* WordPairs 3.xcdatamodel */;
 			path = WordPairs.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

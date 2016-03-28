@@ -17,6 +17,6 @@ extension WordPhrasePair {
     @NSManaged var native: String?
     @NSManaged var foreign: String?
     @NSManaged var note: String?
+    @NSManaged var type: String?
     @NSManaged var tags: NSManagedObject?
-
 }
