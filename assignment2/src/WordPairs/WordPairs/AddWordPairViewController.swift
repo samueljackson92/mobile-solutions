@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class AddWordPairViewController: UIViewController {
+class AddWordPairViewController: UITableViewController {
     
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     var pair = WordPhrasePair?()
