@@ -102,9 +102,15 @@ class WordPairViewController: UITableViewController, UISearchResultsUpdating  {
 
         }
     }
+
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if tableView.editing {
+            self.performSegueWithIdentifier("ViewWordPairDetail", sender: indexPath);
+        }
+    }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "EditWordPair" {
+        if segue.identifier == "ViewWordPairDetail" && editing {
             // handle the case where we're editing a word pair
             let navController = segue.destinationViewController as! UINavigationController
             let addWordPairDetail = navController.viewControllers.first as! AddWordPairViewController
