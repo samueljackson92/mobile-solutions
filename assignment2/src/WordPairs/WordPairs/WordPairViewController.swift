@@ -15,6 +15,7 @@ class WordPairViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.leftBarButtonItem = editButtonItem()
         loadWordPairs()
     }
     
@@ -26,10 +27,21 @@ class WordPairViewController: UITableViewController {
         return wordPairs.count
     }
     
+    // Override to support showing core data objects in the table view.
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("wordPairCell")
         prepareCellForDisplay(cell, cellForRowAtIndexPath: indexPath)
         return cell!
+    }
+    
+    // Override to support editing the table view.
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if editingStyle == .Delete {
+            // Delete the row from the data source
+            deleteWordPair(indexPath)
+        } else if editingStyle == .Insert {
+            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+        }
     }
     
     /** Action to handle when a user clicks Cancel on the add word screen */
@@ -49,6 +61,21 @@ class WordPairViewController: UITableViewController {
                 let indexPath = NSIndexPath(forRow: wordPairs.count-1, inSection: 0)
                 tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
             }
+        }
+    }
+    
+    /** Delete a word pair
+     
+     This removes the object from the core data store, word list and from the view
+     */
+    func deleteWordPair(indexPath: NSIndexPath) {
+        do {
+            managedObjectContext.deleteObject(wordPairs[indexPath.row] as NSManagedObject)
+            try managedObjectContext.save()
+            wordPairs.removeAtIndex(indexPath.row)
+            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+        } catch {
+            fatalError("Failed to delete object: \(error)")
         }
     }
     
