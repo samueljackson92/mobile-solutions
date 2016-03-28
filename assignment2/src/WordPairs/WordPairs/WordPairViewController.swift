@@ -84,8 +84,14 @@ class WordPairViewController: UITableViewController, UISearchResultsUpdating  {
 
     /** Action to handle when a user clicks Done on the add word screen */
     @IBAction func saveAddWordPair(segue:UIStoryboardSegue) {
-        if let addWordPairController = segue.sourceViewController as? AddWordPairViewController {
-            if let pair = addWordPairController.pair {
+        if let addWordPairController = segue.sourceViewController as? AddWordPairViewController,
+            pair = addWordPairController.pair {
+            
+            if let selectedIndexPath = tableView.indexPathForSelectedRow {
+                //edit the pair by overwriting it
+                wordPairs[selectedIndexPath.row] = pair
+                tableView.reloadRowsAtIndexPaths([selectedIndexPath], withRowAnimation: .None)
+            } else {
                 //add the new word pair to the word pair array
                 wordPairs.append(pair)
                 
@@ -93,8 +99,23 @@ class WordPairViewController: UITableViewController, UISearchResultsUpdating  {
                 let indexPath = NSIndexPath(forRow: wordPairs.count-1, inSection: 0)
                 tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
             }
+
         }
     }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "EditWordPair" {
+            // handle the case where we're editing a word pair
+            let navController = segue.destinationViewController as! UINavigationController
+            let addWordPairDetail = navController.viewControllers.first as! AddWordPairViewController
+            if let selectedCell = sender as? UITableViewCell {
+                let indexPath = tableView.indexPathForCell(selectedCell)!
+                let selectedPair = wordPairs[indexPath.row]
+                addWordPairDetail.pair = selectedPair
+            }
+        }
+    }
+    
     
     func filterContentForSearchText(searchText: String, searchScope scope: String = "All") {
         filteredWordPairs = wordPairs.filter { pair in

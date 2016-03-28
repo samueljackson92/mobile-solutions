@@ -46,6 +46,9 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="F7q-4i-fcb" kind="showDetail" identifier="EditWordPair" id="XjJ-IZ-vyC"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -56,7 +59,7 @@
                     <navigationItem key="navigationItem" title="Word Pairs" id="bIt-wH-wOa">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="Psu-MA-5nl">
                             <connections>
-                                <segue destination="F7q-4i-fcb" kind="presentation" identifier="" id="9ao-fC-XHN"/>
+                                <segue destination="F7q-4i-fcb" kind="presentation" identifier="AddWordPair" id="9ao-fC-XHN"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -218,7 +221,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iPw-FR-WP2" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="Hd3-pl-CtF" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="3134" y="-38"/>
+            <point key="canvasLocation" x="2816" y="476"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="JKB-e3-uwM">
@@ -254,7 +257,10 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lmf-VR-UCS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2322" y="-38"/>
+            <point key="canvasLocation" x="2110" y="476"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="XjJ-IZ-vyC"/>
+    </inferredMetricsTieBreakers>
 </document>

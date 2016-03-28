@@ -12,6 +12,7 @@ import CoreData
 class AddWordPairViewController: UITableViewController, UIPickerViewDataSource, UIPickerViewDelegate {
     
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+    
     var pair = WordPhrasePair?()
     
     @IBOutlet weak var nativeWord: UITextField!
@@ -21,8 +22,19 @@ class AddWordPairViewController: UITableViewController, UIPickerViewDataSource, 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    
+        // if editing fill the fields
+        if let pair = pair {
+            nativeWord.text = pair.native
+            foreignWord.text   = pair.foreign
+            note.text = pair.note
+//            phraseType.selectRow(PhraseType.getValueAtIndex(PhraseType(rawValue: pair.type!)), inComponent: 0, animated: true)
+        }
+    
         phraseType.dataSource = self;
         phraseType.delegate = self;
+        
+
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
