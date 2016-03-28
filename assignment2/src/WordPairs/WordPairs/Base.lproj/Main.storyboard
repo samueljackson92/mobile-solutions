@@ -56,7 +56,6 @@
                     <navigationItem key="navigationItem" id="bIt-wH-wOa">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="Psu-MA-5nl">
                             <connections>
-                                <action selector="addWordPair:" destination="jQk-RZ-scn" id="b05-F1-jkZ"/>
                                 <segue destination="JfM-XP-BD5" kind="presentation" id="bKI-Aw-6pA"/>
                             </connections>
                         </barButtonItem>

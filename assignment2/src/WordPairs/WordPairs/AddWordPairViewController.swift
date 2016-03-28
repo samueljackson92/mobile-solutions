@@ -20,16 +20,25 @@ class AddWordPairViewController: UIViewController {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "SaveWordPairDetail" {
-            pair = NSEntityDescription.insertNewObjectForEntityForName("WordPhrasePair", inManagedObjectContext: managedObjectContext) as? WordPhrasePair
-            pair?.native = nativeWord.text
-            pair?.foreign = foreignWord.text
-            pair?.note = note.text
-
-            do {
-                try managedObjectContext.save()
-            } catch {
-                
-            }
+            saveWordPair()
+        }
+    }
+    
+    /** Create a new word pair instance
+     
+     This creates a new word pair using the information from the AddWordPairView
+     and stores it in core data.
+     */
+    func saveWordPair() {
+        pair = NSEntityDescription.insertNewObjectForEntityForName("WordPhrasePair", inManagedObjectContext: managedObjectContext) as? WordPhrasePair
+        pair?.native = nativeWord.text
+        pair?.foreign = foreignWord.text
+        pair?.note = note.text
+        
+        do {
+            try managedObjectContext.save()
+        } catch {
+            fatalError("Failed to save new word phrase: \(error)")
         }
     }
 }
