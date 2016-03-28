@@ -9,13 +9,26 @@
 import UIKit
 import CoreData
 
-class WordPairViewController: UITableViewController {
+class WordPairViewController: UITableViewController, UISearchResultsUpdating  {
+    
+    let searchController = UISearchController(searchResultsController: nil)
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+    
     var wordPairs = [WordPhrasePair]()
+    var filteredWordPairs = [WordPhrasePair]()
+    let searchScopeCategories = ["Phrases", "Word Type", "Tags"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.leftBarButtonItem = editButtonItem()
+        
+        //setup search controller
+        searchController.searchResultsUpdater = self
+        searchController.hidesNavigationBarDuringPresentation = false
+        searchController.dimsBackgroundDuringPresentation = false
+        searchController.searchBar.sizeToFit()
+        searchController.searchBar.scopeButtonTitles = searchScopeCategories
+        self.tableView.tableHeaderView = searchController.searchBar
         loadWordPairs()
     }
     
@@ -24,13 +37,32 @@ class WordPairViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if searchController.active && searchController.searchBar.text != "" {
+            return filteredWordPairs.count
+        }
         return wordPairs.count
     }
     
     // Override to support showing core data objects in the table view.
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("wordPairCell")
-        prepareCellForDisplay(cell, cellForRowAtIndexPath: indexPath)
+        var cell = tableView.dequeueReusableCellWithIdentifier("wordPairCell")
+        let pair : WordPhrasePair
+        
+        // when searching the cell returned is nil
+        // attempting to extract this in the return statement throws an exception
+        // this code provides a work around
+        // see stackoverflow #25461545
+        if !(cell != nil) {
+            cell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: "wordPairCell")
+        }
+
+        if searchController.active && searchController.searchBar.text != "" {
+            pair = filteredWordPairs[indexPath.row]
+        } else {
+            pair = wordPairs[indexPath.row]
+        }
+        
+        prepareCellForDisplay(cell, wordPair: pair)
         return cell!
     }
     
@@ -64,6 +96,28 @@ class WordPairViewController: UITableViewController {
         }
     }
     
+    func filterContentForSearchText(searchText: String, searchScope scope: String = "All") {
+        filteredWordPairs = wordPairs.filter { pair in
+            switch scope {
+                case "Phrases":
+                    return pair.native!.lowercaseString.containsString(searchText.lowercaseString) ||
+                            pair.foreign!.lowercaseString.containsString(searchText.lowercaseString)
+                case "Word Type":
+                    return pair.type!.lowercaseString.containsString(searchText.lowercaseString)
+                case "Tags":
+                    return false
+                default:
+                    return false
+            }
+        }
+        tableView.reloadData()
+    }
+    
+    func updateSearchResultsForSearchController(searchController: UISearchController) {
+        let scope = self.searchScopeCategories[searchController.searchBar.selectedScopeButtonIndex]
+        filterContentForSearchText(searchController.searchBar.text!, searchScope: scope)
+    }
+    
     /** Delete a word pair
      
      This removes the object from the core data store, word list and from the view
@@ -95,8 +149,7 @@ class WordPairViewController: UITableViewController {
     
     /** Prepare cell by loading the information for a word pair into the cell
      */
-    func prepareCellForDisplay(cell:UITableViewCell?, cellForRowAtIndexPath indexPath: NSIndexPath) {
-        let pair = wordPairs[indexPath.row]
+    func prepareCellForDisplay(cell:UITableViewCell?, wordPair pair: WordPhrasePair) {
         let nativeWord = pair.native
         let foreignWord = pair.foreign
         // safely join two optinal strings
