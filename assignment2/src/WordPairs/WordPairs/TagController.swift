@@ -28,6 +28,7 @@ class TagController: UITableViewController, UISearchResultsUpdating {
         searchController.hidesNavigationBarDuringPresentation = false
         searchController.dimsBackgroundDuringPresentation = false
         searchController.searchBar.sizeToFit()
+        searchController.searchBar.placeholder = "Search Tags"
         self.tableView.tableHeaderView = searchController.searchBar
 
         loadTags()
@@ -35,6 +36,7 @@ class TagController: UITableViewController, UISearchResultsUpdating {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        self.searchController.searchBar.hidden = false
         tableView.reloadData()
     }
     
@@ -62,21 +64,27 @@ class TagController: UITableViewController, UISearchResultsUpdating {
             cell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: "Tag")
         }
         
-        if searchController.active && searchController.searchBar.text != "" {
-            tag = filteredTags[indexPath.row]
-        } else {
-            tag = tags[indexPath.row]
-        }
+        tag = getTagFromContext(indexPath)
         
         let wordPairCount = tag.wordPairs!.count
         cell?.textLabel!.text = tag.name
         cell?.detailTextLabel!.text = "Phrases \(wordPairCount)"
+        
+        if wordPairCount == 0 {
+            cell?.accessoryType = UITableViewCellAccessoryType.None
+        } else {
+            cell?.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
+        }
+        
         return cell!
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if tableView.editing {
-            self.performSegueWithIdentifier("ViewTagDetail", sender: indexPath);
+        let cell = tableView.cellForRowAtIndexPath(indexPath)
+        if editing {
+            self.performSegueWithIdentifier("ViewTagDetail", sender: cell);
+        } else {
+            self.performSegueWithIdentifier("ViewWordsForTag", sender: cell)
         }
     }
     
@@ -94,10 +102,11 @@ class TagController: UITableViewController, UISearchResultsUpdating {
             let tagWordPairController = segue.destinationViewController as! TagWordPairViewController
             if let selectedCell = sender as? UITableViewCell {
                 let indexPath = tableView.indexPathForCell(selectedCell)!
-                let tag = tags[indexPath.row]
+                let tag = getTagFromContext(indexPath)
                 let name = tag.name!
                 tagWordPairController.title = "Word Pairs for \(name)"
                 tagWordPairController.wordPairs = tag.wordPairs!.allObjects as! [WordPhrasePair]
+                self.searchController.searchBar.hidden = true
             }
         }
     }
@@ -132,19 +141,27 @@ class TagController: UITableViewController, UISearchResultsUpdating {
         if let tagDetailController = segue.sourceViewController as? TagDetail,
             tag = tagDetailController.tag {
                 
-                if let selectedIndexPath = tableView.indexPathForSelectedRow {
-                    //edit the pair by overwriting it
-                    tags[selectedIndexPath.row] = tag
-                    tableView.reloadRowsAtIndexPaths([selectedIndexPath], withRowAnimation: .None)
+            if let selectedIndexPath = tableView.indexPathForSelectedRow {
+                //edit the pair by overwriting it
+                if isInSearchMode() {
+                    filteredTags[selectedIndexPath.row] = tag
                 } else {
-                    //add the new tag to the tag array
+                    tags[selectedIndexPath.row] = tag
+                }
+
+                tableView.reloadRowsAtIndexPaths([selectedIndexPath], withRowAnimation: .None)
+            } else {
+                //add the new tag to the tag array
+                if isInSearchMode() {
+                    filteredTags.append(tag)
+                } else {
                     tags.append(tag)
-                    
-                    //update the tableView
-                    let indexPath = NSIndexPath(forRow: tags.count-1, inSection: 0)
-                    tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
                 }
                 
+                //update the tableView
+                let indexPath = NSIndexPath(forRow: tags.count-1, inSection: 0)
+                tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+            }
         }
     }
     
@@ -154,9 +171,19 @@ class TagController: UITableViewController, UISearchResultsUpdating {
      */
     func deleteTag(indexPath: NSIndexPath) {
         do {
-            managedObjectContext.deleteObject(tags[indexPath.row] as NSManagedObject)
+            if isInSearchMode() {
+                managedObjectContext.deleteObject(filteredTags[indexPath.row] as NSManagedObject)
+                let tag = filteredTags[indexPath.row]
+                if let tagIndex = tags.indexOf(tag) {
+                    filteredTags.removeAtIndex(indexPath.row)
+                    tags.removeAtIndex(tagIndex)
+                }
+            } else {
+                managedObjectContext.deleteObject(tags[indexPath.row] as NSManagedObject)
+                tags.removeAtIndex(indexPath.row)
+            }
+
             try managedObjectContext.save()
-            tags.removeAtIndex(indexPath.row)
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
         } catch {
             fatalError("Failed to delete object: \(error)")
@@ -170,5 +197,26 @@ class TagController: UITableViewController, UISearchResultsUpdating {
         } catch {
             fatalError("Failed to fetch tags: \(error)")
         }
+    }
+    
+    /** Helper method for getting a tag
+     This should return the correct tag regardless of whether a search
+     filter is active
+     */
+    func getTagFromContext(indexPath: NSIndexPath) -> Tag {
+        let tag: Tag
+        
+        if isInSearchMode() {
+            tag = filteredTags[indexPath.row]
+        } else {
+            tag = tags[indexPath.row]
+        }
+        
+        return tag
+    }
+    
+    /** Check whether the interface is currently in search mode */
+    func isInSearchMode() -> Bool {
+        return searchController.active && searchController.searchBar.text != ""
     }
 }

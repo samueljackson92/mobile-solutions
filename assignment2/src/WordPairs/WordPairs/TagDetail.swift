@@ -34,8 +34,10 @@ class TagDetail: UIViewController {
     }
     
     func saveTag() {
-        tag = NSEntityDescription.insertNewObjectForEntityForName("Tag", inManagedObjectContext: managedObjectContext) as? Tag
-
+        if tag == nil {
+            tag = NSEntityDescription.insertNewObjectForEntityForName("Tag", inManagedObjectContext: managedObjectContext) as? Tag
+        }
+        
         tag?.name = tagName.text
         
         do {

@@ -28,6 +28,7 @@ class WordPairViewController: UITableViewController, UISearchResultsUpdating  {
         searchController.dimsBackgroundDuringPresentation = false
         searchController.searchBar.sizeToFit()
         searchController.searchBar.scopeButtonTitles = searchScopeCategories
+        searchController.searchBar.placeholder = "Search Word Pairs"
         self.tableView.tableHeaderView = searchController.searchBar
         loadWordPairs()
     }
@@ -42,7 +43,7 @@ class WordPairViewController: UITableViewController, UISearchResultsUpdating  {
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if searchController.active && searchController.searchBar.text != "" {
+        if isInSearchMode() {
             return filteredWordPairs.count
         }
         return wordPairs.count
@@ -61,12 +62,7 @@ class WordPairViewController: UITableViewController, UISearchResultsUpdating  {
             cell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: "wordPairCell")
         }
 
-        if searchController.active && searchController.searchBar.text != "" {
-            pair = filteredWordPairs[indexPath.row]
-        } else {
-            pair = wordPairs[indexPath.row]
-        }
-        
+        pair = getWordPairFromContext(indexPath)
         prepareCellForDisplay(cell, wordPair: pair)
         return cell!
     }
@@ -92,12 +88,20 @@ class WordPairViewController: UITableViewController, UISearchResultsUpdating  {
             
             if let selectedIndexPath = tableView.indexPathForSelectedRow {
                 //edit the pair by overwriting it
-                wordPairs[selectedIndexPath.row] = pair
+                if isInSearchMode() {
+                    filteredWordPairs[selectedIndexPath.row] = pair
+                } else {
+                    wordPairs[selectedIndexPath.row] = pair
+                }
+                
                 tableView.reloadRowsAtIndexPaths([selectedIndexPath], withRowAnimation: .None)
             } else {
                 //add the new word pair to the word pair array
-                wordPairs.append(pair)
-                
+                if isInSearchMode() {
+                    filteredWordPairs.append(pair)
+                } else {
+                    wordPairs.append(pair)
+                }
                 //update the tableView
                 let indexPath = NSIndexPath(forRow: wordPairs.count-1, inSection: 0)
                 tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
@@ -119,7 +123,7 @@ class WordPairViewController: UITableViewController, UISearchResultsUpdating  {
             let addWordPairDetail = navController.viewControllers.first as! AddWordPairViewController
             if let selectedCell = sender as? UITableViewCell {
                 let indexPath = tableView.indexPathForCell(selectedCell)!
-                let selectedPair = wordPairs[indexPath.row]
+                let selectedPair = getWordPairFromContext(indexPath)
                 addWordPairDetail.pair = selectedPair
             }
         }
@@ -129,18 +133,33 @@ class WordPairViewController: UITableViewController, UISearchResultsUpdating  {
     func filterContentForSearchText(searchText: String, searchScope scope: String = "All") {
         filteredWordPairs = wordPairs.filter { pair in
             switch scope {
-                case "Phrases":
-                    return pair.native!.lowercaseString.containsString(searchText.lowercaseString) ||
-                            pair.foreign!.lowercaseString.containsString(searchText.lowercaseString)
-                case "Word Type":
-                    return pair.type!.lowercaseString.containsString(searchText.lowercaseString)
-                case "Tags":
-                    return false
-                default:
-                    return false
+            case "Phrases":
+                return filterWordPair(pair, searchText: searchText)
+            case "Word Type":
+                return pair.type!.lowercaseString.containsString(searchText.lowercaseString)
+            case "Tags":
+                return false
+            default:
+                return false
             }
         }
         tableView.reloadData()
+    }
+    
+    func filterWordPair(pair: WordPhrasePair, searchText: String) -> Bool {
+        var nativeMatch = false
+        var foreignMatch = false
+
+        if let native = pair.native {
+            nativeMatch = native.lowercaseString.containsString(searchText.lowercaseString)
+        }
+        
+        if let foreign = pair.foreign {
+            foreignMatch = foreign.lowercaseString.containsString(searchText.lowercaseString)
+        }
+        
+        return (nativeMatch || foreignMatch)
+        
     }
     
     func updateSearchResultsForSearchController(searchController: UISearchController) {
@@ -154,9 +173,8 @@ class WordPairViewController: UITableViewController, UISearchResultsUpdating  {
      */
     func deleteWordPair(indexPath: NSIndexPath) {
         do {
-            managedObjectContext.deleteObject(wordPairs[indexPath.row] as NSManagedObject)
+            removeWordPairFromContext(indexPath)
             try managedObjectContext.save()
-            wordPairs.removeAtIndex(indexPath.row)
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
         } catch {
             fatalError("Failed to delete object: \(error)")
@@ -186,5 +204,45 @@ class WordPairViewController: UITableViewController, UISearchResultsUpdating  {
         let title = [nativeWord, foreignWord].flatMap{$0}.joinWithSeparator(" - ")
         cell?.textLabel!.text = title
         cell?.detailTextLabel!.text = pair.type
+    }
+    
+    /** Helper method for getting a word pair 
+     This should return the correct word pair regardless of whether a search
+     filter is active
+     */
+    func getWordPairFromContext(indexPath: NSIndexPath) -> WordPhrasePair {
+        let pair: WordPhrasePair
+        
+        if isInSearchMode() {
+            pair = filteredWordPairs[indexPath.row]
+        } else {
+            pair = wordPairs[indexPath.row]
+        }
+        
+        return pair
+    }
+    
+    /** Helper method for removing a word pair
+     This should remove the correct word pair regardless of whether a search
+     filter is active
+     */
+    func removeWordPairFromContext(indexPath: NSIndexPath) {
+        if isInSearchMode() {
+            managedObjectContext.deleteObject(filteredWordPairs[indexPath.row] as NSManagedObject)
+            
+            let pair = filteredWordPairs[indexPath.row]
+            if let wordPairindex = wordPairs.indexOf(pair) {
+                filteredWordPairs.removeAtIndex(indexPath.row)
+                wordPairs.removeAtIndex(wordPairindex)
+            }
+        } else {
+            managedObjectContext.deleteObject(wordPairs[indexPath.row] as NSManagedObject)
+            wordPairs.removeAtIndex(indexPath.row)
+        }
+    }
+    
+    /** Check whether the interface is currently in search mode */
+    func isInSearchMode() -> Bool {
+        return searchController.active && searchController.searchBar.text != ""
     }
 }

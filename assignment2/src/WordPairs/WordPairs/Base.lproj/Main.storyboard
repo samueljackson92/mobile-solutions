@@ -105,9 +105,6 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
-                                <connections>
-                                    <segue destination="Igu-xB-ch1" kind="show" identifier="ViewWordsForTag" id="5Qq-qc-h6v"/>
-                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -118,10 +115,13 @@
                     <navigationItem key="navigationItem" title="Tags" id="Kv5-4w-eEB">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="92T-za-Ejr">
                             <connections>
-                                <segue destination="yHz-Ho-NHD" kind="presentation" id="5qC-Cp-KGs"/>
+                                <segue destination="yHz-Ho-NHD" kind="presentation" identifier="ViewTagDetail" id="5qC-Cp-KGs"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="Igu-xB-ch1" kind="show" identifier="ViewWordsForTag" id="WLQ-xx-Fok"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iuK-oa-5Px" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -434,7 +434,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r7o-jC-zFM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3734" y="1257"/>
+            <point key="canvasLocation" x="3726" y="1257"/>
         </scene>
         <!--Word Pairs-->
         <scene sceneID="MBB-Em-J6P">

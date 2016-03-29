@@ -65,7 +65,9 @@ class AddWordPairViewController: UITableViewController, UIPickerViewDataSource, 
      and stores it in core data.
      */
     func saveWordPair() {
-        pair = NSEntityDescription.insertNewObjectForEntityForName("WordPhrasePair", inManagedObjectContext: managedObjectContext) as? WordPhrasePair
+        if pair == nil {
+            pair = NSEntityDescription.insertNewObjectForEntityForName("WordPhrasePair", inManagedObjectContext: managedObjectContext) as? WordPhrasePair
+        }
         pair?.native = nativeWord.text
         pair?.foreign = foreignWord.text
         pair?.note = note.text
