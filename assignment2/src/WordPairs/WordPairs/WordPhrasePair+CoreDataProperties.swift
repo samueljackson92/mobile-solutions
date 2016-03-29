@@ -18,5 +18,10 @@ extension WordPhrasePair {
     @NSManaged var foreign: String?
     @NSManaged var note: String?
     @NSManaged var type: String?
-    @NSManaged var tags: NSManagedObject?
+    @NSManaged var tags: NSSet?
+    
+    @NSManaged func addTagsObject(tag: Tag)
+    @NSManaged func removeTagsObject(tag: Tag)
+    @NSManaged func addTags(tags: NSSet)
+    @NSManaged func removeTags(tags: NSSet)
 }

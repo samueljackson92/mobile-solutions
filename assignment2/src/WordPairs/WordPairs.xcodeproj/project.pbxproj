@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7E8A8D061CAA81B500571B2D /* TagController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8A8D051CAA81B500571B2D /* TagController.swift */; };
+		7E8A8D081CAA82DE00571B2D /* TagDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8A8D071CAA82DE00571B2D /* TagDetail.swift */; };
+		7E8A8D0B1CAA9AD500571B2D /* TagWordPairViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8A8D0A1CAA9AD500571B2D /* TagWordPairViewController.swift */; };
+		7E8A8D0D1CAAA33500571B2D /* TagSelectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8A8D0C1CAAA33500571B2D /* TagSelectionController.swift */; };
 		7EE253FF1CA934370036A8B7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE253FE1CA934370036A8B7 /* AppDelegate.swift */; };
 		7EE254041CA934370036A8B7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7EE254021CA934370036A8B7 /* Main.storyboard */; };
 		7EE254071CA934370036A8B7 /* WordPairs.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7EE254051CA934370036A8B7 /* WordPairs.xcdatamodeld */; };
@@ -41,6 +45,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7E8A8D051CAA81B500571B2D /* TagController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagController.swift; sourceTree = "<group>"; };
+		7E8A8D071CAA82DE00571B2D /* TagDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagDetail.swift; sourceTree = "<group>"; };
+		7E8A8D091CAA928C00571B2D /* WordPairs 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "WordPairs 4.xcdatamodel"; sourceTree = "<group>"; };
+		7E8A8D0A1CAA9AD500571B2D /* TagWordPairViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagWordPairViewController.swift; sourceTree = "<group>"; };
+		7E8A8D0C1CAAA33500571B2D /* TagSelectionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagSelectionController.swift; sourceTree = "<group>"; };
 		7EE253FB1CA934370036A8B7 /* WordPairs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WordPairs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EE253FE1CA934370036A8B7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7EE254031CA934370036A8B7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -148,6 +157,10 @@
 			children = (
 				7EE254311CA93E8D0036A8B7 /* WordPairViewController.swift */,
 				7EE254341CA947AE0036A8B7 /* AddWordPairViewController.swift */,
+				7E8A8D051CAA81B500571B2D /* TagController.swift */,
+				7E8A8D071CAA82DE00571B2D /* TagDetail.swift */,
+				7E8A8D0A1CAA9AD500571B2D /* TagWordPairViewController.swift */,
+				7E8A8D0C1CAAA33500571B2D /* TagSelectionController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -301,8 +314,12 @@
 				7EE254321CA93E8D0036A8B7 /* WordPairViewController.swift in Sources */,
 				7EE2543B1CA958810036A8B7 /* WordPhrasePair.swift in Sources */,
 				7EE2543A1CA958810036A8B7 /* WordPhrasePair+CoreDataProperties.swift in Sources */,
+				7E8A8D061CAA81B500571B2D /* TagController.swift in Sources */,
+				7E8A8D0D1CAAA33500571B2D /* TagSelectionController.swift in Sources */,
 				7EE2543C1CA958810036A8B7 /* Tag+CoreDataProperties.swift in Sources */,
 				7EE254351CA947AE0036A8B7 /* AddWordPairViewController.swift in Sources */,
+				7E8A8D0B1CAA9AD500571B2D /* TagWordPairViewController.swift in Sources */,
+				7E8A8D081CAA82DE00571B2D /* TagDetail.swift in Sources */,
 				7EE253FF1CA934370036A8B7 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -528,6 +545,7 @@
 				7EE254281CA934370036A8B7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		7EE254291CA934370036A8B7 /* Build configuration list for PBXNativeTarget "WordPairsTests" */ = {
 			isa = XCConfigurationList;
@@ -536,6 +554,7 @@
 				7EE2542B1CA934370036A8B7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		7EE2542C1CA934370036A8B7 /* Build configuration list for PBXNativeTarget "WordPairsUITests" */ = {
 			isa = XCConfigurationList;
@@ -544,6 +563,7 @@
 				7EE2542E1CA934370036A8B7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
@@ -551,11 +571,12 @@
 		7EE254051CA934370036A8B7 /* WordPairs.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				7E8A8D091CAA928C00571B2D /* WordPairs 4.xcdatamodel */,
 				7EE254451CA981A00036A8B7 /* WordPairs 3.xcdatamodel */,
 				7EE254441CA97F1E0036A8B7 /* WordPairs 2.xcdatamodel */,
 				7EE254061CA934370036A8B7 /* WordPairs.xcdatamodel */,
 			);
-			currentVersion = 7EE254451CA981A00036A8B7 /* WordPairs 3.xcdatamodel */;
+			currentVersion = 7E8A8D091CAA928C00571B2D /* WordPairs 4.xcdatamodel */;
 			path = WordPairs.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

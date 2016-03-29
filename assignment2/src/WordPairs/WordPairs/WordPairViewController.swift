@@ -32,6 +32,11 @@ class WordPairViewController: UITableViewController, UISearchResultsUpdating  {
         loadWordPairs()
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
+    }
+    
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
@@ -71,8 +76,6 @@ class WordPairViewController: UITableViewController, UISearchResultsUpdating  {
         if editingStyle == .Delete {
             // Delete the row from the data source
             deleteWordPair(indexPath)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }
     }
     

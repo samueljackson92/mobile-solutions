@@ -15,6 +15,10 @@ import CoreData
 extension Tag {
 
     @NSManaged var name: String?
-    @NSManaged var wordPairs: WordPhrasePair?
+    @NSManaged var wordPairs: NSSet?
 
+    @NSManaged func addWordPhrasePairObject(wordPair: WordPhrasePair)
+    @NSManaged func removeWordPhrasePairObject(wordPair: WordPhrasePair)
+    @NSManaged func addWordPhrasePairs(wordPairs: NSSet)
+    @NSManaged func removeWordPhrasePairs(wordPairs: NSSet)
 }
