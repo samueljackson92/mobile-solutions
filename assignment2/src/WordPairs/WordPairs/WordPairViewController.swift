@@ -85,28 +85,11 @@ class WordPairViewController: UITableViewController, UISearchResultsUpdating, UI
     @IBAction func saveAddWordPair(segue:UIStoryboardSegue) {
         if let addWordPairController = segue.sourceViewController as? AddWordPairViewController,
             pair = addWordPairController.pair {
-            
-            if let selectedIndexPath = tableView.indexPathForSelectedRow {
-                //edit the pair by overwriting it
-                if isInSearchMode() {
-                    filteredWordPairs[selectedIndexPath.row] = pair
-                } else {
-                    wordPairs[selectedIndexPath.row] = pair
-                }
-                
-                tableView.reloadRowsAtIndexPaths([selectedIndexPath], withRowAnimation: .None)
-            } else {
-                //add the new word pair to the word pair array
-                if isInSearchMode() {
-                    filteredWordPairs.append(pair)
-                } else {
-                    wordPairs.append(pair)
-                }
-                //update the tableView
-                let indexPath = NSIndexPath(forRow: wordPairs.count-1, inSection: 0)
-                tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+            addOrEditWordPairInContext(pair)
+        } else if let importController = segue.sourceViewController as? WordPairImportController {
+            importController.wordPairs.forEach { pair in
+                addOrEditWordPairInContext(pair)
             }
-
         }
     }
 
@@ -237,6 +220,29 @@ class WordPairViewController: UITableViewController, UISearchResultsUpdating, UI
         }
         
         return pair
+    }
+    
+    func addOrEditWordPairInContext(pair: WordPhrasePair) {
+        if let selectedIndexPath = tableView.indexPathForSelectedRow {
+            //edit the pair by overwriting it
+            if isInSearchMode() {
+                filteredWordPairs[selectedIndexPath.row] = pair
+            } else {
+                wordPairs[selectedIndexPath.row] = pair
+            }
+            
+            tableView.reloadRowsAtIndexPaths([selectedIndexPath], withRowAnimation: .None)
+        } else {
+            //add the new word pair to the word pair array
+            if isInSearchMode() {
+                filteredWordPairs.append(pair)
+            } else {
+                wordPairs.append(pair)
+            }
+            //update the tableView
+            let indexPath = NSIndexPath(forRow: wordPairs.count-1, inSection: 0)
+            tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+        }
     }
     
     /** Helper method for removing a word pair

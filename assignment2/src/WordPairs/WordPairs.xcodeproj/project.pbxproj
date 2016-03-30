@@ -19,6 +19,7 @@
 		7ECD8BC71CABE67300A222BE /* TestReviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ECD8BC61CABE67300A222BE /* TestReviewController.swift */; };
 		7ECD8BC91CABEC8200A222BE /* TestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ECD8BC81CABEC8200A222BE /* TestData.swift */; };
 		7ECD8BCB1CABF4EA00A222BE /* AddWordPopoverController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ECD8BCA1CABF4EA00A222BE /* AddWordPopoverController.swift */; };
+		7ECD8BCD1CABF92F00A222BE /* WordPairImportController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ECD8BCC1CABF92F00A222BE /* WordPairImportController.swift */; };
 		7EE253FF1CA934370036A8B7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE253FE1CA934370036A8B7 /* AppDelegate.swift */; };
 		7EE254071CA934370036A8B7 /* WordPairs.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7EE254051CA934370036A8B7 /* WordPairs.xcdatamodeld */; };
 		7EE254091CA934370036A8B7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7EE254081CA934370036A8B7 /* Assets.xcassets */; };
@@ -65,6 +66,8 @@
 		7ECD8BC61CABE67300A222BE /* TestReviewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestReviewController.swift; sourceTree = "<group>"; };
 		7ECD8BC81CABEC8200A222BE /* TestData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestData.swift; sourceTree = "<group>"; };
 		7ECD8BCA1CABF4EA00A222BE /* AddWordPopoverController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddWordPopoverController.swift; sourceTree = "<group>"; };
+		7ECD8BCC1CABF92F00A222BE /* WordPairImportController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordPairImportController.swift; sourceTree = "<group>"; };
+		7ECD8BCE1CAC0DC900A222BE /* WordPairs 5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "WordPairs 5.xcdatamodel"; sourceTree = "<group>"; };
 		7EE253FB1CA934370036A8B7 /* WordPairs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WordPairs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EE253FE1CA934370036A8B7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7EE254061CA934370036A8B7 /* WordPairs.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WordPairs.xcdatamodel; sourceTree = "<group>"; };
@@ -182,6 +185,7 @@
 				7E8A8D131CABCDEF00571B2D /* TestStartController.swift */,
 				7ECD8BC21CABDA0A00A222BE /* SimpleTestController.swift */,
 				7ECD8BC61CABE67300A222BE /* TestReviewController.swift */,
+				7ECD8BCC1CABF92F00A222BE /* WordPairImportController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -338,6 +342,7 @@
 				7EE254321CA93E8D0036A8B7 /* WordPairViewController.swift in Sources */,
 				7EE2543B1CA958810036A8B7 /* WordPhrasePair.swift in Sources */,
 				7EE2543A1CA958810036A8B7 /* WordPhrasePair+CoreDataProperties.swift in Sources */,
+				7ECD8BCD1CABF92F00A222BE /* WordPairImportController.swift in Sources */,
 				7E8A8D061CAA81B500571B2D /* TagController.swift in Sources */,
 				7ECD8BC51CABDC8C00A222BE /* Shuffle.swift in Sources */,
 				7E8A8D0D1CAAA33500571B2D /* TagSelectionController.swift in Sources */,
@@ -599,12 +604,13 @@
 		7EE254051CA934370036A8B7 /* WordPairs.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				7ECD8BCE1CAC0DC900A222BE /* WordPairs 5.xcdatamodel */,
 				7E8A8D091CAA928C00571B2D /* WordPairs 4.xcdatamodel */,
 				7EE254451CA981A00036A8B7 /* WordPairs 3.xcdatamodel */,
 				7EE254441CA97F1E0036A8B7 /* WordPairs 2.xcdatamodel */,
 				7EE254061CA934370036A8B7 /* WordPairs.xcdatamodel */,
 			);
-			currentVersion = 7E8A8D091CAA928C00571B2D /* WordPairs 4.xcdatamodel */;
+			currentVersion = 7ECD8BCE1CAC0DC900A222BE /* WordPairs 5.xcdatamodel */;
 			path = WordPairs.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

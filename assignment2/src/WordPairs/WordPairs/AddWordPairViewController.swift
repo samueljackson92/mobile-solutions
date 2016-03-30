@@ -73,6 +73,7 @@ class AddWordPairViewController: UITableViewController, UIPickerViewDataSource, 
         pair?.note = note.text
         pair?.type = PhraseType.getValueAtIndex(phraseType.selectedRowInComponent(0))
         pair?.addTags(NSSet(array: selectedTags))
+        pair?.timeAdded = NSDate()
         
         do {
             try managedObjectContext.save()

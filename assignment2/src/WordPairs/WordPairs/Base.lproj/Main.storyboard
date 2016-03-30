@@ -53,6 +53,9 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="NYS-Rq-rPf" kind="presentation" id="d5g-IV-PyN"/>
+                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -592,6 +595,76 @@
             </objects>
             <point key="canvasLocation" x="5186" y="476"/>
         </scene>
+        <!--Import From URL-->
+        <scene sceneID="Ppp-k6-OMk">
+            <objects>
+                <viewController id="VuE-Nt-Fpa" customClass="WordPairImportController" customModule="WordPairs" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="NkP-Ue-ZvP"/>
+                        <viewControllerLayoutGuide type="bottom" id="QQw-pD-Vy1"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="oh9-7s-Sw4">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter URL For Import" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G8S-tB-azv">
+                                <rect key="frame" x="86" y="52" width="428" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="87s-hd-JGQ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="e.g. www.example.com/wordpairs.json" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1WN-CN-EJy">
+                                <rect key="frame" x="20" y="81" width="560" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" keyboardType="URL"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hea-gZ-iRg">
+                                <rect key="frame" x="20" y="119" width="560" height="51"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="51" id="j70-RA-Tum"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <state key="normal" title="Import" backgroundImage="Button">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="clickImport:" destination="VuE-Nt-Fpa" eventType="touchUpInside" id="VJr-d1-5kY"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="1WN-CN-EJy" firstAttribute="centerX" secondItem="G8S-tB-azv" secondAttribute="centerX" id="2UX-aq-afv"/>
+                            <constraint firstItem="1WN-CN-EJy" firstAttribute="top" secondItem="G8S-tB-azv" secondAttribute="bottom" constant="8" symbolic="YES" id="4wq-bk-YfJ"/>
+                            <constraint firstItem="1WN-CN-EJy" firstAttribute="trailing" secondItem="oh9-7s-Sw4" secondAttribute="trailingMargin" id="9zB-Je-19o"/>
+                            <constraint firstItem="G8S-tB-azv" firstAttribute="leading" secondItem="oh9-7s-Sw4" secondAttribute="leadingMargin" constant="66" id="Bh8-Jp-xLI"/>
+                            <constraint firstItem="hea-gZ-iRg" firstAttribute="top" secondItem="1WN-CN-EJy" secondAttribute="bottom" constant="8" symbolic="YES" id="LYr-dp-ZEK"/>
+                            <constraint firstItem="hea-gZ-iRg" firstAttribute="leading" secondItem="1WN-CN-EJy" secondAttribute="leading" id="U5l-TI-Q4l"/>
+                            <constraint firstItem="G8S-tB-azv" firstAttribute="top" secondItem="NkP-Ue-ZvP" secondAttribute="bottom" constant="8" symbolic="YES" id="X8C-dJ-d5q"/>
+                            <constraint firstItem="hea-gZ-iRg" firstAttribute="trailing" secondItem="1WN-CN-EJy" secondAttribute="trailing" id="bDD-PI-JzL"/>
+                            <constraint firstItem="1WN-CN-EJy" firstAttribute="leading" secondItem="oh9-7s-Sw4" secondAttribute="leadingMargin" id="pVW-vi-IAk"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Import From URL" id="oaY-zU-oYW">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="6pb-N5-KVp">
+                            <connections>
+                                <segue destination="w8c-tl-0xY" kind="unwind" unwindAction="cancelAddWordPair:" id="ERt-8L-6Qh"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="importURL" destination="1WN-CN-EJy" id="l4m-FJ-BF6"/>
+                        <segue destination="w8c-tl-0xY" kind="unwind" identifier="ImportSuccess" unwindAction="saveAddWordPair:" id="7im-kR-vLh"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3Nl-yN-Opj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="w8c-tl-0xY" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="4546" y="-947"/>
+        </scene>
         <!--Word Pair-->
         <scene sceneID="Jst-tx-Mkr">
             <objects>
@@ -800,10 +873,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Word" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mq4-6S-BTo">
-                                <rect key="frame" x="253" y="102" width="94" height="63"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Word" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mq4-6S-BTo">
+                                <rect key="frame" x="20" y="102" width="560" height="63"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="94" id="6Ls-tE-bja"/>
+                                    <constraint firstAttribute="width" constant="560" id="6Ls-tE-bja"/>
                                     <constraint firstAttribute="height" constant="63" id="dd5-U3-HlZ"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
@@ -849,7 +922,7 @@
                             <constraint firstItem="c9o-Cv-QfT" firstAttribute="trailing" secondItem="htW-Zk-GPe" secondAttribute="trailing" id="gzX-Va-ePC"/>
                             <constraint firstItem="zb7-6U-rvB" firstAttribute="top" secondItem="c9o-Cv-QfT" secondAttribute="bottom" constant="271" id="hOb-1c-Mgm"/>
                             <constraint firstItem="VVn-b8-zPB" firstAttribute="top" secondItem="htW-Zk-GPe" secondAttribute="bottom" constant="25" id="hUg-jK-ASD"/>
-                            <constraint firstItem="VVn-b8-zPB" firstAttribute="leading" secondItem="Mq4-6S-BTo" secondAttribute="leading" constant="-106" id="s6N-pU-8r5"/>
+                            <constraint firstItem="VVn-b8-zPB" firstAttribute="leading" secondItem="Mq4-6S-BTo" secondAttribute="leading" constant="127" id="s6N-pU-8r5"/>
                             <constraint firstItem="c9o-Cv-QfT" firstAttribute="top" secondItem="VVn-b8-zPB" secondAttribute="bottom" constant="8" id="uBI-uS-vDG"/>
                             <constraint firstItem="VVn-b8-zPB" firstAttribute="centerX" secondItem="htW-Zk-GPe" secondAttribute="centerX" id="x3j-0y-s76"/>
                         </constraints>
@@ -923,10 +996,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sde-OB-Hvg">
-                                <rect key="frame" x="200" y="173" width="200" height="63"/>
+                                <rect key="frame" x="20" y="173" width="560" height="63"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="63" id="8CU-rp-yo2"/>
-                                    <constraint firstAttribute="width" constant="200" id="niB-C0-UX1"/>
+                                    <constraint firstAttribute="width" constant="560" id="niB-C0-UX1"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -991,6 +1064,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yHn-iu-8j5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5561" y="3468"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="2er-I2-Bs2">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="NYS-Rq-rPf" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="sBo-D5-XAw">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="VuE-Nt-Fpa" kind="relationship" relationship="rootViewController" id="tGX-Q5-xd8"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ssC-eE-7Yb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3734" y="-947"/>
         </scene>
     </scenes>
     <resources>

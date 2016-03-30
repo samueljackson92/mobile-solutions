@@ -19,6 +19,7 @@ extension WordPhrasePair {
     @NSManaged var note: String?
     @NSManaged var type: String?
     @NSManaged var tags: NSSet?
+    @NSManaged var timeAdded: NSDate?
     
     @NSManaged func addTagsObject(tag: Tag)
     @NSManaged func removeTagsObject(tag: Tag)

@@ -11,12 +11,19 @@ import CoreData
 
 class TestStartController: UITableViewController {
     
+    let TEST_SIZE = 10
     let staticTestCells = ["Most Recent"]
     var tags = [Tag]()
  
     override func viewDidLoad() {
         super.viewDidLoad()
         loadTags()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        loadTags()
+        tableView.reloadData()
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -78,18 +85,41 @@ class TestStartController: UITableViewController {
         
         if let selectedCell = sender as? UITableViewCell {
             let indexPath = tableView.indexPathForCell(selectedCell)!
-            let wordPairs = tags[indexPath.row].wordPairs?.allObjects as! [WordPhrasePair]
-            let testData = TestData(wordPairs: wordPairs.shuffle())
-            testController.testData = testData
+            var testData: TestData?
+            
+            if indexPath.section == 0 {
+                let recentWords = loadMostRecentWordPairs().shuffle()
+                testData = TestData(wordPairs: recentWords)
+            } else if indexPath.section == 1 {
+                let wordPairs = tags[indexPath.row].wordPairs?.allObjects as! [WordPhrasePair]
+                testData = TestData(wordPairs: wordPairs.shuffle())
+            }
+            
+            testController.testData = testData!
         }
     }
 
+    func loadMostRecentWordPairs() -> [WordPhrasePair] {
+        var mostRecentWords = [WordPhrasePair]()
+        let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+        let wordPairFetch = NSFetchRequest(entityName: "WordPhrasePair")
+        do {
+            let allWords = try managedObjectContext.executeFetchRequest(wordPairFetch) as! [WordPhrasePair]
+            mostRecentWords = allWords.sort({ $0.timeAdded!.compare($1.timeAdded!) == NSComparisonResult.OrderedDescending })
+        } catch {
+            fatalError("Failed to fetch tags: \(error)")
+        }
+        return Array(mostRecentWords.prefix(TEST_SIZE))
+    }
     
     func loadTags() {
         let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
         let tagsFetch = NSFetchRequest(entityName: "Tag")
         do {
-            tags = try managedObjectContext.executeFetchRequest(tagsFetch) as! [Tag]
+            let allTags = try managedObjectContext.executeFetchRequest(tagsFetch) as! [Tag]
+            tags = allTags.filter { tag in
+                return tag.wordPairs!.count > 0
+            }
         } catch {
             fatalError("Failed to fetch tags: \(error)")
         }
