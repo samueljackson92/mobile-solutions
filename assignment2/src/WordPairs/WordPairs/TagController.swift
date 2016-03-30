@@ -71,8 +71,10 @@ class TagController: UITableViewController, UISearchResultsUpdating {
         
         if wordPairCount == 0 {
             cell?.accessoryType = UITableViewCellAccessoryType.None
+            cell?.selectionStyle = UITableViewCellSelectionStyle.None
         } else {
             cell?.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
+            cell?.selectionStyle = UITableViewCellSelectionStyle.Gray
         }
         
         return cell!
@@ -82,7 +84,7 @@ class TagController: UITableViewController, UISearchResultsUpdating {
         let cell = tableView.cellForRowAtIndexPath(indexPath)
         if editing {
             self.performSegueWithIdentifier("ViewTagDetail", sender: cell);
-        } else {
+        } else if tags[indexPath.row].wordPairs?.count > 0 {
             self.performSegueWithIdentifier("ViewWordsForTag", sender: cell)
         }
     }
