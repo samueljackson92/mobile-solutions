@@ -30,7 +30,6 @@ class TagController: UITableViewController, UISearchResultsUpdating {
         searchController.searchBar.sizeToFit()
         searchController.searchBar.placeholder = "Search Tags"
         self.tableView.tableHeaderView = searchController.searchBar
-
         loadTags()
     }
     

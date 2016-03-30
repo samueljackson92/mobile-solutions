@@ -18,12 +18,16 @@ class TagSelectionController: UITableViewController {
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     var delegate: TagSelectionDelegate?
     
+    var interactive = true
     var tags = [Tag]()
     var selectedTags = [Tag]?()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadTags()
+
+        if interactive {
+            loadTags()
+        }
         
         if let selectedTags = selectedTags {
             let selectedIndicies = selectedTags.map { tag in
@@ -57,6 +61,13 @@ class TagSelectionController: UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier("tagCell")
         let tag = tags[indexPath.row]
         cell?.textLabel!.text = tag.name
+        
+        if !interactive {
+            cell?.selectionStyle = UITableViewCellSelectionStyle.None
+            cell?.userInteractionEnabled = false
+            cell?.accessoryType = UITableViewCellAccessoryType.None
+        }
+        
         return cell!
     }
     

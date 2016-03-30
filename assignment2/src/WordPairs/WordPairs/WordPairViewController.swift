@@ -111,8 +111,11 @@ class WordPairViewController: UITableViewController, UISearchResultsUpdating  {
     }
 
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if tableView.editing {
-            self.performSegueWithIdentifier("ViewWordPairDetail", sender: indexPath);
+        let cell = tableView.cellForRowAtIndexPath(indexPath);
+        if editing {
+            self.performSegueWithIdentifier("ViewWordPairDetail", sender: cell);
+        } else {
+            self.performSegueWithIdentifier("ViewStaticWordPairDetail", sender: cell);
         }
     }
     
@@ -125,6 +128,13 @@ class WordPairViewController: UITableViewController, UISearchResultsUpdating  {
                 let indexPath = tableView.indexPathForCell(selectedCell)!
                 let selectedPair = getWordPairFromContext(indexPath)
                 addWordPairDetail.pair = selectedPair
+            }
+        } else if segue.identifier == "ViewStaticWordPairDetail" {
+            let staticDetail = segue.destinationViewController as! WordPairStaticDetailController
+            if let selectedCell = sender as? UITableViewCell {
+                let indexPath = tableView.indexPathForCell(selectedCell)!
+                let selectedPair = getWordPairFromContext(indexPath)
+                staticDetail.pair = selectedPair
             }
         }
     }
