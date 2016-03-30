@@ -59,6 +59,30 @@ class TestStartController: UITableViewController {
                 return ""
         }
     }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "BeginTest" {
+            beginTestSegue(segue, sender: sender)
+        }
+    }
+    
+    /** Action to handle when a user clicks the cross on the test screen */
+    @IBAction func stopTesting(segue:UIStoryboardSegue) {
+        // if we cancel we should do nothing
+        // just close the segue
+    }
+    
+    func beginTestSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        let navController = segue.destinationViewController as! UINavigationController
+        let testController = navController.viewControllers.first as! SimpleTestController
+        
+        if let selectedCell = sender as? UITableViewCell {
+            let indexPath = tableView.indexPathForCell(selectedCell)!
+            let wordPairs = tags[indexPath.row].wordPairs?.allObjects as! [WordPhrasePair]
+            let testData = TestData(wordPairs: wordPairs.shuffle())
+            testController.testData = testData
+        }
+    }
 
     
     func loadTags() {

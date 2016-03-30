@@ -14,6 +14,10 @@
 		7E8A8D101CAAE3A300571B2D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E8A8D0E1CAAE3A300571B2D /* Main.storyboard */; };
 		7E8A8D121CAAE92400571B2D /* WordPairDetailStaticController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8A8D111CAAE92400571B2D /* WordPairDetailStaticController.swift */; };
 		7E8A8D141CABCDEF00571B2D /* TestStartController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8A8D131CABCDEF00571B2D /* TestStartController.swift */; };
+		7ECD8BC31CABDA0A00A222BE /* SimpleTestController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ECD8BC21CABDA0A00A222BE /* SimpleTestController.swift */; };
+		7ECD8BC51CABDC8C00A222BE /* Shuffle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ECD8BC41CABDC8C00A222BE /* Shuffle.swift */; };
+		7ECD8BC71CABE67300A222BE /* TestReviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ECD8BC61CABE67300A222BE /* TestReviewController.swift */; };
+		7ECD8BC91CABEC8200A222BE /* TestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ECD8BC81CABEC8200A222BE /* TestData.swift */; };
 		7EE253FF1CA934370036A8B7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE253FE1CA934370036A8B7 /* AppDelegate.swift */; };
 		7EE254071CA934370036A8B7 /* WordPairs.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7EE254051CA934370036A8B7 /* WordPairs.xcdatamodeld */; };
 		7EE254091CA934370036A8B7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7EE254081CA934370036A8B7 /* Assets.xcassets */; };
@@ -55,6 +59,10 @@
 		7E8A8D0F1CAAE3A300571B2D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		7E8A8D111CAAE92400571B2D /* WordPairDetailStaticController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordPairDetailStaticController.swift; sourceTree = "<group>"; };
 		7E8A8D131CABCDEF00571B2D /* TestStartController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestStartController.swift; sourceTree = "<group>"; };
+		7ECD8BC21CABDA0A00A222BE /* SimpleTestController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleTestController.swift; sourceTree = "<group>"; };
+		7ECD8BC41CABDC8C00A222BE /* Shuffle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shuffle.swift; sourceTree = "<group>"; };
+		7ECD8BC61CABE67300A222BE /* TestReviewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestReviewController.swift; sourceTree = "<group>"; };
+		7ECD8BC81CABEC8200A222BE /* TestData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestData.swift; sourceTree = "<group>"; };
 		7EE253FB1CA934370036A8B7 /* WordPairs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WordPairs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EE253FE1CA934370036A8B7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7EE254061CA934370036A8B7 /* WordPairs.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WordPairs.xcdatamodel; sourceTree = "<group>"; };
@@ -134,6 +142,8 @@
 				7E8A8D0E1CAAE3A300571B2D /* Main.storyboard */,
 				7EE2540D1CA934370036A8B7 /* Info.plist */,
 				7EE254051CA934370036A8B7 /* WordPairs.xcdatamodeld */,
+				7ECD8BC41CABDC8C00A222BE /* Shuffle.swift */,
+				7ECD8BC81CABEC8200A222BE /* TestData.swift */,
 			);
 			path = WordPairs;
 			sourceTree = "<group>";
@@ -167,6 +177,8 @@
 				7E8A8D0C1CAAA33500571B2D /* TagSelectionController.swift */,
 				7E8A8D111CAAE92400571B2D /* WordPairDetailStaticController.swift */,
 				7E8A8D131CABCDEF00571B2D /* TestStartController.swift */,
+				7ECD8BC21CABDA0A00A222BE /* SimpleTestController.swift */,
+				7ECD8BC61CABE67300A222BE /* TestReviewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -317,17 +329,21 @@
 				7E8A8D121CAAE92400571B2D /* WordPairDetailStaticController.swift in Sources */,
 				7EE2543D1CA958810036A8B7 /* Tag.swift in Sources */,
 				7EE254431CA9733F0036A8B7 /* PhraseType.swift in Sources */,
+				7ECD8BC31CABDA0A00A222BE /* SimpleTestController.swift in Sources */,
 				7EE254071CA934370036A8B7 /* WordPairs.xcdatamodeld in Sources */,
+				7ECD8BC71CABE67300A222BE /* TestReviewController.swift in Sources */,
 				7EE254321CA93E8D0036A8B7 /* WordPairViewController.swift in Sources */,
 				7EE2543B1CA958810036A8B7 /* WordPhrasePair.swift in Sources */,
 				7EE2543A1CA958810036A8B7 /* WordPhrasePair+CoreDataProperties.swift in Sources */,
 				7E8A8D061CAA81B500571B2D /* TagController.swift in Sources */,
+				7ECD8BC51CABDC8C00A222BE /* Shuffle.swift in Sources */,
 				7E8A8D0D1CAAA33500571B2D /* TagSelectionController.swift in Sources */,
 				7EE2543C1CA958810036A8B7 /* Tag+CoreDataProperties.swift in Sources */,
 				7E8A8D141CABCDEF00571B2D /* TestStartController.swift in Sources */,
 				7EE254351CA947AE0036A8B7 /* AddWordPairViewController.swift in Sources */,
 				7E8A8D0B1CAA9AD500571B2D /* TagWordPairViewController.swift in Sources */,
 				7E8A8D081CAA82DE00571B2D /* TagDetail.swift in Sources */,
+				7ECD8BC91CABEC8200A222BE /* TestData.swift in Sources */,
 				7EE253FF1CA934370036A8B7 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
