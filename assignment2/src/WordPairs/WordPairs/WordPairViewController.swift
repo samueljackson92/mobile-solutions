@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class WordPairViewController: UITableViewController, UISearchResultsUpdating  {
+class WordPairViewController: UITableViewController, UISearchResultsUpdating, UIPopoverPresentationControllerDelegate  {
     
     let searchController = UISearchController(searchResultsController: nil)
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
@@ -136,9 +136,16 @@ class WordPairViewController: UITableViewController, UISearchResultsUpdating  {
                 let selectedPair = getWordPairFromContext(indexPath)
                 staticDetail.pair = selectedPair
             }
+        } else if segue.identifier == "AddWordPair" {
+            let popoverViewController = segue.destinationViewController as! UITableViewController
+            popoverViewController.modalPresentationStyle = UIModalPresentationStyle.Popover
+            popoverViewController.popoverPresentationController!.delegate = self
         }
     }
     
+    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
+        return UIModalPresentationStyle.None
+    }
     
     func filterContentForSearchText(searchText: String, searchScope scope: String = "All") {
         filteredWordPairs = wordPairs.filter { pair in

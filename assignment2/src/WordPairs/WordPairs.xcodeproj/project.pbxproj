@@ -18,6 +18,7 @@
 		7ECD8BC51CABDC8C00A222BE /* Shuffle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ECD8BC41CABDC8C00A222BE /* Shuffle.swift */; };
 		7ECD8BC71CABE67300A222BE /* TestReviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ECD8BC61CABE67300A222BE /* TestReviewController.swift */; };
 		7ECD8BC91CABEC8200A222BE /* TestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ECD8BC81CABEC8200A222BE /* TestData.swift */; };
+		7ECD8BCB1CABF4EA00A222BE /* AddWordPopoverController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ECD8BCA1CABF4EA00A222BE /* AddWordPopoverController.swift */; };
 		7EE253FF1CA934370036A8B7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE253FE1CA934370036A8B7 /* AppDelegate.swift */; };
 		7EE254071CA934370036A8B7 /* WordPairs.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7EE254051CA934370036A8B7 /* WordPairs.xcdatamodeld */; };
 		7EE254091CA934370036A8B7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7EE254081CA934370036A8B7 /* Assets.xcassets */; };
@@ -63,6 +64,7 @@
 		7ECD8BC41CABDC8C00A222BE /* Shuffle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shuffle.swift; sourceTree = "<group>"; };
 		7ECD8BC61CABE67300A222BE /* TestReviewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestReviewController.swift; sourceTree = "<group>"; };
 		7ECD8BC81CABEC8200A222BE /* TestData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestData.swift; sourceTree = "<group>"; };
+		7ECD8BCA1CABF4EA00A222BE /* AddWordPopoverController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddWordPopoverController.swift; sourceTree = "<group>"; };
 		7EE253FB1CA934370036A8B7 /* WordPairs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WordPairs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EE253FE1CA934370036A8B7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7EE254061CA934370036A8B7 /* WordPairs.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WordPairs.xcdatamodel; sourceTree = "<group>"; };
@@ -169,6 +171,7 @@
 		7EE254331CA93EAB0036A8B7 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				7ECD8BCA1CABF4EA00A222BE /* AddWordPopoverController.swift */,
 				7EE254311CA93E8D0036A8B7 /* WordPairViewController.swift */,
 				7EE254341CA947AE0036A8B7 /* AddWordPairViewController.swift */,
 				7E8A8D051CAA81B500571B2D /* TagController.swift */,
@@ -345,6 +348,7 @@
 				7E8A8D081CAA82DE00571B2D /* TagDetail.swift in Sources */,
 				7ECD8BC91CABEC8200A222BE /* TestData.swift in Sources */,
 				7EE253FF1CA934370036A8B7 /* AppDelegate.swift in Sources */,
+				7ECD8BCB1CABF4EA00A222BE /* AddWordPopoverController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
