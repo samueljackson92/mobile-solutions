@@ -85,45 +85,13 @@ public class TemperatureDataWidget extends AppWidgetProvider {
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
                                 int appWidgetId) {
 
+
         CharSequence widgetText = TemperatureDataWidgetConfigureActivity.loadTitlePref(context, appWidgetId);
-
-        XYPlot plot = new XYPlot(context, "Temperature");
-        plot.measure(10, 10);
-        plot.layout(0, 0, 780, 250);
-        plot.setDrawingCacheEnabled(true);
-
-        // Create a couple arrays of y-values to plot:
-        Number[] series1Numbers = {1, 8, 5, 2, 7, 4};
-
-        // Turn the above arrays into XYSeries':
-        XYSeries series1 = new SimpleXYSeries(
-                Arrays.asList(series1Numbers),          // SimpleXYSeries takes a List so turn our array into a List
-                SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, // Y_VALS_ONLY means use the element index as the x value
-                "");                             // Set the display title of the series
-
-        // Create a formatter to use for drawing a series using LineAndPointRenderer:
-        LineAndPointFormatter series1Format = new LineAndPointFormatter(
-                Color.rgb(200, 200, 200),                   // line color
-                Color.rgb(700, 700, 700),                   // point color
-                Color.rgb(100, 100, 600),                   // point color
-                null);                                  // fill color (none)
-
-        // add a new series' to the xyplot:
-        plot.addSeries(series1, series1Format);
-        // reduce the number of range labels
-        plot.setTicksPerRangeLabel(3);
-
-        plot.getDomainLabelWidget().setHeight(1);
-
-        // by default, AndroidPlot displays developer guides to aid in laying out your plot.
-        // To get rid of them call disableAllMarkup():
-        //plot.disableAllMarkup();
-        Bitmap bitmap = plot.getDrawingCache();
 
         // Construct the RemoteViews object
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.temperature_data_widget);
         views.setTextViewText(R.id.appwidget_text, widgetText);
-        views.setImageViewBitmap(R.id.temperatureView_graph, bitmap);
+
 
         // setup click widget event handler intent
         Intent configIntent = new Intent(context, TemperatureDataWidgetConfigureActivity.class);
