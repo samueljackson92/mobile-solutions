@@ -34,16 +34,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import uk.ac.aber.slj11.temperaturedata.model.TemperatureData;
-import uk.ac.aber.slj11.temperaturedata.model.TemperatureReading;
 import uk.ac.aber.slj11.temperaturedatasourceparser.XMLDataSourceParser;
 
 /**
  * Created by samuel on 31/03/16.
  */
 public class UpdateFromDataSourceService extends IntentService {
-
-    public static final String CURRENT_TEMP = "uk.ac.aber.slj11.temperaturedatawidget.CurrentTemperature";
-
     static final String URL = "http://users.aber.ac.uk/aos/CSM22/temp1data.php";
 
     public UpdateFromDataSourceService() {
@@ -54,9 +50,10 @@ public class UpdateFromDataSourceService extends IntentService {
     protected void onHandleIntent(Intent intent) {
 
         Log.i("TESTING", "Running update from data source service.");
-        // Gets data from the incoming Intent
-        String urlString = intent.getDataString();
-        String xmlData = getXmlFromUrl(URL);
+        String urlString = intent.getStringExtra(TemperatureDataWidget.DATA_SOURCE);
+
+        Log.i("TESTING", "Getting data from source: " + urlString);
+        String xmlData = getXmlFromUrl(urlString);
 
         XMLDataSourceParser parser = new XMLDataSourceParser();
         InputStream stream = new ByteArrayInputStream(xmlData.getBytes());
@@ -84,6 +81,7 @@ public class UpdateFromDataSourceService extends IntentService {
         String averageTemp = formatTemperatureForDisplay(R.string.average_temp, data.getAverageTemperatureForLastHour());
         String minTemp = formatTemperatureForDisplay(R.string.min_temp, data.getMinTemperatureForLastHour());
         String maxTemp = formatTemperatureForDisplay(R.string.max_temp, data.getMaxTemperatureForLastHour());
+        Bitmap bitmap = makeGraph(context, data);
 
         // set text on interface
         remoteViews.setTextViewText(R.id.currentTime_text, data.getCurrentTimeFormatted());
@@ -91,9 +89,22 @@ public class UpdateFromDataSourceService extends IntentService {
         remoteViews.setTextViewText(R.id.averageTemp_text, averageTemp);
         remoteViews.setTextViewText(R.id.minTemp_text, minTemp);
         remoteViews.setTextViewText(R.id.maxTemp_text, maxTemp);
+        remoteViews.setImageViewBitmap(R.id.temperatureView_graph, bitmap);
 
+        // update widget
+        appWidgetManager.updateAppWidget(thisWidget, remoteViews);
+    }
 
+    private Bitmap makeGraph(Context context, TemperatureData data) {
+        XYPlot plot = makePlot(context);
+        XYSeries series = makeSeriesData(plot, data);
+        LineAndPointFormatter seriesFormatter = makeLineFormatter();
 
+        plot.addSeries(series, seriesFormatter);
+        return plot.getDrawingCache();
+    }
+
+    private XYPlot makePlot(Context context) {
         XYPlot plot = new XYPlot(context, getString(R.string.graph_title));
         plot.measure(0, 0);
         plot.layout(0, 0, 780, 250);
@@ -108,13 +119,18 @@ public class UpdateFromDataSourceService extends IntentService {
         plot.getGraphWidget().setPaddingLeft(30);
         plot.getGraphWidget().setPaddingTop(10);
         plot.getGraphWidget().setPaddingRight(10);
-        plot.getGraphWidget().refreshLayout();
 
+        plot.setTicksPerRangeLabel(3);
+
+        plot.getGraphWidget().refreshLayout();
+        return plot;
+    }
+
+    private XYSeries makeSeriesData(XYPlot plot, TemperatureData data) {
         // Create a couple arrays of y-values to plot:
         ArrayList<Double> readings = data.getReadingValuesForLastHour();
         ArrayList<Integer> minutes = data.getMinutesForLastHour();
 
-        Log.i("TESTING", Integer.toString(readings.size()));
         if (readings.size() == 1) {
             // duplicate single data point
             // this prevents the graph from looking weird
@@ -129,11 +145,10 @@ public class UpdateFromDataSourceService extends IntentService {
         minutes.toArray(minutesArray);
 
         // Turn the above arrays into XYSeries':
-
-        XYSeries series1 = new SimpleXYSeries(
+        XYSeries series = new SimpleXYSeries(
                 Arrays.asList(readingsArray),          // SimpleXYSeries takes a List so turn our array into a List
                 SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, // Y_VALS_ONLY means use the element index as the x value
-                "");                             // Set the display title of the series
+                "");
 
         plot.setDomainValueFormat(new NumberFormat() {
             @Override
@@ -152,37 +167,25 @@ public class UpdateFromDataSourceService extends IntentService {
             }
         });
 
-        // Create a formatter to use for drawing a series using LineAndPointRenderer:
-        LineAndPointFormatter series1Format = new LineAndPointFormatter(
+        plot.setRangeValueFormat(new DecimalFormat("#.##"));
+
+        return series;
+    }
+
+    private LineAndPointFormatter makeLineFormatter() {
+        LineAndPointFormatter seriesFormatter = new LineAndPointFormatter(
                 Color.rgb(200, 200, 200),                   // line color
                 Color.rgb(700, 700, 700),                   // point color
                 Color.rgb(100, 100, 600),                   // point color
                 null);                                  // fill color (none)
 
-//        plot.setDomainValueFormat(new DecimalFormat("#"));
-        plot.setRangeValueFormat(new DecimalFormat("#.##"));
-
-        // add a new series' to the xyplot:
-        plot.addSeries(series1, series1Format);
-        // reduce the number of range labels
-        plot.setTicksPerRangeLabel(3);
-
-        // by default, AndroidPlot displays developer guides to aid in laying out your plot.
-        // To get rid of them call disableAllMarkup():
-        //plot.disableAllMarkup();
-        Bitmap bitmap = plot.getDrawingCache();
-        remoteViews.setImageViewBitmap(R.id.temperatureView_graph, bitmap);
-
-
-
-        // update widget
-        appWidgetManager.updateAppWidget(thisWidget, remoteViews);
+        return seriesFormatter;
     }
 
     private String getXmlFromUrl(String urlString) {
         StringBuffer output = new StringBuffer("");
 
-        InputStream stream = null;
+        InputStream stream;
         URL url;
         try {
             url = new URL(urlString);

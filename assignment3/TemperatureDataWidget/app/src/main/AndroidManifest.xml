@@ -14,7 +14,6 @@
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
                 <action android:name="uk.ac.aber.slj11.temperaturedatawidget.RELOAD_BUTTON" />
-                <action android:name="uk.ac.aber.slj11.temperaturedatawidget.UPDATE_RESPONSE" />
             </intent-filter>
 
             <meta-data
