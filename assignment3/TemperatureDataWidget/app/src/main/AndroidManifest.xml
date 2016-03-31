@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="uk.ac.aber.slj11.temperaturedatawidget" >
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -11,6 +13,8 @@
         <receiver android:name=".TemperatureDataWidget" >
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="uk.ac.aber.slj11.temperaturedatawidget.RELOAD_BUTTON" />
+                <action android:name="uk.ac.aber.slj11.temperaturedatawidget.UPDATE_RESPONSE" />
             </intent-filter>
 
             <meta-data
@@ -23,6 +27,11 @@
                 <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
             </intent-filter>
         </activity>
+
+        <service
+            android:name=".UpdateFromDataSourceService"
+            android:exported="false"
+            android:enabled="true"/>
     </application>
 
 </manifest>

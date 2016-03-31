@@ -9,8 +9,21 @@
     <EditText android:id="@+id/appwidget_text" android:layout_width="match_parent"
         android:layout_height="wrap_content" android:inputType="text" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/data_source"
+        android:id="@+id/dataSource_text" />
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/dataSource_spinner"
+        android:spinnerMode="dropdown" />
+
     <Button android:id="@+id/add_button" android:layout_width="wrap_content"
-        android:layout_height="wrap_content" android:text="@string/add_widget"
-        android:layout_marginTop="8dp" />
+        android:layout_height="wrap_content" android:text="@string/done"
+        android:layout_marginTop="8dp"
+        android:gravity="center" />
 
 </LinearLayout>

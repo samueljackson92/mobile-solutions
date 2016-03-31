@@ -7,7 +7,12 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
+
+import com.db.chart.model.LineSet;
+import com.db.chart.model.Point;
 
 /**
  * The configuration screen for the {@link TemperatureDataWidget TemperatureDataWidget} AppWidget.
@@ -16,8 +21,11 @@ public class TemperatureDataWidgetConfigureActivity extends Activity {
 
     int mAppWidgetId = AppWidgetManager.INVALID_APPWIDGET_ID;
     EditText mAppWidgetText;
+    Spinner dataSourceSpinner;
+
     private static final String PREFS_NAME = "uk.ac.aber.slj11.temperaturedatawidget.TemperatureDataWidget";
     private static final String PREF_PREFIX_KEY = "appwidget_";
+    private static final String PREF_DATA_SOURCE_POSTFIX = "_data_source";
 
     public TemperatureDataWidgetConfigureActivity() {
         super();
@@ -50,6 +58,16 @@ public class TemperatureDataWidgetConfigureActivity extends Activity {
         }
 
         mAppWidgetText.setText(loadTitlePref(TemperatureDataWidgetConfigureActivity.this, mAppWidgetId));
+
+        // get data source option values
+        String[] dataSourceNames = getResources().getStringArray(R.array.data_source_names);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, dataSourceNames);
+        int selectedOption = loadDataSourcePref(TemperatureDataWidgetConfigureActivity.this, mAppWidgetId);
+
+        // setup the spinner
+        dataSourceSpinner = (Spinner) findViewById(R.id.dataSource_spinner);
+        dataSourceSpinner.setAdapter(adapter);
+        dataSourceSpinner.setSelection(selectedOption);
     }
 
     View.OnClickListener mOnClickListener = new View.OnClickListener() {
@@ -59,6 +77,10 @@ public class TemperatureDataWidgetConfigureActivity extends Activity {
             // When the button is clicked, store the string locally
             String widgetText = mAppWidgetText.getText().toString();
             saveTitlePref(context, mAppWidgetId, widgetText);
+
+            // Store index of data source to use
+            int option = dataSourceSpinner.getSelectedItemPosition();
+            saveDataSourcePref(context, mAppWidgetId, option);
 
             // It is the responsibility of the configuration activity to update the app widget
             AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
@@ -96,5 +118,33 @@ public class TemperatureDataWidgetConfigureActivity extends Activity {
         prefs.remove(PREF_PREFIX_KEY + appWidgetId);
         prefs.commit();
     }
+
+    static void saveDataSourcePref(Context context, int appWidgetId, int option) {
+        SharedPreferences.Editor prefs = context.getSharedPreferences(PREFS_NAME, 0).edit();
+        prefs.putInt(PREF_PREFIX_KEY + appWidgetId + PREF_DATA_SOURCE_POSTFIX, option);
+        prefs.commit();
+    }
+
+    static int loadDataSourcePref(Context context, int appWidgetId) {
+        SharedPreferences prefs = context.getSharedPreferences(PREFS_NAME, 0);
+        int optionDefault = context.getResources().getInteger(R.integer.temperature_option_default);
+        int optionValue = prefs.getInt(PREF_PREFIX_KEY + appWidgetId + PREF_DATA_SOURCE_POSTFIX, optionDefault);
+        return optionValue;
+    }
+
+    static void deleteDataSourcePref(Context context, int appWidgetId) {
+        SharedPreferences.Editor prefs = context.getSharedPreferences(PREFS_NAME, 0).edit();
+        prefs.remove(PREF_PREFIX_KEY + appWidgetId + PREF_DATA_SOURCE_POSTFIX);
+        prefs.commit();
+    }
+
+    static LineSet loadGraphData(Context context, int appWidgetId) {
+        LineSet dataset = new LineSet();
+        dataset.addPoint(new Point("1", 0.1f));
+        dataset.addPoint(new Point("2", 0.2f));
+        dataset.addPoint(new Point("3", 0.1f));
+        return dataset;
+    }
+
 }
 

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="temperature_option_default">0</integer>
+
+    <string-array name="data_source_names">
+        <item>Temp Data 1</item>
+        <item>Temp Data 2</item>
+    </string-array>
+
+    <string-array name="data_source_values">
+        <item>http://users.aber.ac.uk/aos/CSM22/temp1data.php</item> <!-- Temp Data 1 -->
+        <item>http://users.aber.ac.uk/aos/CSM22/temp2data.php</item> <!-- Temp Data 2 -->
+    </string-array>
+</resources>
