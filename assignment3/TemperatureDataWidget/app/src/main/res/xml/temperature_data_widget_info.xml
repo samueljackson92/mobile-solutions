@@ -4,5 +4,5 @@
     android:previewImage="@drawable/example_appwidget_preview"
     android:initialLayout="@layout/temperature_data_widget"
     android:configure="uk.ac.aber.slj11.temperaturedatawidget.TemperatureDataWidgetConfigureActivity"
-    android:resizeMode="horizontal|vertical" android:widgetCategory="home_screen"
+    android:widgetCategory="home_screen"
     android:initialKeyguardLayout="@layout/temperature_data_widget"></appwidget-provider>

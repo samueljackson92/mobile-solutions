@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.util.Log;
 import android.widget.RemoteViews;
 
@@ -40,7 +41,6 @@ import uk.ac.aber.slj11.temperaturedatasourceparser.XMLDataSourceParser;
  * Created by samuel on 31/03/16.
  */
 public class UpdateFromDataSourceService extends IntentService {
-    static final String URL = "http://users.aber.ac.uk/aos/CSM22/temp1data.php";
 
     public UpdateFromDataSourceService() {
         super("UpdateDataSourceService");
@@ -52,6 +52,7 @@ public class UpdateFromDataSourceService extends IntentService {
         Log.i("TESTING", "Running update from data source service.");
         String urlString = intent.getStringExtra(TemperatureDataWidget.DATA_SOURCE);
 
+        int widgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, AppWidgetManager.INVALID_APPWIDGET_ID);
         Log.i("TESTING", "Getting data from source: " + urlString);
         String xmlData = getXmlFromUrl(urlString);
 
@@ -61,7 +62,7 @@ public class UpdateFromDataSourceService extends IntentService {
         // parse the XML document returner from the URL
         Document doc = parser.getDocument(stream);
         TemperatureData data = parser.parseDataSource(doc);
-        updateWidget(data);
+        updateWidget(data, widgetId);
     }
 
     private String formatTemperatureForDisplay(int prefixId, double temp) {
@@ -69,7 +70,7 @@ public class UpdateFromDataSourceService extends IntentService {
         return getString(prefixId) + " " + df.format(temp) + "C";
     }
 
-    private void updateWidget(TemperatureData data) {
+    private void updateWidget(TemperatureData data, int widgetId) {
         // get connection to remote views
         Context context = this;
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
@@ -92,7 +93,7 @@ public class UpdateFromDataSourceService extends IntentService {
         remoteViews.setImageViewBitmap(R.id.temperatureView_graph, bitmap);
 
         // update widget
-        appWidgetManager.updateAppWidget(thisWidget, remoteViews);
+        appWidgetManager.updateAppWidget(widgetId, remoteViews);
     }
 
     private Bitmap makeGraph(Context context, TemperatureData data) {
@@ -107,7 +108,8 @@ public class UpdateFromDataSourceService extends IntentService {
     private XYPlot makePlot(Context context) {
         XYPlot plot = new XYPlot(context, getString(R.string.graph_title));
         plot.measure(0, 0);
-        plot.layout(0, 0, 780, 250);
+
+        plot.layout(0, 0, 1000, 500); //780, 250
         plot.setDrawingCacheEnabled(true);
         plot.getLegendWidget().setVisible(false);
 
