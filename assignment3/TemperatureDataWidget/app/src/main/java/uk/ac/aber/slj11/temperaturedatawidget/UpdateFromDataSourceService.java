@@ -27,10 +27,14 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.text.DecimalFormat;
+import java.text.FieldPosition;
+import java.text.NumberFormat;
+import java.text.ParsePosition;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 import uk.ac.aber.slj11.temperaturedata.model.TemperatureData;
+import uk.ac.aber.slj11.temperaturedata.model.TemperatureReading;
 import uk.ac.aber.slj11.temperaturedatasourceparser.XMLDataSourceParser;
 
 /**
@@ -96,17 +100,19 @@ public class UpdateFromDataSourceService extends IntentService {
         plot.setDrawingCacheEnabled(true);
         plot.getLegendWidget().setVisible(false);
 
-        // Create a couple arrays of y-values to plot:
-        ArrayList<Double> readings = data.getReadingsForLastHour();
-
         plot.getGraphWidget().getRangeTickLabelPaint().setTextSize(20);
         plot.getGraphWidget().getRangeOriginTickLabelPaint().setTextSize(20);
         plot.getGraphWidget().getDomainTickLabelPaint().setTextSize(20);
         plot.getGraphWidget().getDomainOriginTickLabelPaint().setTextSize(20);
 
+        plot.getGraphWidget().setPaddingLeft(30);
         plot.getGraphWidget().setPaddingTop(10);
         plot.getGraphWidget().setPaddingRight(10);
         plot.getGraphWidget().refreshLayout();
+
+        // Create a couple arrays of y-values to plot:
+        ArrayList<Double> readings = data.getReadingValuesForLastHour();
+        ArrayList<Integer> minutes = data.getMinutesForLastHour();
 
         Log.i("TESTING", Integer.toString(readings.size()));
         if (readings.size() == 1) {
@@ -116,14 +122,35 @@ public class UpdateFromDataSourceService extends IntentService {
             readings.add(readings.get(0));
         }
 
-        Number[] series1Numbers = new Double[readings.size()];
-        readings.toArray(series1Numbers);
+        Number[] readingsArray = new Double[readings.size()];
+        readings.toArray(readingsArray);
+
+        final Integer[] minutesArray = new Integer[minutes.size()];
+        minutes.toArray(minutesArray);
 
         // Turn the above arrays into XYSeries':
+
         XYSeries series1 = new SimpleXYSeries(
-                Arrays.asList(series1Numbers),          // SimpleXYSeries takes a List so turn our array into a List
+                Arrays.asList(readingsArray),          // SimpleXYSeries takes a List so turn our array into a List
                 SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, // Y_VALS_ONLY means use the element index as the x value
                 "");                             // Set the display title of the series
+
+        plot.setDomainValueFormat(new NumberFormat() {
+            @Override
+            public StringBuffer format(double value, StringBuffer buffer, FieldPosition field) {
+                return new StringBuffer(Integer.toString(minutesArray[(int) value]));
+            }
+
+            @Override
+            public StringBuffer format(long value, StringBuffer buffer, FieldPosition field) {
+                return null;
+            }
+
+            @Override
+            public Number parse(String string, ParsePosition position) {
+                return null;
+            }
+        });
 
         // Create a formatter to use for drawing a series using LineAndPointRenderer:
         LineAndPointFormatter series1Format = new LineAndPointFormatter(
@@ -132,14 +159,13 @@ public class UpdateFromDataSourceService extends IntentService {
                 Color.rgb(100, 100, 600),                   // point color
                 null);                                  // fill color (none)
 
-        plot.setDomainValueFormat(new DecimalFormat("#"));
+//        plot.setDomainValueFormat(new DecimalFormat("#"));
+        plot.setRangeValueFormat(new DecimalFormat("#.##"));
 
         // add a new series' to the xyplot:
         plot.addSeries(series1, series1Format);
         // reduce the number of range labels
         plot.setTicksPerRangeLabel(3);
-
-        plot.getDomainLabelWidget().setHeight(1);
 
         // by default, AndroidPlot displays developer guides to aid in laying out your plot.
         // To get rid of them call disableAllMarkup():

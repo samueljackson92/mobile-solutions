@@ -1,10 +1,8 @@
 package uk.ac.aber.slj11.temperaturedata.model;
 
-import java.lang.reflect.Array;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 
@@ -43,21 +41,30 @@ public class TemperatureData {
     }
 
     public double getMaxTemperatureForLastHour() {
-        ArrayList<Double> lastHourReadings = getReadingsForLastHour();
+        ArrayList<Double> lastHourReadings = getReadingValuesForLastHour();
         return Collections.max(lastHourReadings);
     }
 
     public double getMinTemperatureForLastHour() {
-        ArrayList<Double> lastHourReadings = getReadingsForLastHour();
+        ArrayList<Double> lastHourReadings = getReadingValuesForLastHour();
         return Collections.min(lastHourReadings);
     }
 
     public double getAverageTemperatureForLastHour() {
-        ArrayList<Double> lastHourReadings = getReadingsForLastHour();
+        ArrayList<Double> lastHourReadings = getReadingValuesForLastHour();
         return averageArray(lastHourReadings);
     }
 
-    public ArrayList<Double> getReadingsForLastHour() {
+    public ArrayList<Double> getReadingValuesForLastHour() {
+        ArrayList<TemperatureReading> readingsForLastHour = getReadingsForLastHour();
+        ArrayList<Double> valuesForLastHour = new ArrayList<>();
+        for(TemperatureReading r : readingsForLastHour) {
+            valuesForLastHour.add(r.getTemperature());
+        }
+        return valuesForLastHour;
+    }
+
+    public ArrayList<TemperatureReading> getReadingsForLastHour() {
         TemperatureReading mostRecent = readings.get(readings.size()-1);
         int earliestHour = mostRecent.getHour()-1;
         int earliestMin = mostRecent.getMinute();
@@ -65,11 +72,20 @@ public class TemperatureData {
         return getReadingsSince(seconds);
     }
 
-    private ArrayList<Double> getReadingsSince(long seconds) {
-        ArrayList<Double> filteredReadings = new ArrayList<>();
+    public ArrayList<Integer> getMinutesForLastHour() {
+        ArrayList<TemperatureReading> readingsForLastHour = getReadingsForLastHour();
+        ArrayList<Integer> valuesForLastHour = new ArrayList<>();
+        for(TemperatureReading r : readingsForLastHour) {
+            valuesForLastHour.add(r.getMinute());
+        }
+        return valuesForLastHour;
+    }
+
+    private ArrayList<TemperatureReading> getReadingsSince(long seconds) {
+        ArrayList<TemperatureReading> filteredReadings = new ArrayList<>();
         for(TemperatureReading r : readings) {
             if (convertToSeconds(r.getHour(), r.getMinute()) >= seconds) {
-                filteredReadings.add(r.getTemperature());
+                filteredReadings.add(r);
             }
         }
         return filteredReadings;
