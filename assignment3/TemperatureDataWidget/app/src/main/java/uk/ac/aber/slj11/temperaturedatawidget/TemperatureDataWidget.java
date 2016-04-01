@@ -55,33 +55,30 @@ public class TemperatureDataWidget extends AppWidgetProvider {
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.temperature_data_widget);
 
         // setup click widget event handler intent
-        Intent configIntent = new Intent(context, TemperatureDataWidgetConfigureActivity.class);
-        configIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
-        configIntent.putExtra(DATA_SOURCE, TemperatureDataWidgetConfigureActivity.loadDataSourcePref(context, appWidgetId));
-        Uri data = Uri.withAppendedPath(Uri.parse("widget://widget/id/#click"+appWidgetId), String.valueOf(appWidgetId));
-        configIntent.setData(data);
+        Intent configIntent = createIntent(context, TemperatureDataWidgetConfigureActivity.class, "click", appWidgetId);
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, configIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         views.setOnClickPendingIntent(R.id.mainGrid_layout, pendingIntent);
 
-        //reload button
-        Intent reloadIntent = new Intent(context, UpdateFromDataSourceService.class);
-        reloadIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
-        reloadIntent.putExtra(DATA_SOURCE, TemperatureDataWidgetConfigureActivity.loadDataSourcePref(context, appWidgetId));
-        data = Uri.withAppendedPath(Uri.parse("widget://widget/id/#reload"+appWidgetId), String.valueOf(appWidgetId));
-        reloadIntent.setData(data);
+        // setup reload button pending intent
+        Intent reloadIntent = createIntent(context, UpdateFromDataSourceService.class, "reload", appWidgetId);
         pendingIntent = PendingIntent.getService(context, 0, reloadIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         views.setOnClickPendingIntent(R.id.reload_button, pendingIntent);
 
-        // Build the intent to call the service
-        Intent updateIntent = new Intent(context, UpdateFromDataSourceService.class);
-        updateIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
-        updateIntent.putExtra(DATA_SOURCE, TemperatureDataWidgetConfigureActivity.loadDataSourcePref(context, appWidgetId));
-        data = Uri.withAppendedPath(Uri.parse("widget://widget/id/#config"+appWidgetId), String.valueOf(appWidgetId));
-        updateIntent.setData(data);
+        // Build the intent to call the service and immediately start it
+        Intent updateIntent = createIntent(context, UpdateFromDataSourceService.class, "reload", appWidgetId);
         context.startService(updateIntent);
 
         // Instruct the widget manager to update the widget
         appWidgetManager.updateAppWidget(appWidgetId, views);
+    }
+
+    static private Intent createIntent(Context context, Class cls, String action, int appWidgetId) {
+        Intent intent = new Intent(context, cls);
+        intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
+        intent.putExtra(DATA_SOURCE, TemperatureDataWidgetConfigureActivity.loadDataSourcePref(context, appWidgetId));
+        Uri data = Uri.withAppendedPath(Uri.parse("widget://widget/id/#"+action+appWidgetId), String.valueOf(appWidgetId));
+        intent.setData(data);
+        return intent;
     }
 }
 

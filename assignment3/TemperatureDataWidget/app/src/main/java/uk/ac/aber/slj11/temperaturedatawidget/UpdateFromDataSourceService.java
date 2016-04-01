@@ -2,14 +2,15 @@ package uk.ac.aber.slj11.temperaturedatawidget;
 
 import android.app.IntentService;
 import android.appwidget.AppWidgetManager;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.widget.RemoteViews;
+import android.widget.Toast;
 
 import com.androidplot.xy.LineAndPointFormatter;
 import com.androidplot.xy.SimpleXYSeries;
@@ -17,6 +18,7 @@ import com.androidplot.xy.XYPlot;
 import com.androidplot.xy.XYSeries;
 
 import org.w3c.dom.Document;
+import org.xml.sax.SAXException;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
@@ -24,7 +26,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.text.DecimalFormat;
@@ -33,6 +34,8 @@ import java.text.NumberFormat;
 import java.text.ParsePosition;
 import java.util.ArrayList;
 import java.util.Arrays;
+
+import javax.xml.parsers.ParserConfigurationException;
 
 import uk.ac.aber.slj11.temperaturedata.model.TemperatureData;
 import uk.ac.aber.slj11.temperaturedatasourceparser.XMLDataSourceParser;
@@ -54,15 +57,24 @@ public class UpdateFromDataSourceService extends IntentService {
 
         int widgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, AppWidgetManager.INVALID_APPWIDGET_ID);
         Log.i("TESTING", "Getting data from source: " + urlString);
-        String xmlData = getXmlFromUrl(urlString);
 
-        XMLDataSourceParser parser = new XMLDataSourceParser();
-        InputStream stream = new ByteArrayInputStream(xmlData.getBytes());
+        try {
+            // load data from URL
+            String xmlData = getXmlFromUrl(urlString);
 
-        // parse the XML document returner from the URL
-        Document doc = parser.getDocument(stream);
-        TemperatureData data = parser.parseDataSource(doc);
-        updateWidget(data, widgetId);
+            XMLDataSourceParser parser = new XMLDataSourceParser();
+            InputStream stream = new ByteArrayInputStream(xmlData.getBytes());
+            // parse the XML document returner from the URL
+            Document doc = parser.getDocument(stream);
+            TemperatureData data = parser.parseDataSource(doc);
+            updateWidget(data, widgetId);
+        } catch (IOException e) {
+            showErrorMessage();
+        } catch (SAXException e) {
+            showErrorMessage();
+        } catch (ParserConfigurationException e) {
+            showErrorMessage();
+        }
     }
 
     private String formatTemperatureForDisplay(int prefixId, double temp) {
@@ -75,7 +87,6 @@ public class UpdateFromDataSourceService extends IntentService {
         Context context = this;
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
         RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.temperature_data_widget);
-        ComponentName thisWidget = new ComponentName(context, TemperatureDataWidget.class);
 
         // pull data from model
         String currentTemp = formatTemperatureForDisplay(R.string.current_temp, data.getCurrentTemperature());
@@ -107,23 +118,27 @@ public class UpdateFromDataSourceService extends IntentService {
 
     private XYPlot makePlot(Context context) {
         XYPlot plot = new XYPlot(context, getString(R.string.graph_title));
-        plot.measure(0, 0);
 
-        plot.layout(0, 0, 1000, 500); //780, 250
+        plot.measure(0, 0);
+        plot.layout(0, 0, 1200, 500);
         plot.setDrawingCacheEnabled(true);
         plot.getLegendWidget().setVisible(false);
 
+        //set size of range & domain labels
         plot.getGraphWidget().getRangeTickLabelPaint().setTextSize(20);
         plot.getGraphWidget().getRangeOriginTickLabelPaint().setTextSize(20);
         plot.getGraphWidget().getDomainTickLabelPaint().setTextSize(20);
         plot.getGraphWidget().getDomainOriginTickLabelPaint().setTextSize(20);
 
+        // add padding for display
         plot.getGraphWidget().setPaddingLeft(30);
         plot.getGraphWidget().setPaddingTop(10);
         plot.getGraphWidget().setPaddingRight(10);
 
+        // reduce number of Y axis ticks
         plot.setTicksPerRangeLabel(3);
 
+        // refresh to update display
         plot.getGraphWidget().refreshLayout();
         return plot;
     }
@@ -152,10 +167,18 @@ public class UpdateFromDataSourceService extends IntentService {
                 SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, // Y_VALS_ONLY means use the element index as the x value
                 "");
 
-        plot.setDomainValueFormat(new NumberFormat() {
+        // set axis formatting
+        plot.setDomainValueFormat(makeFormatForYAxis(minutesArray));
+        plot.setRangeValueFormat(new DecimalFormat("#.##"));
+
+        return series;
+    }
+
+    private NumberFormat makeFormatForYAxis(final Integer[] xValues) {
+        return new NumberFormat() {
             @Override
             public StringBuffer format(double value, StringBuffer buffer, FieldPosition field) {
-                return new StringBuffer(Integer.toString(minutesArray[(int) value]));
+                return new StringBuffer(Integer.toString(xValues[(int) value]));
             }
 
             @Override
@@ -167,11 +190,7 @@ public class UpdateFromDataSourceService extends IntentService {
             public Number parse(String string, ParsePosition position) {
                 return null;
             }
-        });
-
-        plot.setRangeValueFormat(new DecimalFormat("#.##"));
-
-        return series;
+        };
     }
 
     private LineAndPointFormatter makeLineFormatter() {
@@ -184,33 +203,39 @@ public class UpdateFromDataSourceService extends IntentService {
         return seriesFormatter;
     }
 
-    private String getXmlFromUrl(String urlString) {
+    private String getXmlFromUrl(String urlString) throws IOException {
         StringBuffer output = new StringBuffer("");
 
         InputStream stream;
-        URL url;
-        try {
-            url = new URL(urlString);
-            URLConnection connection = url.openConnection();
+        URL url = new URL(urlString);
+        URLConnection connection = url.openConnection();
 
-            HttpURLConnection httpConnection = (HttpURLConnection) connection;
-            httpConnection.setRequestMethod("GET");
-            httpConnection.connect();
+        HttpURLConnection httpConnection = (HttpURLConnection) connection;
+        httpConnection.setRequestMethod("GET");
+        httpConnection.connect();
 
-            if (httpConnection.getResponseCode() == HttpURLConnection.HTTP_OK) {
-                stream = httpConnection.getInputStream();
-                BufferedReader buffer = new BufferedReader(
-                        new InputStreamReader(stream));
-                String s = "";
-                while ((s = buffer.readLine()) != null)
-                    output.append(s);
-            }
-        } catch (MalformedURLException e) {
-            Log.e("Error", "Unable to parse URL", e);
-        } catch (IOException e) {
-            Log.e("Error", "IO Exception", e);
+        if (httpConnection.getResponseCode() == HttpURLConnection.HTTP_OK) {
+            stream = httpConnection.getInputStream();
+            BufferedReader buffer = new BufferedReader(
+                    new InputStreamReader(stream));
+            String s = "";
+            while ((s = buffer.readLine()) != null)
+                output.append(s);
+        } else {
+            throw new IOException("Could not load data.");
         }
-
         return output.toString();
     }
+
+    private void showErrorMessage() {
+        new Handler(Looper.getMainLooper()).post(new DisplayToast());
+    }
+
+    private class DisplayToast implements Runnable{
+        public void run(){
+            String message = getString(R.string.data_source_error_message);
+            Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+        }
+    }
 }
+

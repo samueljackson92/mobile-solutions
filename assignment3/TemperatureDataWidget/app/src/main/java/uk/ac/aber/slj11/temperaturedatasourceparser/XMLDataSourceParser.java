@@ -25,23 +25,12 @@ import uk.ac.aber.slj11.temperaturedata.model.TemperatureReading;
 
 public class XMLDataSourceParser {
     // Returns the entire XML document
-    public Document getDocument(InputStream inputStream) {
+    public Document getDocument(InputStream inputStream) throws IOException, SAXException, ParserConfigurationException {
         Document document = null;
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        try {
-            DocumentBuilder db = factory.newDocumentBuilder();
-            InputSource inputSource = new InputSource(inputStream);
-            document = db.parse(inputSource);
-        } catch (ParserConfigurationException e) {
-            Log.e("Error: ", e.getMessage(), e);
-            return null;
-        } catch (SAXException e) {
-            Log.e("Error: ", e.getMessage(), e);
-            return null;
-        } catch (IOException e) {
-            Log.e("Error: ", e.getMessage(), e);
-            return null;
-        }
+        DocumentBuilder db = factory.newDocumentBuilder();
+        InputSource inputSource = new InputSource(inputStream);
+        document = db.parse(inputSource);
         return document;
     }
 
@@ -92,24 +81,4 @@ public class XMLDataSourceParser {
         return reading;
     }
 
-    public String getValue(Element item, String name) {
-        NodeList nodes = item.getElementsByTagName(name);
-        return this.getTextNodeValue(nodes.item(0));
-    }
-
-    private final String getTextNodeValue(Node node) {
-        Node child;
-        if (node != null) {
-            if (node.hasChildNodes()) {
-                child = node.getFirstChild();
-                while (child != null) {
-                    if (child.getNodeType() == Node.TEXT_NODE) {
-                        return child.getNodeValue();
-                    }
-                    child = child.getNextSibling();
-                }
-            }
-        }
-        return "";
-    }
 }

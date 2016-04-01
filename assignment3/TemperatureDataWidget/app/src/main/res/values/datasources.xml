@@ -4,6 +4,7 @@
     <string-array name="data_source_names">
         <item>Temp Data 1</item>
         <item>Temp Data 2</item>
+        <item>Broken Data Source (For Testing)</item>
     </string-array>
 
     <string name="data_source_default">http://users.aber.ac.uk/aos/CSM22/temp1data.php</string>
@@ -11,5 +12,6 @@
     <string-array name="data_source_values">
         <item>http://users.aber.ac.uk/aos/CSM22/temp1data.php</item> <!-- Temp Data 1 -->
         <item>http://users.aber.ac.uk/aos/CSM22/temp2data.php</item> <!-- Temp Data 2 -->
+        <item>http://broken-url.com/xyz.html</item> <!-- Broken URL for testing -->
     </string-array>
 </resources>

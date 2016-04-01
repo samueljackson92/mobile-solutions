@@ -16,4 +16,5 @@
     <string name="data_source">Data Source</string>
     <string name="widget_reload_button">Reload</string>
     <string name="graph_title">Temperature for Last Hour</string>
+    <string name="data_source_error_message">Could not load from data source.</string>
 </resources>

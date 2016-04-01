@@ -70,6 +70,8 @@ public class TemperatureDataWidgetConfigureActivity extends Activity {
             }
         }
 
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
         // setup the spinner
         dataSourceSpinner = (Spinner) findViewById(R.id.dataSource_spinner);
         dataSourceSpinner.setAdapter(adapter);

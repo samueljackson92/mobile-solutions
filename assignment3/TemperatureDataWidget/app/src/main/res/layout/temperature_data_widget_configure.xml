@@ -10,13 +10,18 @@
         android:layout_height="wrap_content"
         android:text="@string/data_source"
         android:id="@+id/dataSource_text"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+        android:textSize="30dp" />
 
     <Spinner
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/dataSource_spinner"
-        android:spinnerMode="dropdown" />
+        android:spinnerMode="dropdown"
+        android:padding="0dp"
+        android:layout_weight="0.08"
+        android:minHeight="50dp"
+        android:contextClickable="false" />
 
     <Button android:id="@+id/add_button" android:layout_width="match_parent"
         android:layout_height="wrap_content" android:text="@string/done"
