@@ -17,15 +17,18 @@ public class TemperatureDataWidget extends AppWidgetProvider {
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
+        super.onUpdate(context, appWidgetManager, appWidgetIds);
         // There may be multiple widgets active, so update all of them
         final int N = appWidgetIds.length;
         for (int i = 0; i < N; i++) {
-            updateAppWidget(context, appWidgetManager, appWidgetIds[i]);
+            refreshWidgetContents(context, appWidgetIds[i]);
         }
     }
 
     @Override
     public void onDeleted(Context context, int[] appWidgetIds) {
+        super.onDeleted(context, appWidgetIds);
+
         // When the user deletes the widget, delete the preference associated with it.
         final int N = appWidgetIds.length;
         for (int i = 0; i < N; i++) {
@@ -36,11 +39,13 @@ public class TemperatureDataWidget extends AppWidgetProvider {
     @Override
     public void onEnabled(Context context) {
         // Enter relevant functionality for when the first widget is created
+        super.onEnabled(context);
     }
 
     @Override
     public void onDisabled(Context context) {
         // Enter relevant functionality for when the last widget is disabled
+        super.onDisabled(context);
     }
 
     @Override
@@ -48,30 +53,49 @@ public class TemperatureDataWidget extends AppWidgetProvider {
         super.onReceive(context, intent);
     }
 
-    static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
-                                int appWidgetId) {
+    /** Starts a service to gather data from the data source
+     *
+     * @param context context of the update
+     * @param appWidgetId ID of the widget requesting an update
+     */
+    public void refreshWidgetContents(Context context, int appWidgetId) {
+        // Call reload intent to update interface
+        // A new remote view object is created in the service and the view is updated there.
+        Intent reloadIntent = createIntent(context, TemperatureDataSourceService.class, "reload", appWidgetId);
+        context.startService(reloadIntent);
+    }
 
-        // Construct the RemoteViews object
-        RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.temperature_data_widget);
-
+    /** Append the correct pending intents to the remote views interface
+     *
+     * This is helper method so that they can be written once and reused again when the interface
+     * gets updated. (Both in configuration and in the service).
+     *
+     * @param context context of intent
+     * @param views remote views to bind the pending intents to
+     * @param appWidgetId id of the widget to bind pending intents to
+     */
+    public static void buildPendingIntents(Context context, RemoteViews views, int appWidgetId) {
         // setup click widget event handler intent
         Intent configIntent = createIntent(context, TemperatureDataWidgetConfigureActivity.class, "click", appWidgetId);
-        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, configIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, appWidgetId, configIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         views.setOnClickPendingIntent(R.id.mainGrid_layout, pendingIntent);
 
         // setup reload button pending intent
-        Intent reloadIntent = createIntent(context, UpdateFromDataSourceService.class, "reload", appWidgetId);
-        pendingIntent = PendingIntent.getService(context, 0, reloadIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        Intent reloadIntent = createIntent(context, TemperatureDataSourceService.class, "reload", appWidgetId);
+        pendingIntent = PendingIntent.getService(context, appWidgetId, reloadIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         views.setOnClickPendingIntent(R.id.reload_button, pendingIntent);
-
-        // Build the intent to call the service and immediately start it
-        Intent updateIntent = createIntent(context, UpdateFromDataSourceService.class, "reload", appWidgetId);
-        context.startService(updateIntent);
-
-        // Instruct the widget manager to update the widget
-        appWidgetManager.updateAppWidget(appWidgetId, views);
     }
 
+    /** Helper method to create intents
+     *
+     * Makes sure the widget id and URI path are included
+     *
+     * @param context context of the intent
+     * @param cls class to target the intent at
+     * @param action string action to be encoded in the URI
+     * @param appWidgetId the id of the widget sending the intent
+     * @return
+     */
     static private Intent createIntent(Context context, Class cls, String action, int appWidgetId) {
         Intent intent = new Intent(context, cls);
         intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);

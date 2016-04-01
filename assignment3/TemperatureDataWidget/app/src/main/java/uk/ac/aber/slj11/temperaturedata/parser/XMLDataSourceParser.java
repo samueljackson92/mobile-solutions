@@ -1,4 +1,4 @@
-package uk.ac.aber.slj11.temperaturedatasourceparser; /**
+package uk.ac.aber.slj11.temperaturedata.parser; /**
  * Created by samuel on 31/03/16.
  */
 import java.io.IOException;

@@ -40,14 +40,14 @@ public class TemperatureData {
         return readings.get(readings.size()-1).getTemperature();
     }
 
-    public double getMaxTemperatureForLastHour() {
-        ArrayList<Double> lastHourReadings = getReadingValuesForLastHour();
-        return Collections.max(lastHourReadings);
+    public double getMaxTemperatureForDay() {
+        ArrayList<Double> allReadings = getReadingValues();
+        return Collections.max(allReadings);
     }
 
-    public double getMinTemperatureForLastHour() {
-        ArrayList<Double> lastHourReadings = getReadingValuesForLastHour();
-        return Collections.min(lastHourReadings);
+    public double getMinTemperatureForDay() {
+        ArrayList<Double> allReadings = getReadingValues();
+        return Collections.min(allReadings);
     }
 
     public double getAverageTemperatureForLastHour() {
@@ -68,6 +68,7 @@ public class TemperatureData {
         TemperatureReading mostRecent = readings.get(readings.size()-1);
         int earliestHour = mostRecent.getHour()-1;
         int earliestMin = mostRecent.getMinute();
+        // convert to seconds for easy comparison
         long seconds = convertToSeconds(earliestHour, earliestMin);
         return getReadingsSince(seconds);
     }
@@ -84,6 +85,7 @@ public class TemperatureData {
     private ArrayList<TemperatureReading> getReadingsSince(long seconds) {
         ArrayList<TemperatureReading> filteredReadings = new ArrayList<>();
         for(TemperatureReading r : readings) {
+            // check if the current reading was more recent than "seconds"
             if (convertToSeconds(r.getHour(), r.getMinute()) >= seconds) {
                 filteredReadings.add(r);
             }
@@ -91,8 +93,18 @@ public class TemperatureData {
         return filteredReadings;
     }
 
+    private ArrayList<Double> getReadingValues() {
+        ArrayList<Double> filteredReadings = new ArrayList<>();
+        for(TemperatureReading r : readings) {
+                filteredReadings.add(r.getTemperature());
+        }
+        return filteredReadings;
+    }
+
     private long convertToSeconds(int hour, int min) {
-        return hour*3600 + min*60;
+        final int HOUR_IN_SEC = 3600;
+        final int MINS_IN_SEC = 60;
+        return hour*HOUR_IN_SEC + min*MINS_IN_SEC;
     }
 
     private double averageArray(ArrayList<Double> array) {

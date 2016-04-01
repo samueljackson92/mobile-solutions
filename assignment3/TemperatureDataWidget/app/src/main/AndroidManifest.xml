@@ -28,8 +28,8 @@
         </activity>
 
         <service
-            android:name=".UpdateFromDataSourceService"
-            android:exported="false"
+            android:name="uk.ac.aber.slj11.temperaturedatawidget.TemperatureDataSourceService"
+            android:exported="true"
             android:enabled="true"/>
     </application>
 

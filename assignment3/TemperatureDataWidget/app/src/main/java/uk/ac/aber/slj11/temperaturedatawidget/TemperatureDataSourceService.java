@@ -38,25 +38,25 @@ import java.util.Arrays;
 import javax.xml.parsers.ParserConfigurationException;
 
 import uk.ac.aber.slj11.temperaturedata.model.TemperatureData;
-import uk.ac.aber.slj11.temperaturedatasourceparser.XMLDataSourceParser;
+import uk.ac.aber.slj11.temperaturedata.parser.XMLDataSourceParser;
 
 /**
  * Created by samuel on 31/03/16.
  */
-public class UpdateFromDataSourceService extends IntentService {
-
-    public UpdateFromDataSourceService() {
+public class TemperatureDataSourceService extends IntentService {
+    static private final String LOG_ID = "TemperatureDataWidget:";
+    public TemperatureDataSourceService() {
         super("UpdateDataSourceService");
     }
 
     @Override
     protected void onHandleIntent(Intent intent) {
 
-        Log.i("TESTING", "Running update from data source service.");
+        Log.i(LOG_ID, "Running update from data source service.");
         String urlString = intent.getStringExtra(TemperatureDataWidget.DATA_SOURCE);
 
         int widgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, AppWidgetManager.INVALID_APPWIDGET_ID);
-        Log.i("TESTING", "Getting data from source: " + urlString);
+        Log.i(LOG_ID, "Getting data from source: " + urlString);
 
         try {
             // load data from URL
@@ -64,10 +64,12 @@ public class UpdateFromDataSourceService extends IntentService {
 
             XMLDataSourceParser parser = new XMLDataSourceParser();
             InputStream stream = new ByteArrayInputStream(xmlData.getBytes());
+
             // parse the XML document returner from the URL
             Document doc = parser.getDocument(stream);
             TemperatureData data = parser.parseDataSource(doc);
             updateWidget(data, widgetId);
+
         } catch (IOException e) {
             showErrorMessage();
         } catch (SAXException e) {
@@ -87,12 +89,20 @@ public class UpdateFromDataSourceService extends IntentService {
         Context context = this;
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
         RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.temperature_data_widget);
+        // add the newly gathered data to the view
+        updateRemoteViewsInterface(context, remoteViews, data);
+        // bind new pending intents to remote views
+        TemperatureDataWidget.buildPendingIntents(getApplicationContext(), remoteViews, widgetId);
+        // update widget with new view
+        appWidgetManager.updateAppWidget(widgetId, remoteViews);
+    }
 
+    private void updateRemoteViewsInterface(Context context, RemoteViews remoteViews, TemperatureData data) {
         // pull data from model
         String currentTemp = formatTemperatureForDisplay(R.string.current_temp, data.getCurrentTemperature());
         String averageTemp = formatTemperatureForDisplay(R.string.average_temp, data.getAverageTemperatureForLastHour());
-        String minTemp = formatTemperatureForDisplay(R.string.min_temp, data.getMinTemperatureForLastHour());
-        String maxTemp = formatTemperatureForDisplay(R.string.max_temp, data.getMaxTemperatureForLastHour());
+        String minTemp = formatTemperatureForDisplay(R.string.min_temp, data.getMinTemperatureForDay());
+        String maxTemp = formatTemperatureForDisplay(R.string.max_temp, data.getMaxTemperatureForDay());
         Bitmap bitmap = makeGraph(context, data);
 
         // set text on interface
@@ -102,16 +112,12 @@ public class UpdateFromDataSourceService extends IntentService {
         remoteViews.setTextViewText(R.id.minTemp_text, minTemp);
         remoteViews.setTextViewText(R.id.maxTemp_text, maxTemp);
         remoteViews.setImageViewBitmap(R.id.temperatureView_graph, bitmap);
-
-        // update widget
-        appWidgetManager.updateAppWidget(widgetId, remoteViews);
     }
 
     private Bitmap makeGraph(Context context, TemperatureData data) {
         XYPlot plot = makePlot(context);
         XYSeries series = makeSeriesData(plot, data);
         LineAndPointFormatter seriesFormatter = makeLineFormatter();
-
         plot.addSeries(series, seriesFormatter);
         return plot.getDrawingCache();
     }
