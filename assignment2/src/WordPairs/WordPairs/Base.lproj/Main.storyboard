@@ -210,7 +210,7 @@
                             <tableViewSection headerTitle="Phrase Words" id="bwA-Cc-Lp4">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="yjH-ub-vnw">
-                                        <rect key="frame" x="0.0" y="93.5" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="113.5" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="yjH-ub-vnw" id="e29-YA-c0u">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
@@ -231,7 +231,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="0FT-GM-kpT">
-                                        <rect key="frame" x="0.0" y="137.5" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="157.5" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0FT-GM-kpT" id="tlc-pf-lqD">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
@@ -256,7 +256,7 @@
                             <tableViewSection headerTitle="Phrase Type" id="Ogi-JH-ddk">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="139" id="fip-eI-ggJ">
-                                        <rect key="frame" x="0.0" y="231.5" width="600" height="139"/>
+                                        <rect key="frame" x="0.0" y="251.5" width="600" height="139"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fip-eI-ggJ" id="9GD-3u-T4a">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="138.5"/>
@@ -279,7 +279,7 @@
                             <tableViewSection headerTitle="Tags" id="t94-8h-7mA">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="KUl-oj-44J" style="IBUITableViewCellStyleDefault" id="CIf-O0-qVr">
-                                        <rect key="frame" x="0.0" y="420.5" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="440.5" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="CIf-O0-qVr" id="XTb-jw-sxZ">
                                             <rect key="frame" x="0.0" y="0.0" width="567" height="43.5"/>
@@ -303,7 +303,7 @@
                             <tableViewSection headerTitle="Notes" id="bCJ-Mt-zP2">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="161" id="UDZ-hI-B9h">
-                                        <rect key="frame" x="0.0" y="514.5" width="600" height="161"/>
+                                        <rect key="frame" x="0.0" y="534.5" width="600" height="161"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="UDZ-hI-B9h" id="AiA-zS-WfO">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="160.5"/>
@@ -634,6 +634,9 @@
                                     <action selector="clickImport:" destination="VuE-Nt-Fpa" eventType="touchUpInside" id="VJr-d1-5kY"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Jtd-GX-Nl0">
+                                <rect key="frame" x="290" y="178" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -643,8 +646,10 @@
                             <constraint firstItem="G8S-tB-azv" firstAttribute="leading" secondItem="oh9-7s-Sw4" secondAttribute="leadingMargin" constant="66" id="Bh8-Jp-xLI"/>
                             <constraint firstItem="hea-gZ-iRg" firstAttribute="top" secondItem="1WN-CN-EJy" secondAttribute="bottom" constant="8" symbolic="YES" id="LYr-dp-ZEK"/>
                             <constraint firstItem="hea-gZ-iRg" firstAttribute="leading" secondItem="1WN-CN-EJy" secondAttribute="leading" id="U5l-TI-Q4l"/>
+                            <constraint firstItem="Jtd-GX-Nl0" firstAttribute="top" secondItem="hea-gZ-iRg" secondAttribute="bottom" constant="8" symbolic="YES" id="UCj-Nc-vIG"/>
                             <constraint firstItem="G8S-tB-azv" firstAttribute="top" secondItem="NkP-Ue-ZvP" secondAttribute="bottom" constant="8" symbolic="YES" id="X8C-dJ-d5q"/>
                             <constraint firstItem="hea-gZ-iRg" firstAttribute="trailing" secondItem="1WN-CN-EJy" secondAttribute="trailing" id="bDD-PI-JzL"/>
+                            <constraint firstItem="Jtd-GX-Nl0" firstAttribute="centerX" secondItem="hea-gZ-iRg" secondAttribute="centerX" id="f5o-F5-Ylp"/>
                             <constraint firstItem="1WN-CN-EJy" firstAttribute="leading" secondItem="oh9-7s-Sw4" secondAttribute="leadingMargin" id="pVW-vi-IAk"/>
                         </constraints>
                     </view>
@@ -656,6 +661,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="activityIndicator" destination="Jtd-GX-Nl0" id="g71-nl-uli"/>
                         <outlet property="importURL" destination="1WN-CN-EJy" id="l4m-FJ-BF6"/>
                         <segue destination="w8c-tl-0xY" kind="unwind" identifier="ImportSuccess" unwindAction="saveAddWordPair:" id="7im-kR-vLh"/>
                     </connections>
@@ -1091,8 +1097,8 @@
         <image name="Word Pairs" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="Aya-Hg-Bjc"/>
         <segue reference="TUn-y3-4Iy"/>
-        <segue reference="iND-9y-1V1"/>
         <segue reference="zHe-nP-Pyl"/>
     </inferredMetricsTieBreakers>
 </document>

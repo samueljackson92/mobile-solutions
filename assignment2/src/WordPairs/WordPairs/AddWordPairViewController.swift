@@ -29,7 +29,8 @@ class AddWordPairViewController: UITableViewController, UIPickerViewDataSource, 
             nativeWord.text = pair.native
             foreignWord.text   = pair.foreign
             note.text = pair.note
-            phraseType.selectRow(PhraseType.getIndexForValue(pair.type!), inComponent: 0, animated: true)
+            let type = PhraseType.getIndexForValue(pair.type!)
+            phraseType.selectRow(type, inComponent: 0, animated: true)
         }
     
         phraseType.dataSource = self

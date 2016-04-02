@@ -14,12 +14,20 @@ class WordPairImportController: UIViewController {
     var wordPairs = [WordPhrasePair]()
     
     @IBOutlet weak var importURL: UITextField!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        activityIndicator.hidden = true
+    }
     
     @IBAction func clickImport(sender: AnyObject) {
         if (importURL.text!.isEmpty) {
             let message = "Please Enter a URL"
             MessageHelper.showValidationMessage(message, controller: self)
         } else {
+            activityIndicator.hidden = false
+            activityIndicator.startAnimating()
             importPairsFromURL()
         }
     }
@@ -36,7 +44,7 @@ class WordPairImportController: UIViewController {
             }
             task.resume()
         } else {
-            self.alertImportFailure()
+            self.handleImportFailure()
         }
     }
     
@@ -46,12 +54,12 @@ class WordPairImportController: UIViewController {
             
             if (statusCode == 200) {
                 self.parseJSONResponse(data)
-                self.alertImportSuccess()
+                self.handleImportSuccess()
             } else {
-                self.alertImportFailure()
+                self.handleImportFailure()
             }
         } else {
-            self.alertImportFailure()
+            self.handleImportFailure()
         }
     }
     
@@ -93,17 +101,21 @@ class WordPairImportController: UIViewController {
         return wordPair!
     }
     
-    func alertImportSuccess() {
+    func handleImportSuccess() {
         NSOperationQueue.mainQueue().addOperationWithBlock {
             MessageHelper.alertSuccess("Data Imported Successfully!", controller: self, handler: { (alert :UIAlertAction!) in
                 self.performSegueWithIdentifier("ImportSuccess", sender: nil);
             })
+            self.activityIndicator.stopAnimating()
+            self.activityIndicator.hidden = true
         }
     }
     
-    func alertImportFailure() {
+    func handleImportFailure() {
         NSOperationQueue.mainQueue().addOperationWithBlock {
             MessageHelper.alertFailure("Sorry. Could not import from that URL.", controller: self)
+            self.activityIndicator.stopAnimating()
+            self.activityIndicator.hidden = true
         }
     }
 }

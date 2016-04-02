@@ -27,12 +27,12 @@
 		7EE254171CA934370036A8B7 /* WordPairsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE254161CA934370036A8B7 /* WordPairsTests.swift */; };
 		7EE254221CA934370036A8B7 /* WordPairsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE254211CA934370036A8B7 /* WordPairsUITests.swift */; };
 		7EE254321CA93E8D0036A8B7 /* WordPairViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE254311CA93E8D0036A8B7 /* WordPairViewController.swift */; };
-		7EE254351CA947AE0036A8B7 /* AddWordPairViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE254341CA947AE0036A8B7 /* AddWordPairViewController.swift */; };
 		7EE2543A1CA958810036A8B7 /* WordPhrasePair+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE254361CA958810036A8B7 /* WordPhrasePair+CoreDataProperties.swift */; };
 		7EE2543B1CA958810036A8B7 /* WordPhrasePair.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE254371CA958810036A8B7 /* WordPhrasePair.swift */; };
 		7EE2543C1CA958810036A8B7 /* Tag+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE254381CA958810036A8B7 /* Tag+CoreDataProperties.swift */; };
 		7EE2543D1CA958810036A8B7 /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE254391CA958810036A8B7 /* Tag.swift */; };
 		7EE254431CA9733F0036A8B7 /* PhraseType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE254421CA9733F0036A8B7 /* PhraseType.swift */; };
+		7EE409221CAFFDA700659906 /* AddWordPairViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE254341CA947AE0036A8B7 /* AddWordPairViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -333,6 +333,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7EE409221CAFFDA700659906 /* AddWordPairViewController.swift in Sources */,
 				7E8A8D121CAAE92400571B2D /* WordPairDetailStaticController.swift in Sources */,
 				7EE2543D1CA958810036A8B7 /* Tag.swift in Sources */,
 				7EE254431CA9733F0036A8B7 /* PhraseType.swift in Sources */,
@@ -349,7 +350,6 @@
 				7E8A8D0D1CAAA33500571B2D /* TagSelectionController.swift in Sources */,
 				7EE2543C1CA958810036A8B7 /* Tag+CoreDataProperties.swift in Sources */,
 				7E8A8D141CABCDEF00571B2D /* TestStartController.swift in Sources */,
-				7EE254351CA947AE0036A8B7 /* AddWordPairViewController.swift in Sources */,
 				7E8A8D0B1CAA9AD500571B2D /* TagWordPairViewController.swift in Sources */,
 				7E8A8D081CAA82DE00571B2D /* TagDetail.swift in Sources */,
 				7ECD8BC91CABEC8200A222BE /* TestData.swift in Sources */,
