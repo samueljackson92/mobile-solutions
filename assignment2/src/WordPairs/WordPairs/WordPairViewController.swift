@@ -14,8 +14,12 @@ class WordPairViewController: UITableViewController, UISearchResultsUpdating, UI
     let searchController = UISearchController(searchResultsController: nil)
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
+    // Two lists of words. One with all pairs, one to store the results of
+    // filtering via the search bar.
     var wordPairs = [WordPhrasePair]()
     var filteredWordPairs = [WordPhrasePair]()
+    
+    // list of catagories to filter words by
     let searchScopeCategories = ["Phrases", "Word Type", "Tags"]
     
     override func viewDidLoad() {
@@ -30,6 +34,8 @@ class WordPairViewController: UITableViewController, UISearchResultsUpdating, UI
         searchController.searchBar.scopeButtonTitles = searchScopeCategories
         searchController.searchBar.placeholder = "Search Word Pairs"
         self.tableView.tableHeaderView = searchController.searchBar
+        
+        // load all the word pairs from core data
         loadWordPairs()
     }
     
@@ -43,6 +49,8 @@ class WordPairViewController: UITableViewController, UISearchResultsUpdating, UI
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // if we're searching return a restricted view
+        // of the list of word pairs
         if isInSearchMode() {
             return filteredWordPairs.count
         }
@@ -62,6 +70,7 @@ class WordPairViewController: UITableViewController, UISearchResultsUpdating, UI
             cell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: "wordPairCell")
         }
 
+        // get pair and format it for display
         pair = getWordPairFromContext(indexPath)
         prepareCellForDisplay(cell, wordPair: pair)
         return cell!
@@ -83,9 +92,13 @@ class WordPairViewController: UITableViewController, UISearchResultsUpdating, UI
 
     /** Action to handle when a user clicks Done on the add word screen */
     @IBAction func saveAddWordPair(segue:UIStoryboardSegue) {
+        // if the segue was from a word the add pair screen then
+        // we only need to add one pair to the list
         if let addWordPairController = segue.sourceViewController as? AddWordPairViewController,
             pair = addWordPairController.pair {
             addOrEditWordPairInContext(pair)
+        // if the segue was from the import screen then 
+        // we need to add all of the new pairs to the list
         } else if let importController = segue.sourceViewController as? WordPairImportController {
             importController.wordPairs.forEach { pair in
                 addOrEditWordPairInContext(pair)
@@ -95,6 +108,7 @@ class WordPairViewController: UITableViewController, UISearchResultsUpdating, UI
 
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let cell = tableView.cellForRowAtIndexPath(indexPath);
+        // choose which view to show based on whether we are currently in edit mode
         if editing {
             self.performSegueWithIdentifier("ViewWordPairDetail", sender: cell);
         } else {
@@ -107,8 +121,10 @@ class WordPairViewController: UITableViewController, UISearchResultsUpdating, UI
             // handle the case where we're editing a word pair
             segueToViewWordPair(segue, sender: sender)
         } else if segue.identifier == "ViewStaticWordPairDetail" {
+            // handle the case where we're viewing a word pair
             segueToViewStaticWordPair(segue, sender: sender)
         } else if segue.identifier == "AddWordPair" {
+            // handle the case where we're adding a new word pair
             segueToAddWordPair(segue, sender: sender)
         }
     }
@@ -145,15 +161,19 @@ class WordPairViewController: UITableViewController, UISearchResultsUpdating, UI
         return UIModalPresentationStyle.None
     }
     
+    /** Filter function called when user types in the search bar
+     
+     This will choose which category to filter by
+     */
     func filterContentForSearchText(searchText: String, searchScope scope: String = "All") {
         filteredWordPairs = wordPairs.filter { pair in
             switch scope {
             case "Phrases":
                 return filterWordPair(pair, searchText: searchText)
             case "Word Type":
-                return pair.type!.lowercaseString.containsString(searchText.lowercaseString)
+                return filterType(pair, searchText: searchText)
             case "Tags":
-                return false
+                return filterTags(pair, searchText: searchText)
             default:
                 return false
             }
@@ -161,20 +181,49 @@ class WordPairViewController: UITableViewController, UISearchResultsUpdating, UI
         tableView.reloadData()
     }
     
+    /** Filter word pairs by name
+     
+     This will filter the word pairs that match the search text by
+     both the native and foreign word for a phrase
+     */
     func filterWordPair(pair: WordPhrasePair, searchText: String) -> Bool {
         var nativeMatch = false
         var foreignMatch = false
 
+        // get native word
         if let native = pair.native {
             nativeMatch = native.lowercaseString.containsString(searchText.lowercaseString)
         }
-        
+
+        // get foreign word
         if let foreign = pair.foreign {
             foreignMatch = foreign.lowercaseString.containsString(searchText.lowercaseString)
         }
         
         return (nativeMatch || foreignMatch)
         
+    }
+    
+    /** Filter word pairs by tags
+    
+     This will filter the word pairs that contain any tag whose name matches
+     the search text.
+     */
+    func filterTags(pair: WordPhrasePair, searchText:String) -> Bool {
+        let tags = pair.tags!.allObjects as! [Tag]
+        let index = tags.indexOf { tag in
+            (tag.name?.lowercaseString.containsString(searchText.lowercaseString))!
+        }
+        return index != nil
+    }
+    
+    /** Filter word pairs by type
+     
+     This will filter the word pairs that contain any tag whose type matches 
+     the search text.
+     */
+    func filterType(pair: WordPhrasePair, searchText:String) -> Bool {
+        return pair.type!.lowercaseString.containsString(searchText.lowercaseString)
     }
     
     func updateSearchResultsForSearchController(searchController: UISearchController) {
@@ -222,6 +271,7 @@ class WordPairViewController: UITableViewController, UISearchResultsUpdating, UI
     }
     
     /** Helper method for getting a word pair 
+     
      This should return the correct word pair regardless of whether a search
      filter is active
      */
@@ -237,6 +287,12 @@ class WordPairViewController: UITableViewController, UISearchResultsUpdating, UI
         return pair
     }
     
+    /** Add/Edit a word pair for the given context
+     
+     This will check whether the item already exists in the word list. If so
+     the existing word will be overwitten. Otherwise it will be appended to the
+     end of the list
+     */
     func addOrEditWordPairInContext(pair: WordPhrasePair) {
         if let selectedIndexPath = tableView.indexPathForSelectedRow {
             //edit the pair by overwriting it
@@ -246,6 +302,7 @@ class WordPairViewController: UITableViewController, UISearchResultsUpdating, UI
                 wordPairs[selectedIndexPath.row] = pair
             }
             
+            // update the table view
             tableView.reloadRowsAtIndexPaths([selectedIndexPath], withRowAnimation: .None)
         } else {
             //add the new word pair to the word pair array
@@ -254,13 +311,14 @@ class WordPairViewController: UITableViewController, UISearchResultsUpdating, UI
             } else {
                 wordPairs.append(pair)
             }
-            //update the tableView
+            //update the table view
             let indexPath = NSIndexPath(forRow: wordPairs.count-1, inSection: 0)
             tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
         }
     }
     
     /** Helper method for removing a word pair
+     
      This should remove the correct word pair regardless of whether a search
      filter is active
      */
