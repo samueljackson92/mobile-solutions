@@ -13,9 +13,14 @@ class AddWordPairViewController: UITableViewController, UIPickerViewDataSource, 
     
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
+    // instance variable to store the word pair we're creating
     var pair = WordPhrasePair?()
+    
+    // list of tags to be associated with the pair.
+    // this is set from TagSelectionController.
     var selectedTags = [Tag]()
     
+    // register outlets
     @IBOutlet weak var nativeWord: UITextField!
     @IBOutlet weak var foreignWord: UITextField!
     @IBOutlet weak var note: UITextView!
@@ -33,6 +38,7 @@ class AddWordPairViewController: UITableViewController, UIPickerViewDataSource, 
             phraseType.selectRow(type, inComponent: 0, animated: true)
         }
     
+        // setup the type spinner
         phraseType.dataSource = self
         phraseType.delegate = self
     }
@@ -58,8 +64,10 @@ class AddWordPairViewController: UITableViewController, UIPickerViewDataSource, 
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "SaveWordPairDetail" {
+            // save the segue as we pass back to the previosu screen
             saveWordPair()
         } else if segue.identifier == "ViewChooseTags" {
+            // move to the tag selection screen
             let tagSelectionController = segue.destinationViewController as! TagSelectionController
             tagSelectionController.delegate = self
             tagSelectionController.selectedTags = pair?.tags!.allObjects as? [Tag]
@@ -103,6 +111,8 @@ class AddWordPairViewController: UITableViewController, UIPickerViewDataSource, 
     }
 }
 
+/** Allows the TagSelectionController to pass back the selected tags
+*/
 extension AddWordPairViewController: TagSelectionDelegate {
     func selectedTags(tags: [Tag]) {
         self.selectedTags = tags
