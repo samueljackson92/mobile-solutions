@@ -28,6 +28,7 @@ class WordPairStaticDetailController: UITableViewController {
             
             let tags = pair.tags?.allObjects as! [Tag]
             
+            // insert all of the tags onto the page
             for (var row = 0; row < tags.count; row++) {
                 let index = NSIndexPath(forRow: row, inSection: 2)
                 tableView.insertRowsAtIndexPaths([index], withRowAnimation: .None)
@@ -39,6 +40,7 @@ class WordPairStaticDetailController: UITableViewController {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "ViewTags" {
+            // segue back to view the tags associated with word pair
             let tagSelectionController = segue.destinationViewController as! TagSelectionController
             tagSelectionController.tags = (pair?.tags!.allObjects as? [Tag])!
             tagSelectionController.interactive = false

@@ -18,13 +18,21 @@ class TagSelectionController: UITableViewController {
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     var delegate: TagSelectionDelegate?
     
+    // flag stating if the interface is interactive or not
+    // this let us reuse the view depending on whether we're editing or not
     var interactive = true
+    
+    // instance variables to store all the tags and the list of
+    // selected tags
     var tags = [Tag]()
     var selectedTags = [Tag]?()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        // only load all tags when we're in interactive mode
+        // otherwise we only want to show the tags associated with
+        // a particular word
         if interactive {
             loadTags()
         }
@@ -62,6 +70,7 @@ class TagSelectionController: UITableViewController {
         let tag = tags[indexPath.row]
         cell?.textLabel!.text = tag.name
         
+        // if this isn't interactive then prevent user interaction
         if !interactive {
             cell?.selectionStyle = UITableViewCellSelectionStyle.None
             cell?.userInteractionEnabled = false
@@ -77,15 +86,18 @@ class TagSelectionController: UITableViewController {
             if let indicies = tableView.indexPathsForSelectedRows {
                 var selectedTags = [Tag]()
                 
+                // collect all of the selected tag objects
                 indicies.forEach { index in
                     selectedTags.append(tags[index.row])
                 }
                 
+                // pass the tags we chose back to the add word pair view
                 self.delegate?.selectedTags(selectedTags)
             }
         }
     }
     
+    /** Load all of the tags from the Core Data */
     func loadTags() {
         let tagsFetch = NSFetchRequest(entityName: "Tag")
         do {

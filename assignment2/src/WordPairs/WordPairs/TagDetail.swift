@@ -12,8 +12,10 @@ import CoreData
 class TagDetail: UIViewController {
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
+    // instance variable to store new tag
     var tag = Tag?()
     
+    // register outlets
     @IBOutlet weak var tagName: UITextField!
     
     override func viewDidLoad() {
@@ -29,6 +31,8 @@ class TagDetail: UIViewController {
     
     override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject!) -> Bool {
         if identifier == "SaveTagDetail" {
+            
+            // Only segue if the user has entered something
             if tagName.text!.isEmpty {
                 let message = "Please Enter a Name for the Tag"
                 MessageHelper.showValidationMessage(message, controller: self)
@@ -45,6 +49,11 @@ class TagDetail: UIViewController {
         }
     }
     
+    
+    /** Create a new tag instance
+     
+     This creates a new tag and stores it in core data.
+     */
     func saveTag() {
         if tag == nil {
             tag = NSEntityDescription.insertNewObjectForEntityForName("Tag", inManagedObjectContext: managedObjectContext) as? Tag
