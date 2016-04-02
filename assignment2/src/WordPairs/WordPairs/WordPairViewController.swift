@@ -129,7 +129,7 @@ class WordPairViewController: UITableViewController, UISearchResultsUpdating, UI
         }
     }
     
-    /** Make segue to edit word pairs */
+    /** Prepare segue to edit word pairs */
     func segueToViewWordPair(segue: UIStoryboardSegue, sender: AnyObject?) {
         let navController = segue.destinationViewController as! UINavigationController
         let addWordPairDetail = navController.viewControllers.first as! AddWordPairViewController
@@ -140,7 +140,7 @@ class WordPairViewController: UITableViewController, UISearchResultsUpdating, UI
         }
     }
     
-    /** Make segue to view word pairs */
+    /** Prepare segue to view word pairs */
     func segueToViewStaticWordPair(segue: UIStoryboardSegue, sender: AnyObject?) {
         let staticDetail = segue.destinationViewController as! WordPairStaticDetailController
         if let selectedCell = sender as? UITableViewCell {
@@ -150,7 +150,7 @@ class WordPairViewController: UITableViewController, UISearchResultsUpdating, UI
         }
     }
     
-    /** Make segue to add word pairs */
+    /** Prepare segue to add word pairs */
     func segueToAddWordPair(segue: UIStoryboardSegue, sender: AnyObject?) {
         let popoverViewController = segue.destinationViewController as! UITableViewController
         popoverViewController.modalPresentationStyle = UIModalPresentationStyle.Popover

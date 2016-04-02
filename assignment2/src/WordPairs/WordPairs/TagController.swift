@@ -91,24 +91,38 @@ class TagController: UITableViewController, UISearchResultsUpdating {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "ViewTagDetail" && editing {
-            // handle the case where we're editing a word pair
-            let navController = segue.destinationViewController as! UINavigationController
-            let tagDetail = navController.viewControllers.first as! TagDetail
-            if let selectedCell = sender as? UITableViewCell {
-                let indexPath = tableView.indexPathForCell(selectedCell)!
-                let tag = tags[indexPath.row]
-                tagDetail.tag = tag
-            }
+            // handle the case where we're editing a tag
+            segueToViewTagDetail(segue, sender: sender)
         } else if segue.identifier == "ViewWordsForTag" {
-            let tagWordPairController = segue.destinationViewController as! TagWordPairViewController
-            if let selectedCell = sender as? UITableViewCell {
-                let indexPath = tableView.indexPathForCell(selectedCell)!
-                let tag = getTagFromContext(indexPath)
-                let name = tag.name!
-                tagWordPairController.title = "Word Pairs for \(name)"
-                tagWordPairController.wordPairs = tag.wordPairs!.allObjects as! [WordPhrasePair]
-                self.searchController.searchBar.hidden = true
-            }
+            // handle the case where we're viewing a tag
+            segueToViewWordForTag(segue, sender: sender)
+        }
+    }
+    
+    /* Prepare segue to view add/edit a tag */
+    func segueToViewTagDetail(segue: UIStoryboardSegue, sender: AnyObject?) {
+        let navController = segue.destinationViewController as! UINavigationController
+        let tagDetail = navController.viewControllers.first as! TagDetail
+        
+        if let selectedCell = sender as? UITableViewCell {
+            let indexPath = tableView.indexPathForCell(selectedCell)!
+            let tag = tags[indexPath.row]
+            tagDetail.tag = tag
+        }
+    }
+    
+    /* Prepare segue to view the words associated with a tag */
+    func segueToViewWordForTag(segue: UIStoryboardSegue, sender: AnyObject?) {
+        let tagWordPairController = segue.destinationViewController as! TagWordPairViewController
+        
+        if let selectedCell = sender as? UITableViewCell {
+            let indexPath = tableView.indexPathForCell(selectedCell)!
+            let tag = getTagFromContext(indexPath)
+            let name = tag.name!
+            
+            tagWordPairController.title = "Word Pairs for \(name)"
+            tagWordPairController.wordPairs = tag.wordPairs!.allObjects as! [WordPhrasePair]
+            self.searchController.searchBar.hidden = true
         }
     }
     
@@ -116,6 +130,7 @@ class TagController: UITableViewController, UISearchResultsUpdating {
         filterContentForSearchText(searchController.searchBar.text!)
     }
     
+    /* Filter function for search for tags by name */
     func filterContentForSearchText(searchText: String) {
         filteredTags = tags.filter { tag in
                 return tag.name!.lowercaseString.containsString(searchText.lowercaseString)
@@ -191,6 +206,7 @@ class TagController: UITableViewController, UISearchResultsUpdating {
         }
     }
     
+    /** Fetch all tags from Core Data */
     func loadTags() {
         let tagsFetch = NSFetchRequest(entityName: "Tag")
         do {
