@@ -16,7 +16,12 @@ class WordPairImportController: UIViewController {
     @IBOutlet weak var importURL: UITextField!
     
     @IBAction func clickImport(sender: AnyObject) {
-        importPairsFromURL()
+        if (importURL.text!.isEmpty) {
+            let message = "Please Enter a URL"
+            MessageHelper.showValidationMessage(message, controller: self)
+        } else {
+            importPairsFromURL()
+        }
     }
     
     func importPairsFromURL() {
@@ -90,21 +95,15 @@ class WordPairImportController: UIViewController {
     
     func alertImportSuccess() {
         NSOperationQueue.mainQueue().addOperationWithBlock {
-            let alertController = UIAlertController(title: "Word Pairs", message:
-                "Data Imported Successfully!", preferredStyle: UIAlertControllerStyle.Alert)
-            alertController.addAction(UIAlertAction(title: "Continue", style: UIAlertActionStyle.Default, handler: { (alert :UIAlertAction!) in
+            MessageHelper.alertSuccess("Data Imported Successfully!", controller: self, handler: { (alert :UIAlertAction!) in
                 self.performSegueWithIdentifier("ImportSuccess", sender: nil);
-            }))
-            self.presentViewController(alertController, animated: true, completion: nil)
+            })
         }
     }
     
     func alertImportFailure() {
         NSOperationQueue.mainQueue().addOperationWithBlock {
-            let alertController = UIAlertController(title: "Word Pairs", message:
-                "Sorry. Could not import from that URL", preferredStyle: UIAlertControllerStyle.Alert)
-            alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default, handler: nil))
-            self.presentViewController(alertController, animated: true, completion: nil)
+            MessageHelper.alertFailure("Sorry. Could not import from that URL.", controller: self)
         }
     }
 }

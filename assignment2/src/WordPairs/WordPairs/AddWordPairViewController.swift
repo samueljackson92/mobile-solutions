@@ -29,11 +29,30 @@ class AddWordPairViewController: UITableViewController, UIPickerViewDataSource, 
             nativeWord.text = pair.native
             foreignWord.text   = pair.foreign
             note.text = pair.note
-//            phraseType.selectRow(PhraseType.getValueAtIndex(PhraseType(rawValue: pair.type!)), inComponent: 0, animated: true)
+            phraseType.selectRow(PhraseType.getIndexForValue(pair.type!), inComponent: 0, animated: true)
         }
     
         phraseType.dataSource = self
         phraseType.delegate = self
+    }
+    
+    override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject!) -> Bool {
+        if identifier == "SaveWordPairDetail" {
+            
+            // validate text input fields
+            if (nativeWord.text!.isEmpty) {
+                let message = "Please Enter a Native Word"
+                MessageHelper.showValidationMessage(message, controller: self)
+                return false
+            } else if (foreignWord.text!.isEmpty) {
+                let message = "Please Enter a Foreign Word"
+                MessageHelper.showValidationMessage(message, controller: self)
+                return false
+            }
+        }
+        
+        // by default, transition
+        return true
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

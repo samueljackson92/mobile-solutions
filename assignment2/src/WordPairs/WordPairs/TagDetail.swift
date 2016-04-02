@@ -27,6 +27,18 @@ class TagDetail: UIViewController {
         }
     }
     
+    override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject!) -> Bool {
+        if identifier == "SaveTagDetail" {
+            if tagName.text!.isEmpty {
+                let message = "Please Enter a Name for the Tag"
+                MessageHelper.showValidationMessage(message, controller: self)
+                return false
+            }
+        }
+        
+        return true
+    }
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "SaveTagDetail" {
             saveTag()

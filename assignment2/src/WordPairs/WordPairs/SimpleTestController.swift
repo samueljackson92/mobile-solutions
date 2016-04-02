@@ -26,7 +26,7 @@ class SimpleTestController: UIViewController {
         testData?.correctCount = 0
         setupTestStep()
     }
-
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "ReviewTest" {
             let navController = segue.destinationViewController as! UINavigationController
@@ -37,7 +37,12 @@ class SimpleTestController: UIViewController {
     
     @IBAction func submitButtonClicked(sender: AnyObject) {
         if(!wordSubmitted) {
-            changeToGuessedState()
+            if (currentGuess.text!.isEmpty) {
+                let message = "Please Enter a Guess"
+                MessageHelper.showValidationMessage(message, controller: self)
+            } else {
+                changeToGuessedState()
+            }
         } else {
             changeToNextWordOrReview()
         }
