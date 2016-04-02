@@ -6,56 +6,22 @@
 //  Copyright © 2016 Samuel Jackson. All rights reserved.
 //
 
-enum PhraseType: String {
-    case Noun
-    case Verb
-    case Adjective
-    case NounPhrase
-    case VerbPhrase
+class PhraseType {
+    
+    static var types: [String] = ["", "Noun", "Verb", "Adjective", "Noun Phrase", "Verb Phrase"]
     
     static func getValueAtIndex(indexOfElement: Int) -> String {
-        
-        var value = ""
-        
-        switch indexOfElement {
-            case 0:
-                value = "Noun"
-            case 1:
-                value = "Verb"
-            case 2:
-                value = "Adjective"
-            case 3:
-                value = "NounPhrase"
-            case 4:
-                value = "VerbPhrase"
-            default:
-                value = ""
-        }
-        
-        return value
+        return types[indexOfElement]
     }
     
     static func getIndexForValue(valueOfElement: String) -> Int {
-        var value: Int
-        
-        switch valueOfElement {
-            case "Noun":
-                value = 0
-            case "Verb":
-                value = 1
-            case "Adjective":
-                value = 2
-            case "NounPhrase":
-                value = 3
-            case "VerbPhrase":
-                value = 4
-            default:
-                value = 0
+        if let index = types.indexOf(valueOfElement) {
+            return index
         }
-        
-        return value
+        // return empty type if not found
+        return 0
     }
     
-    static var count: Int { return PhraseType.VerbPhrase.hashValue + 1}
+    static var count: Int { return types.count }
 }
 

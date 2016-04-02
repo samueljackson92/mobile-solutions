@@ -6,10 +6,10 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Add Word Popover Controller-->
+        <!--Table View Controller-->
         <scene sceneID="SVg-iu-zrg">
             <objects>
-                <tableViewController id="3oQ-8b-9b5" customClass="AddWordPopoverController" customModule="WordPairs" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="3oQ-8b-9b5" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="zKy-ah-4xf">
                         <rect key="frame" x="0.0" y="0.0" width="200" height="85"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

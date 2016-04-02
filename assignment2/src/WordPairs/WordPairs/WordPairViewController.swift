@@ -105,25 +105,40 @@ class WordPairViewController: UITableViewController, UISearchResultsUpdating, UI
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "ViewWordPairDetail" && editing {
             // handle the case where we're editing a word pair
-            let navController = segue.destinationViewController as! UINavigationController
-            let addWordPairDetail = navController.viewControllers.first as! AddWordPairViewController
-            if let selectedCell = sender as? UITableViewCell {
-                let indexPath = tableView.indexPathForCell(selectedCell)!
-                let selectedPair = getWordPairFromContext(indexPath)
-                addWordPairDetail.pair = selectedPair
-            }
+            segueToViewWordPair(segue, sender: sender)
         } else if segue.identifier == "ViewStaticWordPairDetail" {
-            let staticDetail = segue.destinationViewController as! WordPairStaticDetailController
-            if let selectedCell = sender as? UITableViewCell {
-                let indexPath = tableView.indexPathForCell(selectedCell)!
-                let selectedPair = getWordPairFromContext(indexPath)
-                staticDetail.pair = selectedPair
-            }
+            segueToViewStaticWordPair(segue, sender: sender)
         } else if segue.identifier == "AddWordPair" {
-            let popoverViewController = segue.destinationViewController as! UITableViewController
-            popoverViewController.modalPresentationStyle = UIModalPresentationStyle.Popover
-            popoverViewController.popoverPresentationController!.delegate = self
+            segueToAddWordPair(segue, sender: sender)
         }
+    }
+    
+    /** Make segue to edit word pairs */
+    func segueToViewWordPair(segue: UIStoryboardSegue, sender: AnyObject?) {
+        let navController = segue.destinationViewController as! UINavigationController
+        let addWordPairDetail = navController.viewControllers.first as! AddWordPairViewController
+        if let selectedCell = sender as? UITableViewCell {
+            let indexPath = tableView.indexPathForCell(selectedCell)!
+            let selectedPair = getWordPairFromContext(indexPath)
+            addWordPairDetail.pair = selectedPair
+        }
+    }
+    
+    /** Make segue to view word pairs */
+    func segueToViewStaticWordPair(segue: UIStoryboardSegue, sender: AnyObject?) {
+        let staticDetail = segue.destinationViewController as! WordPairStaticDetailController
+        if let selectedCell = sender as? UITableViewCell {
+            let indexPath = tableView.indexPathForCell(selectedCell)!
+            let selectedPair = getWordPairFromContext(indexPath)
+            staticDetail.pair = selectedPair
+        }
+    }
+    
+    /** Make segue to add word pairs */
+    func segueToAddWordPair(segue: UIStoryboardSegue, sender: AnyObject?) {
+        let popoverViewController = segue.destinationViewController as! UITableViewController
+        popoverViewController.modalPresentationStyle = UIModalPresentationStyle.Popover
+        popoverViewController.popoverPresentationController!.delegate = self
     }
     
     func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
