@@ -15,6 +15,7 @@ class SimpleTestController: UIViewController {
     var currentWordIndex: Int = 0
     var wordSubmitted: Bool = false
     
+    @IBOutlet weak var foreignWord: UILabel!
     @IBOutlet weak var currentWord: UILabel!
     @IBOutlet weak var currentGuess: UITextField!
     @IBOutlet weak var result: UILabel!
@@ -53,6 +54,7 @@ class SimpleTestController: UIViewController {
         currentWordPhrase = testData?.wordPairs[currentWordIndex]
         result.text = ""
         currentGuess.text = ""
+        foreignWord.text = ""
         currentWord.text = currentWordPhrase!.native
         submit.setTitle("OK", forState: .Normal)
     }
@@ -69,6 +71,7 @@ class SimpleTestController: UIViewController {
             result.text = "Incorrect!"
         }
         
+        foreignWord.text = currentWordPhrase?.foreign
         // set button to continue to next word
         submit.setTitle("Continue", forState: .Normal)
     }

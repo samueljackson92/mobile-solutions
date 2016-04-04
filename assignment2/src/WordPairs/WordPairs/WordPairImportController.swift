@@ -89,7 +89,7 @@ class WordPairImportController: UIViewController {
         
         wordPair?.native = nativeWord
         wordPair?.foreign = foreignWord
-        wordPair?.type = type
+        wordPair?.type = type?.uppercaseFirst
         wordPair?.note = note
         wordPair?.timeAdded = NSDate()
 

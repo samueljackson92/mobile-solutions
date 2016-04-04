@@ -29,6 +29,10 @@ class AddWordPairViewController: UITableViewController, UIPickerViewDataSource, 
     override func viewDidLoad() {
         super.viewDidLoad()
     
+        // setup the type spinner
+        phraseType.dataSource = self
+        phraseType.delegate = self
+        
         // if editing fill the fields
         if let pair = pair {
             nativeWord.text = pair.native
@@ -37,10 +41,6 @@ class AddWordPairViewController: UITableViewController, UIPickerViewDataSource, 
             let type = PhraseType.getIndexForValue(pair.type!)
             phraseType.selectRow(type, inComponent: 0, animated: true)
         }
-    
-        // setup the type spinner
-        phraseType.dataSource = self
-        phraseType.delegate = self
     }
     
     override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject!) -> Bool {
