@@ -1,12 +1,10 @@
 package uk.ac.aber.slj11.temperaturedatawidget;
 
-import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.widget.RemoteViews;
 
 /**
  * Implementation of App Widget functionality.
@@ -65,27 +63,6 @@ public class TemperatureDataWidget extends AppWidgetProvider {
         context.startService(reloadIntent);
     }
 
-    /** Append the correct pending intents to the remote views interface
-     *
-     * This is helper method so that they can be written once and reused again when the interface
-     * gets updated. (Both in configuration and in the service).
-     *
-     * @param context context of intent
-     * @param views remote views to bind the pending intents to
-     * @param appWidgetId id of the widget to bind pending intents to
-     */
-    public static void buildPendingIntents(Context context, RemoteViews views, int appWidgetId) {
-        // setup click widget event handler intent
-        Intent configIntent = createIntent(context, TemperatureDataWidgetConfigureActivity.class, "click", appWidgetId);
-        PendingIntent pendingIntent = PendingIntent.getActivity(context, appWidgetId, configIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-        views.setOnClickPendingIntent(R.id.mainGrid_layout, pendingIntent);
-
-        // setup reload button pending intent
-        Intent reloadIntent = createIntent(context, TemperatureDataSourceService.class, "reload", appWidgetId);
-        pendingIntent = PendingIntent.getService(context, appWidgetId, reloadIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-        views.setOnClickPendingIntent(R.id.reload_button, pendingIntent);
-    }
-
     /** Helper method to create intents
      *
      * Makes sure the widget id and URI path are included
@@ -94,9 +71,9 @@ public class TemperatureDataWidget extends AppWidgetProvider {
      * @param cls class to target the intent at
      * @param action string action to be encoded in the URI
      * @param appWidgetId the id of the widget sending the intent
-     * @return
+     * @return an intent with the appropriate application data attached
      */
-    static private Intent createIntent(Context context, Class cls, String action, int appWidgetId) {
+    private Intent createIntent(Context context, Class cls, String action, int appWidgetId) {
         Intent intent = new Intent(context, cls);
         intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
         intent.putExtra(DATA_SOURCE, TemperatureDataWidgetConfigureActivity.loadDataSourcePref(context, appWidgetId));

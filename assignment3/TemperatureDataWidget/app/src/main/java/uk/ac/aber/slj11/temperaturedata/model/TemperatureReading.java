@@ -1,6 +1,12 @@
 package uk.ac.aber.slj11.temperaturedata.model;
 
-/**
+/** Temperature Reading
+ *
+ * This class represents a single data reading from the data source.
+ * Each temperature reading has a time (hour, min) associated with it and a temperature value.
+ *
+ * This class is simply a convenient container for working with all of these values together.
+ *
  * Created by samuel on 31/03/16.
  */
 public class TemperatureReading {
