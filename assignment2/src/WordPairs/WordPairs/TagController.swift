@@ -121,7 +121,7 @@ class TagController: UITableViewController, UISearchResultsUpdating {
             let name = tag.name!
             
             tagWordPairController.title = "Word Pairs for \(name)"
-            tagWordPairController.wordPairs = tag.getWordPairs()
+            tagWordPairController.wordPairs = tag.getAllWordPairsForTag()
             self.searchController.searchBar.hidden = true
         }
     }

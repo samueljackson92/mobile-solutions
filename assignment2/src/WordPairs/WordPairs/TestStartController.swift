@@ -93,7 +93,7 @@ class TestStartController: UITableViewController {
                 testData = TestData(wordPairs: recentWords)
             } else if indexPath.section == 1 {
                 // otherwise load all words associated with a tag
-                let wordPairs = tags[indexPath.row].getWordPairs()
+                let wordPairs = tags[indexPath.row].getAllWordPairsForTag()
                 testData = TestData(wordPairs: wordPairs.shuffle())
             }
             

@@ -12,7 +12,7 @@ import CoreData
 
 class Tag: NSManagedObject {
 
-    func getWordPairs() -> [WordPhrasePair] {
+    func getAllWordPairsForTag() -> [WordPhrasePair] {
         return self.wordPairs?.allObjects as! [WordPhrasePair]
     }
 }

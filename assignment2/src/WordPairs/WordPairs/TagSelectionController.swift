@@ -83,17 +83,17 @@ class TagSelectionController: UITableViewController {
     override func willMoveToParentViewController(parent: UIViewController?) {
         super.willMoveToParentViewController(parent)
         if parent == nil {
+            var selectedTags = [Tag]()
+            
             if let indicies = tableView.indexPathsForSelectedRows {
-                var selectedTags = [Tag]()
-                
                 // collect all of the selected tag objects
                 indicies.forEach { index in
                     selectedTags.append(tags[index.row])
                 }
-                
-                // pass the tags we chose back to the add word pair view
-                self.delegate?.selectedTags(selectedTags)
             }
+            
+            // pass the tags we chose back to the add word pair view
+            self.delegate?.selectedTags(selectedTags)
         }
     }
     

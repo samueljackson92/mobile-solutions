@@ -210,7 +210,7 @@ class WordPairViewController: UITableViewController, UISearchResultsUpdating, UI
      the search text.
      */
     func filterTags(pair: WordPhrasePair, searchText:String) -> Bool {
-        let tags = pair.getTags()
+        let tags = pair.getAllTagsForWordPair()
         let index = tags.indexOf { tag in
             (tag.name?.lowercaseString.containsString(searchText.lowercaseString))!
         }

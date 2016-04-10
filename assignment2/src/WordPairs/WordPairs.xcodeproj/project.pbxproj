@@ -56,6 +56,8 @@
 /* Begin PBXFileReference section */
 		7E2AE1471CAFD24100AF1F71 /* MessageHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageHelper.swift; sourceTree = "<group>"; };
 		7E551DB31CB04FD5002130EC /* StringHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringHelper.swift; sourceTree = "<group>"; };
+		7E5EEA351CBAAAC2002D1A72 /* WordPairs 6.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "WordPairs 6.xcdatamodel"; sourceTree = "<group>"; };
+		7E5EEA361CBAAB72002D1A72 /* WordPairs 7.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "WordPairs 7.xcdatamodel"; sourceTree = "<group>"; };
 		7E8A8D051CAA81B500571B2D /* TagController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagController.swift; sourceTree = "<group>"; };
 		7E8A8D071CAA82DE00571B2D /* TagDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagDetail.swift; sourceTree = "<group>"; };
 		7E8A8D091CAA928C00571B2D /* WordPairs 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "WordPairs 4.xcdatamodel"; sourceTree = "<group>"; };
@@ -608,13 +610,15 @@
 		7EE254051CA934370036A8B7 /* WordPairs.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				7E5EEA361CBAAB72002D1A72 /* WordPairs 7.xcdatamodel */,
+				7E5EEA351CBAAAC2002D1A72 /* WordPairs 6.xcdatamodel */,
 				7ECD8BCE1CAC0DC900A222BE /* WordPairs 5.xcdatamodel */,
 				7E8A8D091CAA928C00571B2D /* WordPairs 4.xcdatamodel */,
 				7EE254451CA981A00036A8B7 /* WordPairs 3.xcdatamodel */,
 				7EE254441CA97F1E0036A8B7 /* WordPairs 2.xcdatamodel */,
 				7EE254061CA934370036A8B7 /* WordPairs.xcdatamodel */,
 			);
-			currentVersion = 7ECD8BCE1CAC0DC900A222BE /* WordPairs 5.xcdatamodel */;
+			currentVersion = 7E5EEA361CBAAB72002D1A72 /* WordPairs 7.xcdatamodel */;
 			path = WordPairs.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
