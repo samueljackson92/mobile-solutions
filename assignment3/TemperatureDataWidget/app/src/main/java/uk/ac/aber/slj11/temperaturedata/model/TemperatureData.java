@@ -167,7 +167,7 @@ public class TemperatureData {
      *
      * @param hour hours for the time to convert
      * @param min minutes for the time to convert
-     * @return
+     * @return the time represented in seconds
      */
     private long convertToSeconds(int hour, int min) {
         final int HOUR_IN_SEC = 3600;
