@@ -1,0 +1,29 @@
+#,Functional Requirement,Test Description,Expected Outcome,Pass/Fail,Actual Outcome,Solution
+1,FR1,Add new word pair,A new word is added and is shown in the main word pairs view.,Fail,High level exception thrown when setting the data.,The model had recently just been updated through refactoring. Incrementing the version solved this issue.
+2,FR1,Add new word pair with no type,A new word is added without  type and is shown in the main word pairs view.,Pass,As Expected,N/a
+3,FR1,Add new word pair with a note,A new word pair is added and a note is shown when clicking on it and viewing it.,Pass,As Expected,N/a
+4,FR1,Edit a word pair and change the content,Word pair is edited and the details are saved the viewed after editing,Pass,As Expected,N/a
+5,FR1,Delete a word pair,Deleting a word pair should remove remove it from the table view and remove it from core data. Closing a reopening the app should show the entry is still removed.,Pass,As Expected,N/a
+6,FR2,Create a new tag,A new tag is created,Pass,As Expected,N/a
+7,FR2,Assign a tag to an existing word pair,Viewing the word pair should show that a tag is associated with it,Pass,As Expected,N/a
+8,FR2,View a list of words for tag,Clicking on a tag should show a list of word pairs that are associated with this tag,Pass,As Expected,N/a
+9,FR2,Cannot view words for a tag that has zero references,Clicking on the tag should do nothing. The row should also have the chevron (>) removed from the interface to indicate this.,Pass,As Expected,N/a
+10,FR2,Editing a tag,Editing a tag should change update tag. The tag should not lose it’s references to word pairs. Word pairs should show as being associated with the edited name of the tag,Pass,As Expected,N/a
+11,FR2,Delete a tag,Deleting a tag should remove it from the table view. All word pairs that were associated with the tag should no longer have the tag associated with them,Pass,As Expected,N/a
+12,FR2,Assign multiple word pairs a tag,All of the tags should be shown in the when viewing the word pair,Pass,As Expected,N/a
+13,FR2,Remove all tags associated with a word pair,"An association with a tag is optional, so the it should be possible to remove all tags associated with a word pair.",Fail,Tags are not removed.,"The NSSet holding the tags was not being cleared before adding new tags. This meant that the set was only ever updated with new tags, but removing a tag had not effect. This is now resolved by clearing before updating. "
+14,FR3,Search for a word pair by foreign/native word,Searching by a word pair should filter all of the pairs that match either the foreign or the native word,Pass,As Expected,N/a
+15,FR3,Search for a word pair by tag ,Searching by tag should return all words that are associated with that particular tag,Pass,As Expected,N/a
+16,FR3,Search for a word pair by type,Searching by type should return all words that are associated with that particular type,Pass,As Expected,N/a
+17,FR3 ,Editing a word pair while a search filter is active,Editing a word pair while a search filter is active should edit the correct word. When the filter is removed the edited version of the word pair should be present and correct in the table view,Pass,As Expected,N/a
+18,FR3 ,Removing a word pair while a search filter is active,Removing a word pair while a search filter is active should remove the correct word. When the filter is removed the word pair should no longer be present and correct in the table view,Pass,As Expected,N/a
+19,FR3,Searching for a tag by name,Searching by name for a tag should return all of the tags which match the filter value,Pass,As Expected,N/a
+20,FR4,Starting a test set with the most recent words,A new test set should be generated that only consists of the 10 most recent words added to the application. This collection of words should be randomised.,Pass,As Expected,N/a
+21,FR4,Starting a test set using a tag,All of the word pairs associated with a tag should be added to used in the test and the word pairs should be randomised.,Pass,As Expected,N/a
+22,FR4,Entering a correct guess for a word,Entering a correct guess should show confirmation that it was correct and display the foreign word.,Pass,As Expected,N/a
+23,FR4,Entering an incorrect guess for a word,Entering an incorrect guess should inform the user that they were wrong and display the correct foreign word.,Pass,As Expected,N/a
+24,FR4,Cancelling a revision exercise,At any point during the test the user should be able to click the cross icon to return the the home screen.,Pass,As Expected,N/a
+25,FR4 ,Review a revision exercise,The total number of correct guesses and the total number of words in the exercise should be displayed. The user should be able to navigate back to the home screen ,Pass,As Expected,N/a
+26,FR4 ,Retake a revision exercise,"On the revision page, clicking the “try again” button restart the test. Entries should be randomised again, but the same words should be reused.",Pass,As Expected,N/a
+27,FR5,Importing data from a URL,New word pairs should be added on the main screen. A loading spinner should be shown while loading. A message should be shown when the operation successfully completes. Dismissing the message should return the user to the home screen.,Pass,As Expected,N/a
+28,FR5,Importing data from an invalid URL,The operation should fail and a message should be displayed to the user informing them that it was unsuccessful. They should not be segued back to the main screen.,Pass,As Expected,N/a
