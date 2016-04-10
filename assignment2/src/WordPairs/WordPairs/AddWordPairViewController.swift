@@ -96,12 +96,21 @@ class AddWordPairViewController: UITableViewController, UIPickerViewDataSource, 
         if pair == nil {
             pair = NSEntityDescription.insertNewObjectForEntityForName("WordPhrasePair", inManagedObjectContext: managedObjectContext) as? WordPhrasePair
         }
+        
         pair?.native = nativeWord.text
         pair?.foreign = foreignWord.text
         pair?.note = note.text
         pair?.type = PhraseType.getValueAtIndex(phraseType.selectedRowInComponent(0))
+        
+        // clear whatever tags we currently have and update with the new selection
+        pair?.removeTags((pair?.tags)!)
         pair?.addTags(NSSet(array: selectedTags))
-        pair?.timeAdded = NSDate()
+        
+        // check if a date is already associated with this pair. 
+        // if so don't update it
+        if pair?.timeAdded == nil {
+            pair?.timeAdded = NSDate()
+        }
         
         do {
             try managedObjectContext.save()
