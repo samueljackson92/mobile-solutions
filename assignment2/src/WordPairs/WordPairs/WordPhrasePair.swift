@@ -11,7 +11,9 @@ import CoreData
 
 
 class WordPhrasePair: NSManagedObject {
-
-// Insert code here to add functionality to your managed object subclass
+    
+    func getTags() -> [Tag] {
+        return self.tags!.allObjects as! [Tag]
+    }
 
 }

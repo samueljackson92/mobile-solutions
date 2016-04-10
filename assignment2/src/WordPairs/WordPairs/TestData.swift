@@ -1,6 +1,9 @@
 //
 //  TestResult.swift
 //  WordPairs
+// 
+//  Class to hold test data passed between interfaces in the testing section
+//  of the application. This is neater than passing multiple values.
 //
 //  Created by Samuel Jackson on 30/03/2016.
 //  Copyright © 2016 Samuel Jackson. All rights reserved.

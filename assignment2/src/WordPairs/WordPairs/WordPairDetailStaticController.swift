@@ -26,7 +26,7 @@ class WordPairStaticDetailController: UITableViewController {
             note.text = pair.note
             type.textLabel?.text = pair.type
             
-            let tags = pair.tags?.allObjects as! [Tag]
+            let tags = pair.getTags()
             
             // insert all of the tags onto the page
             for (var row = 0; row < tags.count; row++) {
@@ -42,7 +42,7 @@ class WordPairStaticDetailController: UITableViewController {
         if segue.identifier == "ViewTags" {
             // segue back to view the tags associated with word pair
             let tagSelectionController = segue.destinationViewController as! TagSelectionController
-            tagSelectionController.tags = (pair?.tags!.allObjects as? [Tag])!
+            tagSelectionController.tags = (pair?.getTags())!
             tagSelectionController.interactive = false
         }
     }

@@ -2,8 +2,11 @@
 //  StringHelper.swift
 //  WordPairs
 //
-//  Created by Samuel Jackson on 02/04/2016.
-//  Copyright © 2016 Samuel Jackson. All rights reserved.
+//  Helper extensions to the string class for capilalisting the first letter
+//  of a word
+//
+//  Based on stack overflow question: http://stackoverflow.com/questions/26306326
+//  Date: 10/04/16
 //
 
 import Foundation

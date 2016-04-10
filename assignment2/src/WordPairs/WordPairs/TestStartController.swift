@@ -88,10 +88,12 @@ class TestStartController: UITableViewController {
             var testData: TestData?
             
             if indexPath.section == 0 {
+                // load recent word pairs if user clicked the static section
                 let recentWords = loadMostRecentWordPairs().shuffle()
                 testData = TestData(wordPairs: recentWords)
             } else if indexPath.section == 1 {
-                let wordPairs = tags[indexPath.row].wordPairs?.allObjects as! [WordPhrasePair]
+                // otherwise load all words associated with a tag
+                let wordPairs = tags[indexPath.row].getWordPairs()
                 testData = TestData(wordPairs: wordPairs.shuffle())
             }
             
@@ -99,19 +101,33 @@ class TestStartController: UITableViewController {
         }
     }
 
+    /* Load the most recent word pairs from Core Data 
+    
+    This uses the time added attribute associated with a word pair to find the
+    n most recent entries. n is currently hard coded as the constant TEST_SIZE
+    */
     func loadMostRecentWordPairs() -> [WordPhrasePair] {
         var mostRecentWords = [WordPhrasePair]()
         let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
         let wordPairFetch = NSFetchRequest(entityName: "WordPhrasePair")
+
         do {
+            // find all word pairs
             let allWords = try managedObjectContext.executeFetchRequest(wordPairFetch) as! [WordPhrasePair]
+            // sort by the most recent words
             mostRecentWords = allWords.sort({ $0.timeAdded!.compare($1.timeAdded!) == NSComparisonResult.OrderedDescending })
         } catch {
             fatalError("Failed to fetch tags: \(error)")
         }
+        
+        // return only the n most recent words
         return Array(mostRecentWords.prefix(TEST_SIZE))
     }
     
+    /* Load all tags from Core Data
+    
+    This is for display in the table view
+    */
     func loadTags() {
         let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
         let tagsFetch = NSFetchRequest(entityName: "Tag")

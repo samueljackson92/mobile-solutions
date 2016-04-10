@@ -70,7 +70,7 @@ class AddWordPairViewController: UITableViewController, UIPickerViewDataSource, 
             // move to the tag selection screen
             let tagSelectionController = segue.destinationViewController as! TagSelectionController
             tagSelectionController.delegate = self
-            tagSelectionController.selectedTags = pair?.tags!.allObjects as? [Tag]
+            tagSelectionController.selectedTags = pair?.getTags()
         }
     }
     

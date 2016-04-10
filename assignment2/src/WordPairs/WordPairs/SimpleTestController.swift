@@ -49,6 +49,7 @@ class SimpleTestController: UIViewController {
         }
     }
     
+    /* Reset the UI ready for another test */
     func setupTestStep() {
         wordSubmitted = false
         currentWordPhrase = testData?.wordPairs[currentWordIndex]
@@ -59,6 +60,7 @@ class SimpleTestController: UIViewController {
         submit.setTitle("OK", forState: .Normal)
     }
     
+    /* Change the guessed state after the user has submitted a guess */
     func changeToGuessedState() {
         wordSubmitted = true
         // check guess is correct and update state
@@ -76,6 +78,7 @@ class SimpleTestController: UIViewController {
         submit.setTitle("Continue", forState: .Normal)
     }
     
+    /* Move onto the next word or go to the review view */
     func changeToNextWordOrReview() {
         // word has been guessed, continue to next word
         ++currentWordIndex
@@ -88,6 +91,7 @@ class SimpleTestController: UIViewController {
         }
     }
     
+    /* Helper function to check if the guess made matched the word */
     func checkGuessIsCorrect() -> Bool {
         let guess = currentGuess.text?.lowercaseString
         let actual = currentWordPhrase?.foreign?.lowercaseString
