@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2014.4.15)  10 APR 2016 18:24
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2014.4.15)  11 APR 2016 13:46
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -619,52 +619,52 @@ Package microtype Info: Loading generic settings for font family
 
 {/usr/local/texlive/2013/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2
 
-]
-Overfull \hbox (0.86296pt too wide) in paragraph at lines 93--93
+] [3] [4]
+Overfull \hbox (0.86296pt too wide) in paragraph at lines 123--123
 []|\OT1/cmr/bx/n/10.95 Functional
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 93--93
+Underfull \hbox (badness 10000) in paragraph at lines 123--123
 \OT1/cmr/bx/n/10.95 Re-quire-
  []
 
 
-Overfull \hbox (30.84204pt too wide) in alignment at lines 91--93
+Overfull \hbox (30.84204pt too wide) in alignment at lines 121--123
  [] [] [] [] [] [] [] 
  []
 
-LaTeX Font Info:    Try loading font information for OML+cmr on input line 102.
+LaTeX Font Info:    Try loading font information for OML+cmr on input line 132.
 (/usr/local/texlive/2013/texmf-dist/tex/latex/base/omlcmr.fd
 File: omlcmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <10.95> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 102.
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 132.
 Missing character: There is no ‚ in font cmr10!
 Missing character: There is no Ä in font cmr10!
 Missing character: There is no ô in font cmr10!
 
-Underfull \hbox (badness 1005) in paragraph at lines 106--106
+Underfull \hbox (badness 1005) in paragraph at lines 136--136
 []|\OT1/cmr/m/n/10.95 (+20) Remove all tags as-so-ci-ated
  []
 
 
-Underfull \hbox (badness 2181) in paragraph at lines 107--107
+Underfull \hbox (badness 2181) in paragraph at lines 137--137
 []|\OT1/cmr/m/n/10.95 (+20) Searching by a word pair
  []
 
 
-Underfull \hbox (badness 3375) in paragraph at lines 111--111
+Underfull \hbox (badness 3375) in paragraph at lines 141--141
 \OT1/cmr/m/n/10.95 (+20) pair should no longer be
  []
 
 
-Overfull \hbox (30.84204pt too wide) in alignment at lines 93--113
+Overfull \hbox (30.84204pt too wide) in alignment at lines 123--143
  [] [] [] [] [] [] [] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 115--115
+Underfull \hbox (badness 10000) in paragraph at lines 145--145
 []|\OT1/cmr/m/n/10.95 (+20) Entering a cor-rect guess
  []
 
@@ -675,49 +675,45 @@ Missing character: There is no ‚ in font cmr10!
 Missing character: There is no Ä in font cmr10!
 Missing character: There is no ù in font cmr10!
 
-Underfull \hbox (badness 1077) in paragraph at lines 120--120
+Underfull \hbox (badness 1077) in paragraph at lines 150--150
 \OT1/cmr/m/n/10.95 (+20) added on the main screen.
  []
 
 
-Overfull \hbox (30.84204pt too wide) in alignment at lines 113--123
+Overfull \hbox (30.84204pt too wide) in alignment at lines 143--153
  [] [] [] [] [] [] [] 
  []
 
-[3
+[5
 
 
-] [4] [5] [6] [7] (/Users/samuel/git/mobile-solutions/assignment2/report/.texpadtmp/report.bbl
-
-Package natbib Warning: Empty `thebibliography' environment on input line 8.
-
-)
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 131.
- [8
+] [6] [7] [8] [9] (/Users/samuel/git/mobile-solutions/assignment2/report/.texpadtmp/report.bbl)
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 161.
+ [10
 
 
 ]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 131.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 161.
  (/Users/samuel/git/mobile-solutions/assignment2/report/.texpadtmp/report.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 131.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 131.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 161.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 161.
 Package rerunfilecheck Info: File `report.out' has not changed.
 (rerunfilecheck)             Checksum: <no file>.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 131.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 161.
  ) 
 Here is how much of TeX's memory you used:
- 12942 strings out of 493315
- 201565 string characters out of 6137904
- 399251 words of memory out of 5000000
- 16119 multiletter control sequences out of 15000+600000
- 15969 words of font info for 69 fonts, out of 8000000 for 9000
+ 13029 strings out of 493315
+ 202686 string characters out of 6137904
+ 399269 words of memory out of 5000000
+ 16163 multiletter control sequences out of 15000+600000
+ 21414 words of font info for 101 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
- 54i,10n,47p,716b,559s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/local/texlive/2013/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/texlive/2013/texmf-dist/fonts/type1/bitstrea/charter/bchb8a.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/bitstrea/charter/bchr8a.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on /Users/samuel/git/mobile-solutions/assignment2/report/.texpadtmp/report.pdf (8 pages, 91664 bytes).
+ 54i,10n,47p,982b,559s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/local/texlive/2013/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/texlive/2013/texmf-dist/fonts/type1/bitstrea/charter/bchb8a.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/bitstrea/charter/bchr8a.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
+Output written on /Users/samuel/git/mobile-solutions/assignment2/report/.texpadtmp/report.pdf (10 pages, 126174 bytes).
 PDF statistics:
- 86 PDF objects out of 1000 (max. 8388607)
- 68 compressed objects within 1 object stream
- 13 named destinations out of 1000 (max. 500000)
- 11793 words of extra memory for PDF output out of 12000 (max. 10000000)
+ 118 PDF objects out of 1000 (max. 8388607)
+ 96 compressed objects within 1 object stream
+ 19 named destinations out of 1000 (max. 500000)
+ 15401 words of extra memory for PDF output out of 17280 (max. 10000000)
 
