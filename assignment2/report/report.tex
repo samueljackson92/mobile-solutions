@@ -87,6 +87,13 @@ This report provides the documentation for the second assignment of the SEM2220 
 \section{Interface and Storyboard}
 My first step in tackling this assignment was to think about what views would be necessary and intuitive for the user. I began this assignment drawing out a very rough version of the application storyboard on pieces of paper. This made me focus on the type of operations that would need to be performed on the data model. It also allowed me to draw out how the screens could be organised and the transitions (segues) required. This process also allowed me to think about how to layout each view. I found this to be a slight challenge because I do not own an iOS device and so I am less familiar with the various interface components and how they are typically used and laid out. Thinking out these issues on paper allowed me to focus on how to properly present the data in a way that is logical for the user.
 
+\begin{figure}[H]
+\centering
+\includegraphics[width=1.0\textwidth]{img/planning.jpg}
+\caption{Initial rough planning for the interface \& storyboard. Left: original concepts for the home page and revision exercise. Right: rough plans for the word pairs and tag views.}
+\label{fig:planning}
+\end{figure}
+
 Based on this initial brainstorming I felt that the application could best be split into three sections. The first section handles the creation and manipulation of word pairs. The second section handles the creation and manipulation of tags which can be associated with word pairs. The third section handles the revision exercise and testing the user. This logical separation of operations is clearly reflected in the user interface. Each of these sections corresponds to a different tab of the main tab view when the interface is first opened.
 
 Both the word pairs section and the tags section follow a consistent implementation of CRUD operations. In both cases they are implemented as a table view which lists all of the current items stored in iOS's core data. Each interface uses the plus icon at the top to open a view that allows a user to add a new item. Clicking the edit button on the top left of each of these interfaces turns on ``edit mode''. In edit mode items can be removed from the system using the button on the left of the item. Clicking on the item in edit mode with open the item for editing. This recycles the same view that is used for adding word pairs/tags but loads the data for the selected item into the view so that it can be edited by the user.
