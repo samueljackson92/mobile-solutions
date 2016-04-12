@@ -2,7 +2,7 @@
 // (c) 2015 Nate Cook, licensed under the MIT license
 //
 // Fisher-Yates shuffle as protocol extensions
-// Taken from: https://gist.github.com/natecook1000/ef096622dab1981823c5
+// Taken from: https://gist.github.com/natecook1000/ef096622dab1981823c5`
 // Date: 30/03/16
 //
 
