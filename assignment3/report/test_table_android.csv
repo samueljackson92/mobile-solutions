@@ -1,0 +1,11 @@
+#,Functional Requirement,Test Description,Expected Outcome,Pass/Fail,Actual Outcome,Solution
+1,"FR1, FR3",Create the widget,The configuration view is shown. A new widget is added to the home screen after the user closes the configuration.,Pass,As expected.,N/a
+2,"FR1, FR3",Remove the widget,Dragging the widget off the home screen deletes the application without error.,Pass,As expected.,N/a
+3,"FR1, FR2",Reloading the widget,Clicking the reload button should cause the interface to update.,Pass,As expected.,N/a
+4,"FR1, FR2, FR3",Change the data source used,The data source used should be switched by tapping the widget. Checking the log should show that the correct data source is used when reloading.,Pass,As expected.,N/a
+5,"FR1, FR2",Loading from a broken data source,Switching to using the “broken” data source value should a toast indicating that the data cannot be loaded. This also simulates turning off wifi,Pass,As expected.,N/a
+6,FR2,Check that the widget is updated every 30 minutes,After waiting 30 minutes the application should update the interface with new data.,Pass,As expected.,N/a
+7,"FR1, FR2, FR3",Create two widgets with different data sources,The two widgets should work independently and should contain different data.,Pass,As expected.,N/a
+8,"FR1, FR2","With two widgets, reload one.",The two widgets should work independently. Reloading one should not effect the other.,Pass,As expected.,N/a
+9,"FR1, FR2","With two widgets, change the data source used and reload",The two widgets should work independently. Reloading one should not effect the other.,Pass,As expected.,N/a
+10,"FR1, FR2, FR3","With two widgets, delete one.",The remaining widget should continue to work and should not be effected,Pass,As expected.,N/a

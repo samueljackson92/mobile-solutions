@@ -1,24 +1,15 @@
 package uk.ac.aber.slj11.temperaturedatawidget;
 
 import android.app.Activity;
-import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.RemoteViews;
 import android.widget.Spinner;
-
-import com.db.chart.model.LineSet;
-import com.db.chart.model.Point;
-
-import uk.ac.aber.slj11.temperaturedata.model.TemperatureData;
 
 /**
  * The configuration screen for the {@link TemperatureDataWidgetProvider TemperatureDataWidget} AppWidget.

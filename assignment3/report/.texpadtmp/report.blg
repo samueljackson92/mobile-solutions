@@ -1,0 +1,49 @@
+This is BibTeX, Version 0.99d (TeX Live 2013)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: /Users/samuel/git/mobile-solutions/assignment3/report/.texpadtmp/report.aux
+The style file: unsrtnat.bst
+Database file #1: ../references.bib
+Warning--empty year in android-widget-guidelines
+Warning--empty year in android-plot
+You've used 3 entries,
+            2481 wiz_defined-function locations,
+            566 strings with 4952 characters,
+and the built_in function-call counts, 866 in all, are:
+= -- 71
+> -- 27
+< -- 0
++ -- 15
+- -- 8
+* -- 63
+:= -- 122
+add.period$ -- 9
+call.type$ -- 3
+change.case$ -- 6
+chr.to.int$ -- 2
+cite$ -- 7
+duplicate$ -- 47
+empty$ -- 98
+format.name$ -- 9
+if$ -- 189
+int.to.chr$ -- 2
+int.to.str$ -- 4
+missing$ -- 1
+newline$ -- 23
+num.names$ -- 3
+pop$ -- 37
+preamble$ -- 1
+purify$ -- 3
+quote$ -- 0
+skip$ -- 24
+stack$ -- 0
+substring$ -- 14
+swap$ -- 8
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 21
+warning$ -- 2
+while$ -- 3
+width$ -- 0
+write$ -- 44
+(There were 2 warnings)
