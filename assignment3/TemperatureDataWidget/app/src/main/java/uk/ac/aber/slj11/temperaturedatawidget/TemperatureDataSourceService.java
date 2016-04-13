@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
+import android.widget.RemoteViews;
 import android.widget.Toast;
 
 import org.w3c.dom.Document;
@@ -37,7 +38,7 @@ public class TemperatureDataSourceService extends IntentService {
     protected void onHandleIntent(Intent intent) {
 
         Log.i(LOG_ID, "Running update from data source service.");
-        String urlString = intent.getStringExtra(TemperatureDataWidget.DATA_SOURCE);
+        String urlString = intent.getStringExtra(TemperatureDataWidgetProvider.DATA_SOURCE);
 
         int widgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, AppWidgetManager.INVALID_APPWIDGET_ID);
         Log.i(LOG_ID, "Getting data from source: " + urlString);
@@ -84,11 +85,16 @@ public class TemperatureDataSourceService extends IntentService {
         // get connection to remote views
         Context context = this;
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
-        TemperatureDataWidgetRemoteView views = new TemperatureDataWidgetRemoteView(context, R.layout.temperature_data_widget, widgetId);
-        // update the interface
-        views.updateInterface(data);
+
+        // build new remote view
+        TemperatureDataWidgetBuilder viewBuilder = new TemperatureDataWidgetBuilder();
+        viewBuilder.setContext(context);
+        viewBuilder.setWidgetId(widgetId);
+        viewBuilder.setTemperatureData(data);
+
         // update widget with new view
-        appWidgetManager.updateAppWidget(widgetId, views);
+        RemoteViews view = viewBuilder.buildWidget();
+        appWidgetManager.updateAppWidget(widgetId, view);
     }
 
     /** Display an error message by showing a toast

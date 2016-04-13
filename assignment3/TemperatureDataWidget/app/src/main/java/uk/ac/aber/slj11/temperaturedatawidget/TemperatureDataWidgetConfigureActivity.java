@@ -21,14 +21,14 @@ import com.db.chart.model.Point;
 import uk.ac.aber.slj11.temperaturedata.model.TemperatureData;
 
 /**
- * The configuration screen for the {@link TemperatureDataWidget TemperatureDataWidget} AppWidget.
+ * The configuration screen for the {@link TemperatureDataWidgetProvider TemperatureDataWidget} AppWidget.
  */
 public class TemperatureDataWidgetConfigureActivity extends Activity {
 
     int mAppWidgetId = AppWidgetManager.INVALID_APPWIDGET_ID;
     Spinner dataSourceSpinner;
 
-    private static final String PREFS_NAME = "uk.ac.aber.slj11.temperaturedatawidget.TemperatureDataWidget";
+    private static final String PREFS_NAME = "uk.ac.aber.slj11.temperaturedatawidget.TemperatureDataWidgetProvider";
     private static final String PREF_PREFIX_KEY = "appwidget_";
     private static final String PREF_DATA_SOURCE_POSTFIX = "_data_source";
 
@@ -92,11 +92,15 @@ public class TemperatureDataWidgetConfigureActivity extends Activity {
 
             // It is the responsibility of the configuration activity to update the app widget
             AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
-            TemperatureDataWidgetRemoteView views = new TemperatureDataWidgetRemoteView(context, R.layout.temperature_data_widget, mAppWidgetId);
-            appWidgetManager.updateAppWidget(mAppWidgetId, views);
+            TemperatureDataWidgetBuilder viewBuilder = new TemperatureDataWidgetBuilder();
+            viewBuilder.setContext(context);
+            viewBuilder.setWidgetId(mAppWidgetId);
+
+            RemoteViews view = viewBuilder.buildWidget();
+            appWidgetManager.updateAppWidget(mAppWidgetId, view);
 
             // send intent to update widget immediately
-            Intent intent = new Intent(AppWidgetManager.ACTION_APPWIDGET_UPDATE, null, context, TemperatureDataWidget.class);
+            Intent intent = new Intent(AppWidgetManager.ACTION_APPWIDGET_UPDATE, null, context, TemperatureDataWidgetProvider.class);
             intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, new int[] {mAppWidgetId});
             sendBroadcast(intent);
 

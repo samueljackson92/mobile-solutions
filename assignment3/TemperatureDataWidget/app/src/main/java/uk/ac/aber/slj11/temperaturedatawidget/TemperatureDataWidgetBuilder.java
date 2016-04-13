@@ -31,41 +31,52 @@ import uk.ac.aber.slj11.temperaturedata.model.TemperatureData;
  *
  * Created by samuel on 10/04/16.
  */
-public class TemperatureDataWidgetRemoteView extends RemoteViews {
+public class TemperatureDataWidgetBuilder {
 
-    private final int widgetId;
-    private final Context context;
+    private int widgetId;
+    private Context context;
+    private TemperatureData data;
 
-    public TemperatureDataWidgetRemoteView(Context context, int layoutId, int widgetId) {
-        super(context.getPackageName(), widgetId);
+    /** Build a new remote view
+     *
+     * This will build a new remote view object with the given data, widget ID and context.
+     *
+     * @return a RemoteViews object updated with the new data
+     */
+    public RemoteViews buildWidget() {
+        RemoteViews view = new RemoteViews(context.getPackageName(), R.layout.temperature_data_widget);
+        setupEventHandlers(view);
 
-        this.widgetId = widgetId;
-        this.context = context;
+        if (data != null) {
+            updateInterface(view);
+        }
 
-        setupEventHandlers();
+        return view;
     }
 
     /** Setup the event handlers for the interface
      *
      * This includes the reload button and the click to open then interface.
+     *
+     * @param view the RemoteViews object to update with click event handlers
      */
-    private void setupEventHandlers() {
+    private void setupEventHandlers(RemoteViews view) {
         // setup click widget event handler intent
         Intent configIntent = createIntent(context, TemperatureDataWidgetConfigureActivity.class, "click", widgetId);
         PendingIntent pendingIntent = PendingIntent.getActivity(context, widgetId, configIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-        this.setOnClickPendingIntent(R.id.mainGrid_layout, pendingIntent);
+        view.setOnClickPendingIntent(R.id.mainGrid_layout, pendingIntent);
 
         // setup reload button pending intent
         Intent reloadIntent = createIntent(context, TemperatureDataSourceService.class, "reload", widgetId);
         pendingIntent = PendingIntent.getService(context, widgetId, reloadIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-        this.setOnClickPendingIntent(R.id.reload_button, pendingIntent);
+        view.setOnClickPendingIntent(R.id.reload_button, pendingIntent);
     }
 
     /** Update the interface with the given temperature data object
      *
-     * @param data the data object to update the interface with
+     * @param view the RemoteViews object to update with the data
      */
-    public void updateInterface(TemperatureData data) {
+    public void updateInterface(RemoteViews view) {
         // pull data from model
         String currentTemp = formatTemperatureForDisplay(R.string.current_temp, data.getCurrentTemperature());
         String averageTemp = formatTemperatureForDisplay(R.string.average_temp, data.getAverageTemperatureForLastHour());
@@ -74,12 +85,12 @@ public class TemperatureDataWidgetRemoteView extends RemoteViews {
         Bitmap bitmap = makeGraph(context, data);
 
         // set text on interface
-        this.setTextViewText(R.id.currentTime_text, data.getCurrentTimeFormatted());
-        this.setTextViewText(R.id.currentTemperature_text, currentTemp);
-        this.setTextViewText(R.id.averageTemp_text, averageTemp);
-        this.setTextViewText(R.id.minTemp_text, minTemp);
-        this.setTextViewText(R.id.maxTemp_text, maxTemp);
-        this.setImageViewBitmap(R.id.temperatureView_graph, bitmap);
+        view.setTextViewText(R.id.currentTime_text, data.getCurrentTimeFormatted());
+        view.setTextViewText(R.id.currentTemperature_text, currentTemp);
+        view.setTextViewText(R.id.averageTemp_text, averageTemp);
+        view.setTextViewText(R.id.minTemp_text, minTemp);
+        view.setTextViewText(R.id.maxTemp_text, maxTemp);
+        view.setImageViewBitmap(R.id.temperatureView_graph, bitmap);
     }
 
     /** Helper method to convert a temperature reading value to a nicely formatted string
@@ -231,9 +242,21 @@ public class TemperatureDataWidgetRemoteView extends RemoteViews {
     static private Intent createIntent(Context context, Class cls, String action, int appWidgetId) {
         Intent intent = new Intent(context, cls);
         intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
-        intent.putExtra(TemperatureDataWidget.DATA_SOURCE, TemperatureDataWidgetConfigureActivity.loadDataSourcePref(context, appWidgetId));
+        intent.putExtra(TemperatureDataWidgetProvider.DATA_SOURCE, TemperatureDataWidgetConfigureActivity.loadDataSourcePref(context, appWidgetId));
         Uri data = Uri.withAppendedPath(Uri.parse("widget://widget/id/#"+action+appWidgetId), String.valueOf(appWidgetId));
         intent.setData(data);
         return intent;
+    }
+
+    public void setWidgetId(int widgetId) {
+        this.widgetId = widgetId;
+    }
+
+    public void setContext(Context context) {
+        this.context = context;
+    }
+
+    public void setTemperatureData(TemperatureData data) {
+        this.data = data;
     }
 }

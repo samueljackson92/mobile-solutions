@@ -10,7 +10,7 @@ import android.net.Uri;
  * Implementation of App Widget functionality.
  * App Widget Configuration implemented in {@link TemperatureDataWidgetConfigureActivity TemperatureDataWidgetConfigureActivity}
  */
-public class TemperatureDataWidget extends AppWidgetProvider {
+public class TemperatureDataWidgetProvider extends AppWidgetProvider {
     public static final String DATA_SOURCE = "uk.ac.aber.slj11.temperaturedatawidget.DATA_SOURCE";
 
     @Override
