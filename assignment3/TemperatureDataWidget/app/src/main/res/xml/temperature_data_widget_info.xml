@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
-    android:minWidth="250dp" android:minHeight="110dp" android:updatePeriodMillis="180000"
+    android:minWidth="250dp"
+    android:minResizeWidth="250dp"
+    android:minHeight="110dp"
+    android:minResizeHeight="110dp"
+    android:resizeMode="horizontal"
+    android:updatePeriodMillis="180000"
     android:previewImage="@drawable/temperaturedatawidget_ori_portrait"
     android:configure="uk.ac.aber.slj11.temperaturedatawidget.TemperatureDataWidgetConfigureActivity"
     android:initialLayout="@layout/temperature_data_widget"
