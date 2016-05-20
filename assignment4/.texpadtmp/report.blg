@@ -1,0 +1,54 @@
+This is BibTeX, Version 0.99d (TeX Live 2013)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: /Users/samuel/git/mobile-solutions/assignment4/.texpadtmp/report.aux
+The style file: unsrtnat.bst
+Database file #1: ../references.bib
+Warning--I didn't find a database entry for ""
+Warning--empty year in emarketer2016smartphone
+Warning--empty year in statista2016mobile
+Warning--empty year in ofcom2016facts
+Warning--empty year in comscore2014us
+Warning--empty year in venture2014report
+Warning--empty year in mashable2015micro
+You've used 6 entries,
+            2481 wiz_defined-function locations,
+            570 strings with 5597 characters,
+and the built_in function-call counts, 1354 in all, are:
+= -- 126
+> -- 0
+< -- 0
++ -- 12
+- -- 0
+* -- 62
+:= -- 143
+add.period$ -- 18
+call.type$ -- 6
+change.case$ -- 12
+chr.to.int$ -- 6
+cite$ -- 18
+duplicate$ -- 84
+empty$ -- 193
+format.name$ -- 0
+if$ -- 325
+int.to.chr$ -- 1
+int.to.str$ -- 7
+missing$ -- 0
+newline$ -- 38
+num.names$ -- 0
+pop$ -- 96
+preamble$ -- 1
+purify$ -- 6
+quote$ -- 0
+skip$ -- 49
+stack$ -- 0
+substring$ -- 18
+swap$ -- 12
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 42
+warning$ -- 6
+while$ -- 0
+width$ -- 0
+write$ -- 73
+(There were 7 warnings)

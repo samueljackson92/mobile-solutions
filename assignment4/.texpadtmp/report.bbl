@@ -1,0 +1,45 @@
+\begin{thebibliography}{6}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[ema()]{emarketer2016smartphone}
+{Smartphone Users Worldwide Will Total 1.75 Billion in 2014 (2014)}.
+\newblock
+  \url{http://www.emarketer.com/Article/Smartphone-Users-Worldwide-Will-Total-175-Billion-2014/1010536}.
+\newblock Accessed: 2016-05-20.
+
+\bibitem[sta()]{statista2016mobile}
+{Mobile phone internet user penetration worldwide from 2014 to 2019 (2016)}.
+\newblock
+  \url{http://www.statista.com/statistics/284202/mobile-phone-internet-user-penetration-worldwide/}.
+\newblock Accessed: 2016-05-20.
+
+\bibitem[ofc()]{ofcom2016facts}
+{Ofcom: Facts \& figures}.
+\newblock \url{http://media.ofcom.org.uk/facts/}.
+\newblock Accessed: 2016-05-20.
+
+\bibitem[com()]{comscore2014us}
+{The U.S. Mobile App Report (2014)}.
+\newblock
+  \url{http://www.comscore.com/Insights/Presentations-and-Whitepapers/2014/The-US-Mobile-App-Report?cs_edgescape_cc=GB}.
+\newblock Accessed: 2016-05-20.
+
+\bibitem[ven()]{venture2014report}
+{Report finds free-to-play microtransactions make up 79\% of U.S. app store
+  revenues (2014)}.
+\newblock
+  \url{http://venturebeat.com/2014/02/21/report-finds-free-to-play-microtransactions-make-up-79-of-u-s-app-store-revenues/}.
+\newblock Accessed: 2016-05-20.
+
+\bibitem[mas()]{mashable2015micro}
+{Microtransactions and digital sales are dominating game developers' profits
+  (2015)}.
+\newblock
+  \url{http://mashable.com/2015/01/15/game-developer-survey-2015/#ouJa0XDdQGqx}.
+\newblock Accessed: 2016-05-20.
+
+\end{thebibliography}
