@@ -3,52 +3,119 @@ Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: /Users/samuel/git/mobile-solutions/assignment4/.texpadtmp/report.aux
 The style file: unsrtnat.bst
 Database file #1: ../references.bib
-Warning--I didn't find a database entry for ""
+I was expecting a `,' or a `}'---line 17 of file ../references.bib
+ : 
+ : @misc{comscore2014us,
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+I was expecting a `,' or a `}'---line 75 of file ../references.bib
+ :   
+ :   type={~},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+I was expecting a `,' or a `}'---line 133 of file ../references.bib
+ :   
+ :   type={~},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+I was expecting a `,' or a `}'---line 141 of file ../references.bib
+ :   
+ :   type={~},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+I was expecting a `,' or a `}'---line 154 of file ../references.bib
+ :   
+ :   title = {{Groupon - Shop Deals \& Coupons}},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+I was expecting a `,' or a `}'---line 219 of file ../references.bib
+ :   
+ :   type={~},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+I was expecting a `,' or a `}'---line 233 of file ../references.bib
+ :   
+ :   note = {Accessed: 2016-05-23}
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+I was expecting a `,' or a `}'---line 242 of file ../references.bib
+ :   
+ :   note = {Accessed: 2016-05-23}
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Too many commas in name 1 of "{Statista (2016)}, title = {{Mobile phone internet user penetration worldwide from 2014 to 2019}}, howpublished = {\newline\url{http://www.statista.com/statistics/284202/mobile-phone-internet-user-penetration-worldwide/}}, note = {Accessed: 2016-05-20}" for entry statista2016mobile
+while executing---line 1233 of file unsrtnat.bst
 Warning--empty year in emarketer2016smartphone
+Too many commas in name 1 of "{Statista (2016)}, title = {{Mobile phone internet user penetration worldwide from 2014 to 2019}}, howpublished = {\newline\url{http://www.statista.com/statistics/284202/mobile-phone-internet-user-penetration-worldwide/}}, note = {Accessed: 2016-05-20}" for entry statista2016mobile
+while executing---line 1315 of file unsrtnat.bst
+Too many commas in name 1 of "{Statista (2016)}, title = {{Mobile phone internet user penetration worldwide from 2014 to 2019}}, howpublished = {\newline\url{http://www.statista.com/statistics/284202/mobile-phone-internet-user-penetration-worldwide/}}, note = {Accessed: 2016-05-20}" for entry statista2016mobile
+while executing---line 1315 of file unsrtnat.bst
 Warning--empty year in statista2016mobile
 Warning--empty year in ofcom2016facts
 Warning--empty year in comscore2014us
+Warning--empty year in econsultancy2016mobile
+Warning--empty year in telegraph2015internet
+Warning--empty year in telegraph2015online
+Warning--empty year in quartz2016online
+Warning--empty year in forbes2016how
+Warning--empty year in gbk2016app
+Warning--empty year in groupon2016app
 Warning--empty year in venture2014report
 Warning--empty year in mashable2015micro
-You've used 6 entries,
+Warning--empty year in slice2016hardly
+Warning--empty year in bbc2016google
+Warning--empty year in android2016google
+Warning--empty year in today2015apple
+Warning--empty year in nfcworld2015trustev
+Warning--empty year in pymnts2015apple
+Warning--empty year in 4512015research
+Warning--empty year in allafrica2016nigeria
+Warning--empty year in mpesa2015mpesa
+Warning--empty year in economist2015why
+Warning--empty year in deloitte2015britain
+Warning--empty year in federal2015consumers
+Warning--empty year in tech2015micro
+Warning--empty year in uk1998data
+Warning--empty year in police2016data
+You've used 32 entries,
             2481 wiz_defined-function locations,
-            570 strings with 5597 characters,
-and the built_in function-call counts, 1354 in all, are:
-= -- 126
-> -- 0
-< -- 0
-+ -- 12
-- -- 0
-* -- 62
-:= -- 143
-add.period$ -- 18
-call.type$ -- 6
-change.case$ -- 12
-chr.to.int$ -- 6
-cite$ -- 18
-duplicate$ -- 84
-empty$ -- 193
-format.name$ -- 0
-if$ -- 325
-int.to.chr$ -- 1
-int.to.str$ -- 7
+            678 strings with 10281 characters,
+and the built_in function-call counts, 8220 in all, are:
+= -- 718
+> -- 217
+< -- 31
++ -- 130
+- -- 62
+* -- 313
+:= -- 1272
+add.period$ -- 115
+call.type$ -- 32
+change.case$ -- 66
+chr.to.int$ -- 28
+cite$ -- 61
+duplicate$ -- 448
+empty$ -- 927
+format.name$ -- 93
+if$ -- 1797
+int.to.chr$ -- 5
+int.to.str$ -- 33
 missing$ -- 0
-newline$ -- 38
-num.names$ -- 0
-pop$ -- 96
+newline$ -- 187
+num.names$ -- 93
+pop$ -- 431
 preamble$ -- 1
-purify$ -- 6
+purify$ -- 32
 quote$ -- 0
-skip$ -- 49
+skip$ -- 273
 stack$ -- 0
-substring$ -- 18
-swap$ -- 12
+substring$ -- 65
+swap$ -- 67
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 42
-warning$ -- 6
-while$ -- 0
+type$ -- 224
+warning$ -- 28
+while$ -- 62
 width$ -- 0
-write$ -- 73
-(There were 7 warnings)
+write$ -- 409
+(There were 11 error messages)

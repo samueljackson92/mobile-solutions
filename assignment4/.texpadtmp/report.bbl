@@ -1,45 +1,223 @@
-\begin{thebibliography}{6}
+\begin{thebibliography}{32}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
   \providecommand{\doi}[1]{doi: #1}\else
   \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
 
-\bibitem[ema()]{emarketer2016smartphone}
-{Smartphone Users Worldwide Will Total 1.75 Billion in 2014 (2014)}.
+\bibitem[{eMarketer (2014)}()]{emarketer2016smartphone}
+{eMarketer (2014)}.
+\newblock {Smartphone Users Worldwide Will Total 1.75 Billion in 2014}.
 \newblock
-  \url{http://www.emarketer.com/Article/Smartphone-Users-Worldwide-Will-Total-175-Billion-2014/1010536}.
+  \newline\url{http://www.emarketer.com/Article/Smartphone-Users-Worldwide-Will-Total-175-Billion-2014/1010536}.
 \newblock Accessed: 2016-05-20.
 
-\bibitem[sta()]{statista2016mobile}
-{Mobile phone internet user penetration worldwide from 2014 to 2019 (2016)}.
-\newblock
-  \url{http://www.statista.com/statistics/284202/mobile-phone-internet-user-penetration-worldwide/}.
+\bibitem[{Statista (2016)}()]{statista2016mobile}
+howpublished =
+  {\newline\url{http://www.statista.com/statistics/284202/mobile-phone-internet-user-penetration-worldwide/}}
+  note =~{Accessed: 2016-05-20} {Statista (2016)}, title =~{{Mobile phone
+  internet user penetration worldwide from 2014 to 2019}}.
+
+\bibitem[{Ofcom (No Date)}()]{ofcom2016facts}
+{Ofcom (No Date)}.
+\newblock {Facts \& figures}.
+\newblock \newline\url{http://media.ofcom.org.uk/facts/}.
 \newblock Accessed: 2016-05-20.
 
-\bibitem[ofc()]{ofcom2016facts}
-{Ofcom: Facts \& figures}.
-\newblock \url{http://media.ofcom.org.uk/facts/}.
+\bibitem[{Comscore (2014)}()]{comscore2014us}
+{Comscore (2014)}.
+\newblock {The U.S. Mobile App Report}.
+\newblock
+  \newline\url{http://www.comscore.com/Insights/Presentations-and-Whitepapers/2014/The-US-Mobile-App-Report?cs_edgescape_cc=GB}.
 \newblock Accessed: 2016-05-20.
 
-\bibitem[com()]{comscore2014us}
-{The U.S. Mobile App Report (2014)}.
+\bibitem[{eConsultancy (2016)}()]{econsultancy2016mobile}
+{eConsultancy (2016)}.
+\newblock {Mobile commerce at the tipping point: Almost half of all UK
+  eCommerce transactions now take place on mobile}.
 \newblock
-  \url{http://www.comscore.com/Insights/Presentations-and-Whitepapers/2014/The-US-Mobile-App-Report?cs_edgescape_cc=GB}.
+  \newline\url{https://econsultancy.com/press-releases/8214-mobile-commerce-at-the-tipping-point-almost-half-of-all-uk-ecommerce-transactions-now-take-place-on-mobile/}.
+\newblock Accessed: 2016-05-22.
+
+\bibitem[(2015)(2015{\natexlab{a}})]{criteo2015stateQ1}
+Criteo (2015).
+\newblock {State of Mobile Commerce, Q1}.
+\newblock Technical report, Criteo, 2015{\natexlab{a}}.
+
+\bibitem[(2015)(2015{\natexlab{b}})]{criteo2015stateQ4}
+Criteo (2015).
+\newblock {State of Mobile Commerce, Q4}.
+\newblock Technical report, Criteo, 2015{\natexlab{b}}.
+
+\bibitem[{The Telegraph (2015)}({\natexlab{a}})]{telegraph2015internet}
+{The Telegraph (2015)}.
+\newblock {Internet-only stores to overtake retail giants' online sales this
+  year}.
+\newblock
+  \newline\url{http://www.telegraph.co.uk/finance/newsbysector/retailandconsumer/11773421/Internet-only-stores-to-overtake-retail-giants-online-sales-this-year.html},
+  {\natexlab{a}}.
+\newblock Accessed: 2016-05-22.
+
+\bibitem[{The Telegraph (2015)}({\natexlab{b}})]{telegraph2015online}
+{The Telegraph (2015)}.
+\newblock {Online shopping is king - high street stores must adapt or die}.
+\newblock
+  \newline\url{http://www.telegraph.co.uk/finance/newsbysector/retailandconsumer/11714847/Online-shopping-is-king-high-street-stores-must-adapt-or-die.html},
+  {\natexlab{b}}.
+\newblock Accessed: 2016-05-22.
+
+\bibitem[{Quartz (2016)}()]{quartz2016online}
+{Quartz (2016)}.
+\newblock {Online retail owned the holiday season}.
+\newblock
+  \newline\url{http://qz.com/589997/online-retail-owned-the-holiday-season/}.
+\newblock Accessed: 2016-05-21.
+
+\bibitem[{Forbes (2016)}()]{forbes2016how}
+{Forbes (2016)}.
+\newblock {How Mobile Commerce Is Changing The Face Of The Nation's Biggest
+  Retailers, From Wal-Mart To Macy's}.
+\newblock
+  \newline\url{http://www.forbes.com/sites/barbarathau/2016/04/30/how-mobile-commerce-is-changing-the-face-of-the-nations-biggest-retailers-from-wal-mart-to-macys/#971e623668d6}.
+\newblock Accessed: 2016-05-22.
+
+\bibitem[Rue(2011)]{larue2011report}
+Frank~La Rue.
+\newblock {Report of the Special Rapporteur on the promotion and protection of
+  the right to freedom of opinion and expression}.
+\newblock Technical report, U.N. Human Rights Council, 2011.
+
+\bibitem[{Google Play Store (No Date)}({\natexlab{a}})]{gbk2016app}
+{Google Play Store (No Date)}.
+\newblock {GBK}.
+\newblock
+  \newline\url{https://play.google.com/store/apps/details?id=uk.co.gbk.loyalty&hl=en_GB},
+  {\natexlab{a}}.
+\newblock Accessed: 2016-05-22.
+
+\bibitem[{Google Play Store (No Date)}({\natexlab{b}})]{groupon2016app}
+{Google Play Store (No Date)}, {\natexlab{b}}.
+
+\bibitem[{Venture Beat (2014)}()]{venture2014report}
+{Venture Beat (2014)}.
+\newblock {Report finds free-to-play microtransactions make up 79\% of U.S. app
+  store revenues}.
+\newblock
+  \newline\url{http://venturebeat.com/2014/02/21/report-finds-free-to-play-microtransactions-make-up-79-of-u-s-app-store-revenues/}.
 \newblock Accessed: 2016-05-20.
 
-\bibitem[ven()]{venture2014report}
-{Report finds free-to-play microtransactions make up 79\% of U.S. app store
-  revenues (2014)}.
+\bibitem[{Mashable (2015)}()]{mashable2015micro}
+{Mashable (2015)}.
+\newblock {Microtransactions and digital sales are dominating game developers'
+  profits}.
 \newblock
-  \url{http://venturebeat.com/2014/02/21/report-finds-free-to-play-microtransactions-make-up-79-of-u-s-app-store-revenues/}.
+  \newline\url{http://mashable.com/2015/01/15/game-developer-survey-2015/#ouJa0XDdQGqx}.
 \newblock Accessed: 2016-05-20.
 
-\bibitem[mas()]{mashable2015micro}
-{Microtransactions and digital sales are dominating game developers' profits
-  (2015)}.
+\bibitem[{Slice Intelligence (2016)}()]{slice2016hardly}
+{Slice Intelligence (2016)}.
+\newblock {Hardly pocket change: mobile gamers spend an average of \$87 on
+  in-app purchases}.
 \newblock
-  \url{http://mashable.com/2015/01/15/game-developer-survey-2015/#ouJa0XDdQGqx}.
+  \newline\url{http://intelligence.slice.com/hardly-pocket-change-mobile-gamers-spend-an-average-of-87-dollars-on-in-app-purchases}.
+\newblock Accessed: 2016-05-22.
+
+\bibitem[{BBC News (2016)}()]{bbc2016google}
+{BBC News (2016)}.
+\newblock {Google to expand Android Pay digital wallet to UK}.
+\newblock \newline\url{http://www.bbc.co.uk/news/technology-35874420}.
+\newblock Accessed: 2016-05-22.
+
+\bibitem[{Official Android Blog (2016)}()]{android2016google}
+{Official Android Blog (2016)}.
+\newblock {Android Pay now in the UK, new countries on the way}.
+\newblock
+  \newline\url{http://officialandroid.blogspot.co.uk/2016/05/android-pay-now-in-uk-new-countries-on.html}.
+\newblock Accessed: 2016-05-22.
+
+\bibitem[{Today Online (2015)}()]{today2015apple}
+{Today Online (2015)}.
+\newblock {Apple Pay seeks growth in Asia, Europe after slow US adoption}.
+\newblock
+  \newline\url{http://www.todayonline.com/tech/apple-pay-seeks-growth-asia-europe-after-slow-us-adoption?singlepage=true}.
+\newblock Accessed: 2016-05-22.
+
+\bibitem[{NFC World (2015)}()]{nfcworld2015trustev}
+{NFC World (2015)}.
+\newblock {Trustev reports on US adoption rates for Apple Pay versus Android
+  Pay and Samsung Pay}.
+\newblock
+  \newline\url{http://www.nfcworld.com/2015/11/06/339308/trustev-reports-on-us-adoption-rates-for-apple-pay-versus-android-pay-and-samsung-pay/}.
+\newblock Accessed: 2016-05-22.
+
+\bibitem[{PYMNTS (2015)}()]{pymnts2015apple}
+{PYMNTS (2015)}.
+\newblock {Apple Pay Adoption}.
+\newblock \newline\url{http://www.pymnts.com/apple-pay-adoption/}.
+\newblock Accessed: 2016-05-22.
+
+\bibitem[{451 Research (2015)}()]{4512015research}
+{451 Research (2015)}.
+\newblock {451 Research: Global mPoS installed base to quadruple to 54 million
+  units by 2019}.
+\newblock
+  \newline\url{https://451research.com/images/Marketing/press_releases/07.30.15_mPoS_Forecast_PR_Final.pdf}.
+\newblock Accessed: 2016-05-21.
+
+\bibitem[(2015)(2015{\natexlab{c}})]{gsma2015mobile}
+GSMA (2015).
+\newblock {The Mobile Economy}.
+\newblock Technical report, GSMA, 2015{\natexlab{c}}.
+
+\bibitem[{All Africa (2016)}()]{allafrica2016nigeria}
+{All Africa (2016)}.
+\newblock {Nigeria: 73 Percent e-Commerce Transactions in Nigeria Happened On
+  Smartphones in Q1}.
+\newblock \newline\url{http://allafrica.com/stories/201604251608.html}.
+\newblock Accessed: 2016-05-22.
+
+\bibitem[mpe()]{mpesa2015mpesa}
+{M-Pesa}.
+\newblock \newline\url{https://www.mpesa.in/portal/}.
+\newblock Accessed: 2016-05-22.
+
+\bibitem[{Economist (2013)}()]{economist2015why}
+{Economist (2013)}.
+\newblock {Why does Kenya lead the world in mobile money? }.
+\newblock
+  \newline\url{http://www.economist.com/blogs/economist-explains/2013/05/economist-explains-18}.
+\newblock Accessed: 2016-05-22.
+
+\bibitem[{Deloitte (2015)}()]{deloitte2015britain}
+{Deloitte (2015)}.
+\newblock {Britain poised for mobile payments revolution}.
+\newblock
+  \newline\url{http://www2.deloitte.com/uk/en/pages/press-releases/articles/mobile-payments-revolution.html}.
 \newblock Accessed: 2016-05-20.
+
+\bibitem[{US Federal Reserve (2015)}()]{federal2015consumers}
+{US Federal Reserve (2015)}.
+\newblock {Consumers and Mobile Financial Services 2015}.
+\newblock
+  \newline\url{http://www.federalreserve.gov/econresdata/consumers-and-mobile-financial-services-report-201503.pdf}.
+\newblock Accessed: 2016-05-21.
+
+\bibitem[{Tech Insider (2015)}()]{tech2015micro}
+{Tech Insider (2015)}.
+\newblock {Microtransactions are ruining video games}.
+\newblock
+  \newline\url{http://www.techinsider.io/microtransactions-are-ruining-video-games-2015-4}.
+
+\bibitem[{UK Parliament (1998)}()]{uk1998data}
+{UK Parliament (1998)}.
+\newblock {Data Protection Act UK 1998}.
+\newblock \newline\url{http://www.legislation.gov.uk/ukpga/1998/29/contents}.
+\newblock Accessed: 2016-05-23.
+
+\bibitem[{police.uk (No Date)}()]{police2016data}
+{police.uk (No Date)}.
+\newblock {Theft and Robbery}.
+\newblock
+  \newline\url{https://www.police.uk/crime-prevention-advice/theft-and-robbery}.
 
 \end{thebibliography}
